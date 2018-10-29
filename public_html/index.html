@@ -48,6 +48,15 @@
                         </div>
                     </div>
                 </div>
+                
+                <div>
+                    <div class="row form-group text-center">
+                        <div class="col-4 mx-auto">
+                            <label class="mt-5">Numero de paginas</label>
+                            <input type="text" ng-model="numeroPaginas" name="userInput" id="userInput" class="form-control">
+                        </div>
+                    </div>
+                </div>
 
                 <div id="tablaProductos" class="mt-5">
                     <div class="row form-group text-center">
@@ -95,6 +104,18 @@
                                     $scope.ajaxDataProductos = response.data.message || 'Request failed';
                                     $scope.status = response.status;
                                 });
+                                $http({
+                                    method: 'GET',
+                                    withCredentials: true,
+                                    url: "http://localhost:8081/trolleyes/json?ob=producto&op=getcount"
+                                }).then(function (response) {
+                                    $scope.status = response.status;
+                                    $scope.numeroRegistros = response.data.message;
+                                }, function (response) {
+                                    $scope.numeroRegistros = response.data.message || 'Request failed';
+                                    $scope.status = response.status;
+                                });
+                                $scope.numeroPaginas = Math.ceil($scope.numeroRegistros/$scope.registrosPagina);
                             };
                             $scope.productos = function () {
                                 $http({
