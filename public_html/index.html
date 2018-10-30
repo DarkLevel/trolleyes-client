@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <!-- <link rel="icon" href="../../../../favicon.ico"> -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -15,9 +14,10 @@
 
         <main role="main" class="container">
             <form>
+                
                 <h1 class="text-center">Primer ejercicio AngularJS</h1>
 
-                <div id="crearProductos">
+                <div>
                     <div class="row form-group text-center">
                         <div class="col-4 mx-auto">
                             <label class="mt-5">Número de productos</label>
@@ -28,12 +28,12 @@
                     </div>
                 </div>
 
-                <div id="crearTabla" class="mt-5">
+                <div class="mt-5">
                     <div class="row form-group text-center">
                         <div class="col-4 mx-auto">
                             <label class="mt-3">Registros por página</label>
                             <select ng-model="registrosPagina" class="form-control">
-                                <option selected value="5">5</option>
+                                <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="15">15</option>
                                 <option value="20">20</option>
@@ -43,23 +43,22 @@
                     </div>
                     <div class="row form-group text-center">
                         <div class="col-4 mx-auto">
-                            <button class="mt-2 mx-2 btn btn-primary" ng-click="tabla()">Mostrar productos</button>
-                            <button class="mt-2 mx-2 btn btn-primary">Limpiar tabla</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="row form-group text-center">
-                        <div class="col-4 mx-auto">
-                            <label class="mt-5">Numero de paginas</label>
-                            <input type="text" ng-model="numeroPaginas" name="userInput" id="userInput" class="form-control">
+                            <button class="mt-2 mx-2 btn btn-primary" ng-click="tabla()">Mostrar tabla productos</button>
+                            <button class="mt-2 mx-2 btn btn-primary" ng-click="limpiarTabla()" ng-disabled="activar">Limpiar tabla</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="tablaProductos" class="mt-5">
+                <div class="mt-5" ng-show="mostrar">
                     <div class="row form-group text-center">
+                        <div class="col-4 mx-auto">
+                            <label>Número de página</label>
+                            <select ng-model="pagina" class="form-control">
+                                <option ng-repeat="option in arrayPages" value="{{(arrayPages.indexOf(option)+1)}}">{{option}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group text-center mt-4">
                         <table class="mx-auto">
                             <tr>
                                 <th>id</th>
@@ -82,6 +81,7 @@
                         </table>
                     </div>
                 </div>
+                
             </form>
         </main>
 
@@ -92,11 +92,17 @@
         <script>
                     var MyModule = angular.module('MyApp', []);
                     MyModule.controller("MyController", ['$scope', '$http', function ($scope, $http) {
+                            $scope.pagina = "1";
+                            $scope.registrosPagina = "5";
+                            $scope.arrayPages = [];
+                            $scope.mostrar = false;
+                            $scope.activar = true;
+                            
                             $scope.tabla = function () {
                                 $http({
                                     method: 'GET',
                                     withCredentials: true,
-                                    url: "http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=" + $scope.registrosPagina +"&page=1"
+                                    url: "http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=" + $scope.registrosPagina + "&page=" + $scope.pagina
                                 }).then(function (response) {
                                     $scope.status = response.status;
                                     $scope.ajaxDataProductos = response.data.message;
@@ -111,11 +117,20 @@
                                 }).then(function (response) {
                                     $scope.status = response.status;
                                     $scope.numeroRegistros = response.data.message;
+                                    $scope.numeroPaginas = Math.ceil($scope.numeroRegistros/$scope.registrosPagina);
+                                    for (var i=1; i<=$scope.numeroPaginas; i++) {
+                                        $scope.arrayPages.push(i);
+                                    }
+                                    if (!$scope.mostrar){
+                                        $scope.mostrar = !$scope.mostrar;
+                                    }
+                                    if ($scope.activar){
+                                        $scope.activar = !$scope.activar;
+                                    }
                                 }, function (response) {
                                     $scope.numeroRegistros = response.data.message || 'Request failed';
                                     $scope.status = response.status;
                                 });
-                                $scope.numeroPaginas = Math.ceil($scope.numeroRegistros/$scope.registrosPagina);
                             };
                             $scope.productos = function () {
                                 $http({
@@ -132,6 +147,16 @@
                             };
                             $scope.limpiarCampo = function () {
                                 $scope.numeroProductos = "";
+                            };
+                            $scope.limpiarTabla = function (){
+                                $scope.pagina = "1";
+                                $scope.registrosPagina = "5";
+                                if ($scope.mostrar){
+                                        $scope.mostrar = !$scope.mostrar;
+                                }
+                                if (!$scope.activar){
+                                    $scope.activar = !$scope.activar;
+                                }
                             };
                         }]);
         </script>
