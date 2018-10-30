@@ -53,7 +53,7 @@
                     <div class="row form-group text-center">
                         <div class="col-4 mx-auto">
                             <label>Número de página</label>
-                            <select ng-model="pagina" class="form-control">
+                            <select ng-model="pagina" ng-change="elegirPagina()" class="form-control">
                                 <option ng-repeat="option in arrayPages" value="{{(arrayPages.indexOf(option)+1)}}">{{option}}</option>
                             </select>
                         </div>
@@ -94,7 +94,6 @@
                     MyModule.controller("MyController", ['$scope', '$http', function ($scope, $http) {
                             $scope.pagina = "1";
                             $scope.registrosPagina = "5";
-                            $scope.arrayPages = [];
                             $scope.mostrar = false;
                             $scope.activar = true;
                             
@@ -118,6 +117,7 @@
                                     $scope.status = response.status;
                                     $scope.numeroRegistros = response.data.message;
                                     $scope.numeroPaginas = Math.ceil($scope.numeroRegistros/$scope.registrosPagina);
+                                    $scope.arrayPages = [];
                                     for (var i=1; i<=$scope.numeroPaginas; i++) {
                                         $scope.arrayPages.push(i);
                                     }
@@ -129,6 +129,19 @@
                                     }
                                 }, function (response) {
                                     $scope.numeroRegistros = response.data.message || 'Request failed';
+                                    $scope.status = response.status;
+                                });
+                            };
+                            $scope.elegirPagina = function () {
+                                $http({
+                                    method: 'GET',
+                                    withCredentials: true,
+                                    url: "http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=" + $scope.registrosPagina + "&page=" + $scope.pagina
+                                }).then(function (response) {
+                                    $scope.status = response.status;
+                                    $scope.ajaxDataProductos = response.data.message;
+                                }, function (response) {
+                                    $scope.ajaxDataProductos = response.data.message || 'Request failed';
                                     $scope.status = response.status;
                                 });
                             };
