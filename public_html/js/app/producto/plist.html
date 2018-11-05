@@ -1,10 +1,54 @@
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container" style="margin-top: 50px;">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Productos</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="form-inline">
+                <select ng-model="registrosPagina" class="form-control">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                </select>
+                <button class="mx-2 btn btn-primary" ng-click="tabla()">Mostrar tabla</button>
+                <button class="mx-2 btn btn-primary" ng-click="limpiarTabla()">Limpiar tabla</button>
+            </div>
+        </div>
+    </div> 
+    <form>
+        <div class="mt-5" ng-show="mostrar">
+            <div class="row form-group text-center">
+                <div class="col-4 mx-auto">
+                    <label>Número de página</label>
+                    <select ng-model="pagina" ng-change="elegirPagina()" class="form-control">
+                        <option ng-repeat="option in arrayPages" value="{{(arrayPages.indexOf(option) + 1)}}">{{option}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group text-center mt-4">
+                <table class="mx-auto">
+                    <tr>
+                        <th>id</th>
+                        <th>código</th>
+                        <th>descripción</th>
+                        <th>existencias</th>
+                        <th>precio</th>
+                        <th>foto</th>
+                        <th>id_producto</th>
+                    </tr>
+                    <tr ng-repeat="fila in ajaxData">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.codigo}}</td>
+                        <td>{{fila.desc}}</td>
+                        <td>{{fila.existencias}}</td>
+                        <td>{{fila.precio}}</td>
+                        <td>{{fila.foto}}</td>
+                        <td>{{fila.id_tipoProducto}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</main>
+<!-- <footer class="footer" ng-include="'js/app/footer.html'"></footer> -->
