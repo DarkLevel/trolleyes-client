@@ -1,0 +1,26 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+<div ng-show="mostrar">EDIT</div>
+<h1>El resultado de sumar 1+2 es {{1 + 2}}</h1>
+<h2>contenido de la variable:{{var1}}</h2>
+<h1>EDIT</h1>
+<h2>{{ruta}}</h2>
+<h2>id={{id}}</h2>
+<input type="text" ng-model="var2" />
+<h3>{{var2}}</h3>
+<h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>
+<button ng-disabled="activar" ng-click="toggle()">Cambio ver</button>
+<button ng-click="enable()">Cambio activar</button>
+<button ng-click="usuarios()">Mostrar tipos de usuario</button>
+<table>
+    <tr>
+        <th>id</th>
+        <th>descripción</th>
+    </tr>
+    <tr ng-repeat="fila in ajaxDataUsuarios">
+        <td>{{fila.id}}</td>
+        <td>{{fila.desc}}</td>
+    </tr>
+</table>
+</main>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

@@ -1,0 +1,63 @@
+<header ng-include="'js/app/header.html'"></header>
+<div class="container-fluid">
+    <div class="row">      
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Tipos de usuario</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <button class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span data-feather="calendar"></span>
+                        This week
+                    </button>
+                </div>
+            </div>    
+
+            <nav aria-label="paginacion">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" ng-show="page>1" href="usuario/plist/{{rpp}}/{{page-1}}">Previous</a>
+                    </li>
+                    
+                    
+                    
+                    <li class="page-item" ng-class="{'active':(p==page)}" ng-repeat="p in list">
+                        <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}">{{p}}</a>
+                    </li>
+                    
+                    
+                    
+                    <li class="page-item">
+                        <a class="page-link" ng-show="page!=totalPages" href="usuario/plist/{{rpp}}/{{page--1}}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <tr>
+                        <th>id</th>
+                        <th>dni</th>
+                        <th>nombre</th>
+                        <th>primer apellido</th>
+                        <th>segundo apellido</th>
+                        <th>nombre de usuario</th>
+                    </tr>
+                    <tr ng-repeat="fila in ajaxDataUsuarios">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.dni}}</td>
+                        <td>{{fila.nombre}}</td>
+                        <td>{{fila.ape1}}</td>
+                        <td>{{fila.ape2}}</td>
+                        <td>{{fila.login}}</td>
+                    </tr>
+                </table>
+
+            </div>
+        </main>
+    </div>
+</div>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>
