@@ -6,7 +6,6 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         if (!$routeParams.rpp) {
             $scope.rpp = 10;
         } else {
-
             $scope.rpp = $routeParams.rpp;
         }
         if (!$routeParams.page) {
@@ -18,6 +17,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
+        
         $http({
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getcount'

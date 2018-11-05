@@ -22,13 +22,9 @@
                         <a class="page-link" ng-show="page>1" href="usuario/plist/{{rpp}}/{{page-1}}">Previous</a>
                     </li>
                     
-                    
-                    
                     <li class="page-item" ng-class="{'active':(p==page)}" ng-repeat="p in list">
                         <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}">{{p}}</a>
                     </li>
-                    
-                    
                     
                     <li class="page-item">
                         <a class="page-link" ng-show="page!=totalPages" href="usuario/plist/{{rpp}}/{{page--1}}">Next</a>
@@ -55,7 +51,6 @@
                         <td>{{fila.login}}</td>
                     </tr>
                 </table>
-
             </div>
         </main>
     </div>
