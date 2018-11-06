@@ -89,11 +89,15 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
 
         function neighbourhood() {
             $scope.valorNeighbourhood = 1;
+            $scope.prev_1 = ($scope.page - $scope.valorNeighbourhood);
+            $scope.prev_2 = ($scope.page - $scope.valorNeighbourhood-1);
+            $scope.post_1 = ($scope.page - -$scope.valorNeighbourhood);
+            $scope.post_2 = ($scope.page - -$scope.valorNeighbourhood+1);
 
             for (var i = 1; i <= $scope.totalPages; i++) {
-                if ((i >= $scope.page - $scope.valorNeighbourhood) && (i <= $scope.page - -$scope.valorNeighbourhood)) {
+                if (i >= $scope.prev_1 && i <= $scope.post_1) {
                     $scope.list.push(i);
-                } else if ((i === $scope.page - ($scope.valorNeighbourhood + 1)) || (i === $scope.page - -($scope.valorNeighbourhood + 1))) {
+                } else if (i === $scope.prev_2 || i === $scope.post_2) {
                     $scope.list.push("...");
                 }
             }
