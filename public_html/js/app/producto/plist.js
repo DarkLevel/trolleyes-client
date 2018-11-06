@@ -20,7 +20,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             }
         }
         if (!$routeParams.column) {
-            $scope.column = 1;
+            $scope.column = 'id';
         } else {
             $scope.column = $routeParams.column;
         }
@@ -61,9 +61,9 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         $scope.cambiarRegistros = function () {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=1&column=1&order=asc'
+                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=1&column=id&order=asc'
             }).then(function (response) {
-                $location.url('producto/plist/' + $scope.rpp + '/1/1/asc');
+                $location.url('producto/plist/' + $scope.rpp + '/1/id/asc');
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
             }, function (response) {
@@ -85,6 +85,10 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
                 $scope.status = response.status;
             });
         };
+
+        function neighbourhood() {
+            
+        }
 
         $scope.isActive = toolService.isActive;
     }]);
