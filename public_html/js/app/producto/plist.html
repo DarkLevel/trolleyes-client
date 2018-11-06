@@ -4,51 +4,116 @@
         <h1 class="h2">Productos</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="form-inline">
-                <select ng-model="registrosPagina" class="form-control">
-                    <option value="5">5</option>
+                <select ng-model="rpp" ng-change="cambiarRegistros()" class="form-control">
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
                 </select>
-                <button class="mx-2 btn btn-primary" ng-click="tabla()">Mostrar tabla</button>
-                <button class="mx-2 btn btn-primary" ng-click="limpiarTabla()">Limpiar tabla</button>
             </div>
         </div>
     </div> 
     <form>
-        <div class="mt-5" ng-show="mostrar">
-            <div class="row form-group text-center">
-                <div class="col-4 mx-auto">
-                    <label>Número de página</label>
-                    <select ng-model="pagina" ng-change="elegirPagina()" class="form-control">
-                        <option ng-repeat="option in arrayPages" value="{{(arrayPages.indexOf(option) + 1)}}">{{option}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row form-group text-center mt-4">
-                <table class="mx-auto">
-                    <tr>
-                        <th>id</th>
-                        <th>código</th>
-                        <th>descripción</th>
-                        <th>existencias</th>
-                        <th>precio</th>
-                        <th>foto</th>
-                        <th>id_producto</th>
-                    </tr>
-                    <tr ng-repeat="fila in ajaxData">
-                        <td>{{fila.id}}</td>
-                        <td>{{fila.codigo}}</td>
-                        <td>{{fila.desc}}</td>
-                        <td>{{fila.existencias}}</td>
-                        <td>{{fila.precio}}</td>
-                        <td>{{fila.foto}}</td>
-                        <td>{{fila.id_tipoProducto}}</td>
-                    </tr>
-                </table>
-            </div>
+        <div class="row form-group text-center mt-5">
+            <table class="mx-auto">
+                <tr>
+                    <th>
+                        id
+                        <button type="button" class="btn" ng-click="ordenar(1, 'asc')">
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </button>
+                        <button type="button" class="btn" ng-click="ordenar(1, 'desc')">
+                            <i class="fas fa-long-arrow-alt-down"></i>
+                        </button>
+                    </th>
+                    <th>
+                        código
+                        <button type="button" class="btn" ng-click="ordenar(2, 'asc')">
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </button>
+                        <button type="button" class="btn" ng-click="ordenar(2, 'desc')">
+                            <i class="fas fa-long-arrow-alt-down"></i>
+                        </button>
+                    </th>
+                    <th>
+                        descripción
+                        <button type="button" class="btn" ng-click="ordenar(3, 'asc')">
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </button>
+                        <button type="button" class="btn" ng-click="ordenar(3, 'desc')">
+                            <i class="fas fa-long-arrow-alt-down"></i>
+                        </button>
+                    </th>
+                    <th>
+                        existencias
+                        <button type="button" class="btn" ng-click="ordenar(4, 'asc')">
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </button>
+                        <button type="button" class="btn" ng-click="ordenar(4, 'desc')">
+                            <i class="fas fa-long-arrow-alt-down"></i>
+                        </button>
+                    </th>
+                    <th>
+                        precio
+                        <button type="button" class="btn" ng-click="ordenar(5, 'asc')">
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </button>
+                        <button type="button" class="btn" ng-click="ordenar(5, 'desc')">
+                            <i class="fas fa-long-arrow-alt-down"></i>
+                        </button>
+                    </th>
+                    <th>
+                        foto
+                        <button type="button" class="btn" ng-click="ordenar(6, 'asc')">
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </button>
+                        <button type="button" class="btn" ng-click="ordenar(6, 'desc')">
+                            <i class="fas fa-long-arrow-alt-down"></i>
+                        </button>
+                    </th>
+                    <th>
+                        id_producto
+                        <button type="button" class="btn" ng-click="ordenar(7, 'asc')">
+                            <i class="fas fa-long-arrow-alt-up"></i>
+                        </button>
+                        <button type="button" class="btn" ng-click="ordenar(7, 'desc')">
+                            <i class="fas fa-long-arrow-alt-down"></i>
+                        </button>
+                    </th>
+                </tr>
+                <tr ng-repeat="fila in ajaxData">
+                    <td>{{fila.id}}</td>
+                    <td>{{fila.codigo}}</td>
+                    <td>{{fila.desc}}</td>
+                    <td>{{fila.existencias}}</td>
+                    <td>{{fila.precio}}</td>
+                    <td>{{fila.foto}}</td>
+                    <td>{{fila.id_tipoProducto}}</td>
+                </tr>
+            </table>
         </div>
+
+        <nav aria-label="paginacion" class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" ng-class="{'disabled':(page <= 1)}">
+                    <a class="page-link" href="producto/plist/{{rpp}}/1/{{column}}/{{order}}"><span>&laquo;</span></a>
+                </li>
+                <li class="page-item" ng-class="{'disabled':(page <= 1)}">
+                    <a class="page-link" href="producto/plist/{{rpp}}/{{page - 1}}/{{column}}/{{order}}"><span>&lsaquo;</span></a>
+                </li>
+
+                <li class="page-item" ng-class="{'active':(p == page)}" ng-repeat="p in list">
+                    <a class="page-link" href="producto/plist/{{rpp}}/{{p}}/{{column}}/{{order}}">{{p}}</a>
+                </li>
+
+                <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
+                    <a class="page-link" href="producto/plist/{{rpp}}/{{page--1}}/{{column}}/{{order}}"><span>&rsaquo;</span></a>
+                </li>
+                <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
+                    <a class="page-link" href="producto/plist/{{rpp}}/{{totalPages}}/{{column}}/{{order}}"><span>&raquo;</span></a>
+                </li>
+            </ul>
+        </nav>
     </form>
 </main>
-<!-- <footer class="footer" ng-include="'js/app/footer.html'"></footer> -->
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

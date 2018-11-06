@@ -11,6 +11,7 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/producto/view/:id?', {templateUrl:'js/app/producto/view.html', controller: 'productoViewController'});
         $routeProvider.when('/producto/plist/', {templateUrl:'js/app/producto/plist.html', controller: 'productoPlistController'});
         $routeProvider.when('/producto/plist/:rpp?/:page?', {templateUrl:'js/app/producto/plist.html', controller: 'productoPlistController'});
+        $routeProvider.when('/producto/plist/:rpp?/:page?/:column?/:order?', {templateUrl:'js/app/producto/plist.html', controller: 'productoPlistController'});
         
         $routeProvider.when('/tipoproducto/view/:id?', {templateUrl:'js/app/tipoproducto/view.html', controller: 'tipoproductoViewController'});
         $routeProvider.when('/tipoproducto/plist/', {templateUrl:'js/app/tipoproducto/plist.html', controller: 'tipoproductoPlistController'});
