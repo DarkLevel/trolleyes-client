@@ -88,13 +88,12 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         };
 
         function neighbourhood() {
-            $scope.pActual = Math.ceil($scope.page);
             $scope.valorNeighbourhood = 1;
-            
+
             for (var i = 1; i <= $scope.totalPages; i++) {
-                if ((i >= $scope.pActual-$scope.valorNeighbourhood) && (i <= $scope.pActual+$scope.valorNeighbourhood)){
+                if ((i >= $scope.page - $scope.valorNeighbourhood) && (i <= $scope.page - -$scope.valorNeighbourhood)) {
                     $scope.list.push(i);
-                } else if ((i === $scope.pActual-($scope.valorNeighbourhood+1)) || (i === $scope.pActual+($scope.valorNeighbourhood+1))){
+                } else if ((i === $scope.page - ($scope.valorNeighbourhood + 1)) || (i === $scope.page - -($scope.valorNeighbourhood + 1))) {
                     $scope.list.push("...");
                 }
             }
