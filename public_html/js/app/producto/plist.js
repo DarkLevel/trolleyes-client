@@ -38,9 +38,10 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             $scope.ajaxDataNumero = response.data.message;
             $scope.totalPages = Math.ceil($scope.ajaxDataNumero / $scope.rpp);
             $scope.list = [];
-            for (var i = 1; i <= $scope.totalPages; i++) {
-                $scope.list.push(i);
-            }
+            neighbourhood();
+//            for (var i = 1; i <= $scope.totalPages; i++) {
+//                $scope.list.push(i);
+//            }
         }, function (response) {
             $scope.ajaxDataNumero = response.data.message || 'Request failed';
             $scope.status = response.status;
@@ -87,7 +88,14 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         };
 
         function neighbourhood() {
-            
+            $scope.pActual = Math.ceil($scope.page);
+            for (var i = 1; i <= $scope.totalPages; i++) {
+                if ((i >= $scope.pActual-1) && (i <= $scope.pActual+1)){
+                    $scope.list.push(i);
+                } else if ((i === $scope.pActual-2) || (i === $scope.pActual+2)){
+                    $scope.list.push("...");
+                }
+            }
         }
 
         $scope.isActive = toolService.isActive;

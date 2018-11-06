@@ -37,10 +37,10 @@
                     </th>
                     <th>
                         descripción
-                        <button type="button" class="btn" ng-click="ordenar('descripcion', 'asc')">
+                        <button type="button" class="btn" ng-click="ordenar('3', 'asc')">
                             <i class="fas fa-long-arrow-alt-up"></i>
                         </button>
-                        <button type="button" class="btn" ng-click="ordenar('descripcion', 'desc')">
+                        <button type="button" class="btn" ng-click="ordenar('3', 'desc')">
                             <i class="fas fa-long-arrow-alt-down"></i>
                         </button>
                     </th>
@@ -73,10 +73,10 @@
                     </th>
                     <th>
                         id_producto
-                        <button type="button" class="btn" ng-click="ordenar('id_producto', 'asc')">
+                        <button type="button" class="btn" ng-click="ordenar('id_tipoproducto', 'asc')">
                             <i class="fas fa-long-arrow-alt-up"></i>
                         </button>
-                        <button type="button" class="btn" ng-click="ordenar('id_producto', 'desc')">
+                        <button type="button" class="btn" ng-click="ordenar('id_tipoproducto', 'desc')">
                             <i class="fas fa-long-arrow-alt-down"></i>
                         </button>
                     </th>
@@ -102,7 +102,7 @@
                     <a class="page-link" href="producto/plist/{{rpp}}/{{page - 1}}/{{column}}/{{order}}"><span>&lsaquo;</span></a>
                 </li>
 
-                <li class="page-item" ng-class="{'active':(p == page), 'disabled':(p == '...')}" ng-repeat="p in list">
+                <li class="page-item" ng-class="{'active':(p == page), 'disabled':(p === '...')}" ng-repeat="p in list track by $index">
                     <a class="page-link" href="producto/plist/{{rpp}}/{{p}}/{{column}}/{{order}}">{{p}}</a>
                 </li>
 
