@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Usuarios</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-outline-primary btn-xs" ng-click="resetOrder()">Resetear Orden</button>
+            <button type="button" style="height: 40px;" class="btn btn-outline-primary" ng-click="resetOrder()">Resetear Orden</button>
             <div class="btn-group ml-3" style="width:400px;">
                 <p class="mt-2" style="width:300px;">Selecciona Registros: </p>
                 <select class="form-control" ng-change="update()" ng-model="rpp">
@@ -16,71 +16,85 @@
         </div>
     </div> 
     <form>
-        <div class="row form-group text-center mt-5">
-            <table class="mx-auto">
+        <div class="row form-group text-center mx-auto mt-5 table-responsive">
+            <table class="table table-striped">
                 <tr>
                     <th>
-                        Id
-                        <button type="button" class="btn" ng-click="ordenar('id', 'asc')">
-                            <i class="fas fa-long-arrow-alt-up"></i>
-                        </button>
-                        <button type="button" class="btn" ng-click="ordenar('id', 'desc')">
-                            <i class="fas fa-long-arrow-alt-down"></i>
-                        </button>
+                        ID
+                        <div>
+                            <button type="button" class="btn" ng-click="ordenar('id', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('id', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
                     </th>
                     <th>
                         Dni
-                        <button type="button" class="btn" ng-click="ordenar('dni', 'asc')">
-                            <i class="fas fa-long-arrow-alt-up"></i>
-                        </button>
-                        <button type="button" class="btn" ng-click="ordenar('dni', 'desc')">
-                            <i class="fas fa-long-arrow-alt-down"></i>
-                        </button>
+                        <div>
+                            <button type="button" class="btn" ng-click="ordenar('dni', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('dni', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
                     </th>
                     <th>
                         Nombre
-                        <button type="button" class="btn" ng-click="ordenar('nombre', 'asc')">
-                            <i class="fas fa-long-arrow-alt-up"></i>
-                        </button>
-                        <button type="button" class="btn" ng-click="ordenar('nombre', 'desc')">
-                            <i class="fas fa-long-arrow-alt-down"></i>
-                        </button>
+                        <div>
+                            <button type="button" class="btn" ng-click="ordenar('nombre', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('nombre', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
                     </th>
                     <th>
                         Primer apellido
-                        <button type="button" class="btn" ng-click="ordenar('ape1', 'asc')">
-                            <i class="fas fa-long-arrow-alt-up"></i>
-                        </button>
-                        <button type="button" class="btn" ng-click="ordenar('ape1', 'desc')">
-                            <i class="fas fa-long-arrow-alt-down"></i>
-                        </button>
+                        <div>
+                            <button type="button" class="btn" ng-click="ordenar('ape1', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('ape1', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
                     </th>
                     <th>
                         Segundo apellido
-                        <button type="button" class="btn" ng-click="ordenar('ape2', 'asc')">
-                            <i class="fas fa-long-arrow-alt-up"></i>
-                        </button>
-                        <button type="button" class="btn" ng-click="ordenar('ape2', 'desc')">
-                            <i class="fas fa-long-arrow-alt-down"></i>
-                        </button>
+                        <div>
+                            <button type="button" class="btn" ng-click="ordenar('ape2', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('ape2', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
                     </th>
                     <th>
                         Nombre de usuario
-                        <button type="button" class="btn" ng-click="ordenar('login', 'asc')">
-                            <i class="fas fa-long-arrow-alt-up"></i>
-                        </button>
-                        <button type="button" class="btn" ng-click="ordenar('login', 'desc')">
-                            <i class="fas fa-long-arrow-alt-down"></i>
-                        </button>
+                        <div>
+                            <button type="button" class="btn" ng-click="ordenar('login', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('login', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
                     </th>
                     <th>
                         Tipo de usuario
-                        <button type="button" class="btn" ng-click="ordenar('id_tipousuario', 'asc')">
-                            <i class="fas fa-long-arrow-alt-up"></i>
-                        </button>
-                        <button type="button" class="btn" ng-click="ordenar('id_tipousuario', 'desc')">
-                            <i class="fas fa-long-arrow-alt-down"></i>
-                        </button>
+                        <div>
+                            <button type="button" class="btn" ng-click="ordenar('id_tipousuario', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('id_tipousuario', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
                     </th>
                 </tr>
                 <tr ng-repeat="fila in ajaxData">
@@ -103,11 +117,17 @@
                 <li class="page-item" ng-class="{'disabled':(page == 1)}">
                     <a class="page-link" href="usuario/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}"><span>&lsaquo;</span></a>
                 </li>
+                <li class="page-item" ng-class="{'disabled':(page == 1)}">
+                    <a class="page-link" href="usuario/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
+                </li>
 
                 <li class="page-item" ng-class="{'active':(p == page), 'disabled':(p === '...')}" ng-repeat="p in list track by $index">
                     <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
                 </li>
 
+                <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
+                    <a class="page-link" href="usuario/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
+                </li>
                 <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
                     <a class="page-link" href="usuario/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}"><span>&rsaquo;</span></a>
                 </li>

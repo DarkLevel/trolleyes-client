@@ -6,7 +6,7 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 125px;
 }
 .footer {
   position: absolute;
@@ -34,17 +34,4 @@ body > .container {
 
 code {
   font-size: 80%;
-}
-
-table, td, th {
-    border: 1px solid black;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
 }

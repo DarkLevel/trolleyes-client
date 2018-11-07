@@ -15,7 +15,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         }
 
         if (!$routeParams.rpp) {
-            $scope.rpp = 10;
+            $scope.rpp = 5;
         } else {
             $scope.rpp = $routeParams.rpp;
         }
@@ -85,7 +85,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.post_1 = ($scope.page - -$scope.valorNeighbourhood);
             $scope.post_2 = ($scope.page - -$scope.valorNeighbourhood+1);
 
-            for (var i = 1; i <= $scope.totalPages; i++) {
+            for (var i = 2; i <= $scope.totalPages-1; i++) {
                 if (i >= $scope.prev_1 && i <= $scope.post_1) {
                     $scope.list.push(i);
                 } else if (i === $scope.prev_2 || i === $scope.post_2) {
