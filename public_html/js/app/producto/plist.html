@@ -3,12 +3,13 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Productos</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="form-inline">
-                <select ng-model="rpp" ng-change="cambiarRegistros()" class="form-control">
+            <div class="btn-group ml-3" style="width:400px;">
+                <p class="mt-2" style="width:300px;">Selecciona Registros: </p>
+                <select class="form-control" ng-change="update()" ng-model="rpp">
+                    <option value="5">5</option>
                     <option value="10">10</option>
-                    <option value="15">15</option>
                     <option value="20">20</option>
-                    <option value="25">25</option>
+                    <option value="50">50</option>
                 </select>
             </div>
         </div>
@@ -37,10 +38,10 @@
                     </th>
                     <th>
                         descripción
-                        <button type="button" class="btn" ng-click="ordenar('3', 'asc')">
+                        <button type="button" class="btn" ng-click="ordenar('desc', 'asc')">
                             <i class="fas fa-long-arrow-alt-up"></i>
                         </button>
-                        <button type="button" class="btn" ng-click="ordenar('3', 'desc')">
+                        <button type="button" class="btn" ng-click="ordenar('desc', 'desc')">
                             <i class="fas fa-long-arrow-alt-down"></i>
                         </button>
                     </th>
@@ -96,21 +97,21 @@
         <nav aria-label="paginacion" class="mt-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item" ng-class="{'disabled':(page == 1)}">
-                    <a class="page-link" href="producto/plist/{{rpp}}/1/{{column}}/{{order}}"><span>&laquo;</span></a>
+                    <a class="page-link" href="producto/plist/{{rpp}}/1/{{order}}/{{align}}"><span>&laquo;</span></a>
                 </li>
                 <li class="page-item" ng-class="{'disabled':(page == 1)}">
-                    <a class="page-link" href="producto/plist/{{rpp}}/{{page - 1}}/{{column}}/{{order}}"><span>&lsaquo;</span></a>
+                    <a class="page-link" href="producto/plist/{{rpp}}/{{page - 1}}/{{order}}/{{align}}"><span>&lsaquo;</span></a>
                 </li>
 
                 <li class="page-item" ng-class="{'active':(p == page), 'disabled':(p === '...')}" ng-repeat="p in list track by $index">
-                    <a class="page-link" href="producto/plist/{{rpp}}/{{p}}/{{column}}/{{order}}">{{p}}</a>
+                    <a class="page-link" href="producto/plist/{{rpp}}/{{p}}/{{order}}/{{align}}">{{p}}</a>
                 </li>
 
                 <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
-                    <a class="page-link" href="producto/plist/{{rpp}}/{{page--1}}/{{column}}/{{order}}"><span>&rsaquo;</span></a>
+                    <a class="page-link" href="producto/plist/{{rpp}}/{{page--1}}/{{order}}/{{align}}"><span>&rsaquo;</span></a>
                 </li>
                 <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
-                    <a class="page-link" href="producto/plist/{{rpp}}/{{totalPages}}/{{column}}/{{order}}"><span>&raquo;</span></a>
+                    <a class="page-link" href="producto/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}"><span>&raquo;</span></a>
                 </li>
             </ul>
         </nav>

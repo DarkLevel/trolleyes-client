@@ -1,13 +1,25 @@
-'use strict'
+/* global moduleUsuario */
+
+'use strict';
 
 moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
         $scope.totalPages = 1;
+
+        if (!$routeParams.order) {
+            $scope.orderURLServidor = "";
+            $scope.orderURLCliente = "";
+        } else {
+            $scope.orderURLServidor = "&order=" + $routeParams.order;
+            $scope.orderURLCliente = $routeParams.order;
+        }
+
         if (!$routeParams.rpp) {
             $scope.rpp = 10;
         } else {
             $scope.rpp = $routeParams.rpp;
         }
+
         if (!$routeParams.page) {
             $scope.page = 1;
         } else {
@@ -17,33 +29,71 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
-        
+
+        $scope.resetOrder = function () {
+            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page);
+        };
+
+        $scope.ordenar = function (order, align) {
+            if ($scope.orderURLServidor === "") {
+                $scope.orderURLServidor = "&order=" + order + "," + align;
+                $scope.orderURLCliente = order + "," + align;
+            } else {
+                $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
+                $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
+            }
+            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
+        };
+
         $http({
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getcount'
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataUsuariosNumber = response.data.message;
-            $scope.totalPages = Math.ceil($scope.ajaxDataUsuariosNumber / $scope.rpp);
-            $scope.list = [];
-            for (var i = 1; i <= $scope.totalPages; i++) {
-                $scope.list.push(i);
+            $scope.ajaxDataNumber = response.data.message;
+            $scope.totalPages = Math.ceil($scope.ajaxDataNumber / $scope.rpp);
+            if ($scope.page > $scope.totalPages) {
+                $scope.page = $scope.totalPages;
+                $scope.update();
             }
+            pagination();
         }, function (response) {
-            $scope.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
+            $scope.ajaxDataNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataUsuarios = response.data.message;
+            $scope.ajaxData = response.data.message;
         }, function (response) {
-            $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
             $scope.status = response.status;
+            $scope.ajaxData = response.data.message || 'Request failed';
         });
+
+        $scope.update = function () {
+            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
+        };
+
+        function pagination() {
+            $scope.list = [];
+            $scope.valorNeighbourhood = 1;
+            $scope.prev_1 = ($scope.page - $scope.valorNeighbourhood);
+            $scope.prev_2 = ($scope.page - $scope.valorNeighbourhood-1);
+            $scope.post_1 = ($scope.page - -$scope.valorNeighbourhood);
+            $scope.post_2 = ($scope.page - -$scope.valorNeighbourhood+1);
+
+            for (var i = 1; i <= $scope.totalPages; i++) {
+                if (i >= $scope.prev_1 && i <= $scope.post_1) {
+                    $scope.list.push(i);
+                } else if (i === $scope.prev_2 || i === $scope.post_2) {
+                    $scope.list.push("...");
+                }
+            }
+        }
+
         $scope.isActive = toolService.isActive;
     }
 ]);

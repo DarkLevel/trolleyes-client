@@ -5,11 +5,21 @@
 moduleProducto.controller('productoPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
         $scope.totalPages = 1;
+
+        if (!$routeParams.order) {
+            $scope.orderURLServidor = "";
+            $scope.orderURLCliente = "";
+        } else {
+            $scope.orderURLServidor = "&order=" + $routeParams.order;
+            $scope.orderURLCliente = $routeParams.order;
+        }
+
         if (!$routeParams.rpp) {
             $scope.rpp = 10;
         } else {
             $scope.rpp = $routeParams.rpp;
         }
+
         if (!$routeParams.page) {
             $scope.page = 1;
         } else {
@@ -19,75 +29,56 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
                 $scope.page = 1;
             }
         }
-        if (!$routeParams.column) {
-            $scope.column = 'id';
-        } else {
-            $scope.column = $routeParams.column;
-        }
-        if (!$routeParams.order) {
-            $scope.order = 'asc';
-        } else {
-            $scope.order = $routeParams.order;
-        }
+
+        $scope.resetOrder = function () {
+            $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page);
+        };
+
+        $scope.ordenar = function (order, align) {
+            if ($scope.orderURLServidor === "") {
+                $scope.orderURLServidor = "&order=" + order + "," + align;
+                $scope.orderURLCliente = order + "," + align;
+            } else {
+                $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
+                $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
+            }
+            $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
+        };
 
         $http({
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getcount'
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataNumero = response.data.message;
-            $scope.totalPages = Math.ceil($scope.ajaxDataNumero / $scope.rpp);
-            $scope.list = [];
-            neighbourhood();
-//            for (var i = 1; i <= $scope.totalPages; i++) {
-//                $scope.list.push(i);
-//            }
+            $scope.ajaxDataNumber = response.data.message;
+            $scope.totalPages = Math.ceil($scope.ajaxDataNumber / $scope.rpp);
+            if ($scope.page > $scope.totalPages) {
+                $scope.page = $scope.totalPages;
+                $scope.update();
+            }
+            pagination();
         }, function (response) {
-            $scope.ajaxDataNumero = response.data.message || 'Request failed';
+            $scope.ajaxDataNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + '&column=' + $scope.column + '&order=' + $scope.order
+            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
-            $location.url('producto/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.column + '/' + $scope.order);
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
         }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
             $scope.status = response.status;
+            $scope.ajaxData = response.data.message || 'Request failed';
         });
 
-        $scope.cambiarRegistros = function () {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=1&column=id&order=asc'
-            }).then(function (response) {
-                $location.url('producto/plist/' + $scope.rpp + '/1/id/asc');
-                $scope.status = response.status;
-                $scope.ajaxData = response.data.message;
-            }, function (response) {
-                $scope.ajaxData = response.data.message || 'Request failed';
-                $scope.status = response.status;
-            });
+        $scope.update = function () {
+            $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         };
 
-        $scope.ordenar = function (column, order) {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=1&column=' + column + '&order=' + order
-            }).then(function (response) {
-                $location.url('producto/plist/' + $scope.rpp + '/1/' + column + '/' + order);
-                $scope.status = response.status;
-                $scope.ajaxData = response.data.message;
-            }, function (response) {
-                $scope.ajaxData = response.data.message || 'Request failed';
-                $scope.status = response.status;
-            });
-        };
-
-        function neighbourhood() {
+        function pagination() {
+            $scope.list = [];
             $scope.valorNeighbourhood = 1;
             $scope.prev_1 = ($scope.page - $scope.valorNeighbourhood);
             $scope.prev_2 = ($scope.page - $scope.valorNeighbourhood-1);
@@ -104,4 +95,5 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         }
 
         $scope.isActive = toolService.isActive;
-    }]);
+    }
+]);
