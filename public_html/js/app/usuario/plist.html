@@ -90,7 +90,7 @@
                     <td>{{fila.ape1}}</td>
                     <td>{{fila.ape2}}</td>
                     <td>{{fila.login}}</td>
-                    <td>{{fila.id_tipoUsuario}}</td>
+                    <td>{{fila.obj_tipoUsuario.desc}}</td>
                 </tr>
             </table>
         </div>
@@ -98,21 +98,21 @@
         <nav aria-label="paginacion" class="mt-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item" ng-class="{'disabled':(page == 1)}">
-                    <a class="page-link" href="usuario/plist/{{rpp}}/1/{{order}}/{{align}}"><span>&laquo;</span></a>
+                    <a class="page-link" href="usuario/plist/{{rpp}}/1/{{orderURLCliente}}"><span>&laquo;</span></a>
                 </li>
                 <li class="page-item" ng-class="{'disabled':(page == 1)}">
-                    <a class="page-link" href="usuario/plist/{{rpp}}/{{page - 1}}/{{order}}/{{align}}"><span>&lsaquo;</span></a>
+                    <a class="page-link" href="usuario/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}"><span>&lsaquo;</span></a>
                 </li>
 
                 <li class="page-item" ng-class="{'active':(p == page), 'disabled':(p === '...')}" ng-repeat="p in list track by $index">
-                    <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{order}}/{{align}}">{{p}}</a>
+                    <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
                 </li>
 
                 <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
-                    <a class="page-link" href="usuario/plist/{{rpp}}/{{page--1}}/{{order}}/{{align}}"><span>&rsaquo;</span></a>
+                    <a class="page-link" href="usuario/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}"><span>&rsaquo;</span></a>
                 </li>
                 <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
-                    <a class="page-link" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}"><span>&raquo;</span></a>
+                    <a class="page-link" href="usuario/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}"><span>&raquo;</span></a>
                 </li>
             </ul>
         </nav>
