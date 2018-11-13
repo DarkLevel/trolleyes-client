@@ -96,6 +96,7 @@
                             </button>
                         </div>
                     </th>
+                    <th>Operaciones</th>
                 </tr>
                 <tr ng-repeat="fila in ajaxData">
                     <td>{{fila.id}}</td>
@@ -105,6 +106,13 @@
                     <td>{{fila.ape2}}</td>
                     <td>{{fila.login}}</td>
                     <td>{{fila.obj_tipoUsuario.desc}}</td>
+                    <td>
+                        <div class="btn-group">
+                        <a role="button" class="btn btn-info fas fa-eye" href="usuario/view/{{fila.id}}"></a>
+                        <a role="button" class="btn btn-info fas fa-edit" href="usuario/update/{{fila.id}}"></a>
+                        <a role="button" class="btn btn-info fas fa-trash-alt" href="usuario/remove/{{fila.id}}"></a>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>

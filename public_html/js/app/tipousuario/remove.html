@@ -1,0 +1,29 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container" style="margin-top: 75px;">
+
+    <h1 class="text-center">Remove {{ajaxData.desc}}</h1>
+
+    <form>
+        <div class="row form-group text-center mx-auto mt-5 table-responsive" ng-show="botones">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td>{{ajaxData.id}}</td>
+                    <td>{{ajaxData.desc}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="text-center mt-5" ng-show="botones">
+            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="borrar()">Borrar registro</button>
+            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+        </div>
+        <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
+            Tipo de usuario borrado correctamente
+            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+        </div>
+    </form>
+</main>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>
