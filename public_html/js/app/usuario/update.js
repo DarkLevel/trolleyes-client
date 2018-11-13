@@ -24,7 +24,8 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
             $scope.ape1 = response.data.message.ape1;
             $scope.ape2 = response.data.message.ape2;
             $scope.login = response.data.message.login;
-            $scope.tipoUsuario = response.data.message.obj_tipoUsuario.desc;
+            $scope.tipoUsuario_desc = response.data.message.obj_tipoUsuario.desc;
+            $scope.tipoUsuario_id = response.data.message.obj_tipoUsuario.id;
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
@@ -43,7 +44,7 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
                 ape2: $scope.ape2,
                 login: $scope.login,
                 pass: $scope.pass,
-                id_tipoUsuario: $scope.obj_tipoUsuario_id
+                id_tipoUsuario: $scope.tipoUsuario_id
             };
             $http({
                 method: 'GET',
