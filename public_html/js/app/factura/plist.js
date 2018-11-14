@@ -35,7 +35,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
         };
         
         $scope.crear = function () {
-            $location.url('factura/create/');
+            $location.url('factura/create');
         };
 
         $scope.ordenar = function (order, align) {

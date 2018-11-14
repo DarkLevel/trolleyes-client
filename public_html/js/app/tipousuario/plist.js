@@ -35,7 +35,7 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
         };
         
         $scope.crear = function () {
-            $location.url('tipousuario/create/');
+            $location.url('tipousuario/create');
         };
 
         $scope.ordenar = function (order, align) {

@@ -35,7 +35,7 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', '$http',
         };
         
         $scope.crear = function () {
-            $location.url('tipoproducto/create/');
+            $location.url('tipoproducto/create');
         };
 
         $scope.ordenar = function (order, align) {

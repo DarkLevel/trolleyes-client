@@ -35,7 +35,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         };
         
         $scope.crear = function () {
-            $location.url('linea/create/');
+            $location.url('linea/create');
         };
 
         $scope.ordenar = function (order, align) {

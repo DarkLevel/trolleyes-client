@@ -3,12 +3,13 @@
 'use strict';
 
 moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+    'sessionService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
         $scope.login = "";
         $scope.pass = "";
-        
+
         $scope.volverPrincipio = function () {
             $location.url('/');
         };
@@ -20,6 +21,7 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
+                oSessionService.setSessionActive;
                 $scope.botones = false;
                 $scope.alerta = true;
             }, function (response) {
