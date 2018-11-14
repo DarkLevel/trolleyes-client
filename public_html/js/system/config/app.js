@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var trolleyes = angular.module('MyApp', [
     'ngRoute',

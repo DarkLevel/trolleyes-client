@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 trolleyes.config(['$locationProvider', function ($locationProvider) {
         $locationProvider.html5Mode(true);

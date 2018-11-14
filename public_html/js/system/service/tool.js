@@ -1,3 +1,5 @@
+/* global moduleService */
+
 'use strict';
 
 moduleService.service('toolService', ['$location', function ($location) {
@@ -6,6 +8,6 @@ moduleService.service('toolService', ['$location', function ($location) {
             isActive: function (p) {
                 return $location.path().startsWith(p);
             }
-        }
+        };
 
     }]);

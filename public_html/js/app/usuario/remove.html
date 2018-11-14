@@ -1,7 +1,7 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container" style="margin-top: 75px;">
 
-    <h1 class="text-center">View usuario</h1>
+    <h1 class="text-center">Remove usuario {{ajaxData.id}}</h1>
 
     <form>
         <div class="row form-group text-center mx-auto mt-5 table-responsive">
@@ -26,8 +26,13 @@
                 </tr>
             </table>
         </div>
-        <div class="text-center mt-5">
-            <button type="button" style="height: 40px;" class="btn btn-primary" ng-click="volver()">Volver atrás</button>
+        <div class="text-center mt-5" ng-show="botones">
+            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="borrar()">Borrar registro</button>
+            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+        </div>
+        <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
+            Usuario borrado correctamente
+            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>
 </main>
