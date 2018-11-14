@@ -1,7 +1,7 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container" style="margin-top: 75px;">
 
-    <h1 class="text-center">Editar usuario</h1>
+    <h1 class="text-center">Editar producto</h1>
 
     <form>
         <div class="col-4 offset-4">
@@ -9,35 +9,35 @@
             <input type="text" class="form-control" ng-model="id" disabled>
         </div>
         <div class="col-4 offset-4">
-            <label class="mt-5">Dni:</label>
-            <input type="text" class="form-control" ng-model="dni">
+            <label class="mt-5">Código:</label>
+            <input type="text" class="form-control" ng-model="codigo">
         </div>
         <div class="col-4 offset-4">
-            <label class="mt-5">Nombre:</label>
-            <input type="text" class="form-control" ng-model="nombre">
+            <label class="mt-5">Descripción:</label>
+            <input type="text" class="form-control" ng-model="desc">
         </div>
         <div class="col-4 offset-4">
-            <label class="mt-5">Primer apellido:</label>
-            <input type="text" class="form-control" ng-model="ape1">
+            <label class="mt-5">Existencias:</label>
+            <input type="text" class="form-control" ng-model="existencias">
         </div>
         <div class="col-4 offset-4">
-            <label class="mt-5">Segundo apellido:</label>
-            <input type="text" class="form-control" ng-model="ape2">
+            <label class="mt-5">Precio:</label>
+            <input type="text" class="form-control" ng-model="precio">
         </div>
         <div class="col-4 offset-4">
-            <label class="mt-5">Nombre de usuario:</label>
-            <input type="text" class="form-control" ng-model="login">
+            <label class="mt-5">Foto:</label>
+            <input type="text" class="form-control" ng-model="foto">
         </div>
         <div class="col-4 offset-4">
-            <label class="mt-5">Tipo de usuario:</label>
-            <input type="text" class="form-control" ng-model="id_tipousuario">
+            <label class="mt-5">Tipo de producto:</label>
+            <input type="text" class="form-control" ng-model="id_tipoproducto">
         </div>
         <div class="text-center mt-5" ng-show="botones">
             <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="editar()">Editar registro</button>
             <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
         </div>
         <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
-            Usuario editado correctamente
+            Producto editado correctamente
             <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>

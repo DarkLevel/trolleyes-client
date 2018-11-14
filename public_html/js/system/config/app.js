@@ -15,7 +15,7 @@ var trolleyes = angular.module('MyApp', [
 
 var moduleCommon = angular.module ('commonControllers',[]);
 var moduleService = angular.module ('services',[]);
-var moduleTipofactura = angular.module ('facturaControllers',[]);
+var moduleFactura = angular.module ('facturaControllers',[]);
 var moduleLinea = angular.module ('lineaControllers',[]);
 var moduleProducto = angular.module ('productoControllers',[]);
 var moduleTipoproducto = angular.module ('tipoproductoControllers',[]);

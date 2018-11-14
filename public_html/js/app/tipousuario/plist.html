@@ -3,7 +3,10 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Tipo de usuarios</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" style="height: 40px;" class="btn btn-outline-primary" ng-click="resetOrder()">Resetear Orden</button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" style="height: 40px;" class="btn btn-outline-primary" ng-click="crear()">Crear</button>
+                <button type="button" style="height: 40px;" class="btn btn-outline-primary" ng-click="resetOrder()">Resetear Orden</button>
+            </div>
             <div class="btn-group ml-3" style="width:400px;">
                 <p class="mt-2" style="width:300px;">Selecciona Registros: </p>
                 <select class="form-control" ng-change="update()" ng-model="rpp">
@@ -33,10 +36,10 @@
                     <th>
                         Descripción
                         <div>
-                            <button type="button" class="btn" ng-click="ordenar('desc', 'asc')">
+                            <button type="button" class="btn" ng-click="ordenar('tipousuario.desc', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
                             </button>
-                            <button type="button" class="btn" ng-click="ordenar('desc', 'desc')">
+                            <button type="button" class="btn" ng-click="ordenar('tipousuario.desc', 'desc')">
                                 <i class="fas fa-long-arrow-alt-down"></i>
                             </button>
                         </div>

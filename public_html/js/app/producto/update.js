@@ -1,8 +1,8 @@
-/* global moduleUsuario */
+/* global moduleProducto */
 
 'use strict';
 
-moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+moduleProducto.controller('productoUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
         $scope.botones = true;
         $scope.alerta = false;
@@ -15,16 +15,16 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $routeParams.id
+            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $routeParams.id
         }).then(function (response) {
             $scope.status = response.status;
             $scope.id = response.data.message.id;
-            $scope.dni = response.data.message.dni;
-            $scope.nombre = response.data.message.nombre;
-            $scope.ape1 = response.data.message.ape1;
-            $scope.ape2 = response.data.message.ape2;
-            $scope.login = response.data.message.login;
-            $scope.id_tipousuario = response.data.message.obj_tipoUsuario.id;
+            $scope.codigo = response.data.message.codigo;
+            $scope.desc = response.data.message.desc;
+            $scope.existencias = response.data.message.existencias;
+            $scope.precio = response.data.message.precio;
+            $scope.foto = response.data.message.foto;
+            $scope.id_tipoproducto = response.data.message.obj_tipoProducto.id;
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
@@ -37,16 +37,16 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
         $scope.editar = function () {
             var json = {
                 id: $scope.id,
-                dni: $scope.dni,
-                nombre: $scope.nombre,
-                ape1: $scope.ape1,
-                ape2: $scope.ape2,
-                login: $scope.login,
-                id_tipoUsuario: $scope.id_tipousuario
+                codigo: $scope.codigo,
+                desc: $scope.desc,
+                existencias: $scope.existencias,
+                precio: $scope.precio,
+                foto: $scope.foto,
+                id_tipoProducto: $scope.id_tipoproducto
             };
             $http({
                 method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=update',
+                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=update',
                 params: {json: JSON.stringify(json)}
             }).then(function (response) {
                 $scope.status = response.status;

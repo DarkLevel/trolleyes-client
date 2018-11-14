@@ -15,7 +15,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         }
 
         if (!$routeParams.rpp) {
-            $scope.rpp = 10;
+            $scope.rpp = 5;
         } else {
             $scope.rpp = $routeParams.rpp;
         }
@@ -32,6 +32,10 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
 
         $scope.resetOrder = function () {
             $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page);
+        };
+        
+        $scope.crear = function () {
+            $location.url('producto/create/');
         };
 
         $scope.ordenar = function (order, align) {
@@ -85,7 +89,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             $scope.post_1 = ($scope.page - -$scope.valorNeighbourhood);
             $scope.post_2 = ($scope.page - -$scope.valorNeighbourhood+1);
 
-            for (var i = 1; i <= $scope.totalPages; i++) {
+            for (var i = 2; i <= $scope.totalPages-1; i++) {
                 if (i >= $scope.prev_1 && i <= $scope.post_1) {
                     $scope.list.push(i);
                 } else if (i === $scope.prev_2 || i === $scope.post_2) {

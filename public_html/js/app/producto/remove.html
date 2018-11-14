@@ -1,28 +1,28 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container" style="margin-top: 75px;">
 
-    <h1 class="text-center">Borrar usuario {{ajaxData.id}}</h1>
+    <h1 class="text-center">Borrar producto {{ajaxData.id}}</h1>
 
     <form>
         <div class="row form-group text-center mx-auto mt-5 table-responsive">
             <table class="table table-striped">
                 <tr>
                     <th>ID</th>
-                    <th>Dni</th>
-                    <th>Nombre</th>
-                    <th>Primer apellido</th>
-                    <th>Segundo apellido</th>
-                    <th>Nombre de usuario</th>
-                    <th>Tipo de usuario</th>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Existencias</th>
+                    <th>Precio</th>
+                    <th>Foto</th>
+                    <th>Tipo de producto</th>
                 </tr>
                 <tr>
                     <td>{{ajaxData.id}}</td>
-                    <td>{{ajaxData.dni}}</td>
-                    <td>{{ajaxData.nombre}}</td>
-                    <td>{{ajaxData.ape1}}</td>
-                    <td>{{ajaxData.ape2}}</td>
-                    <td>{{ajaxData.login}}</td>
-                    <td>{{ajaxData.obj_tipoUsuario.desc}}</td>
+                    <td>{{ajaxData.codigo}}</td>
+                    <td>{{ajaxData.desc}}</td>
+                    <td>{{ajaxData.existencias}}</td>
+                    <td>{{ajaxData.precio}}</td>
+                    <td>{{ajaxData.foto}}</td>
+                    <td>{{ajaxData.obj_tipoProducto.desc}}</td>
                 </tr>
             </table>
         </div>
@@ -31,7 +31,7 @@
             <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
         </div>
         <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
-            Usuario borrado correctamente
+            Producto borrado correctamente
             <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>

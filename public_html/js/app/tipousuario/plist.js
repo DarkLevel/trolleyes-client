@@ -33,6 +33,10 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
         $scope.resetOrder = function () {
             $location.url(`tipousuario/plist/` + $scope.rpp + `/` + $scope.page);
         };
+        
+        $scope.crear = function () {
+            $location.url('tipousuario/create/');
+        };
 
         $scope.ordenar = function (order, align) {
             if ($scope.orderURLServidor === "") {

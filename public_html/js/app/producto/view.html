@@ -1,10 +1,34 @@
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container" style="margin-top: 75px;">
+
+    <h1 class="text-center">Ver producto</h1>
+
+    <form>
+        <div class="row form-group text-center mx-auto mt-5 table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Existencias</th>
+                    <th>Precio</th>
+                    <th>Foto</th>
+                    <th>Tipo de producto</th>
+                </tr>
+                <tr>
+                    <td>{{ajaxData.id}}</td>
+                    <td>{{ajaxData.codigo}}</td>
+                    <td>{{ajaxData.desc}}</td>
+                    <td>{{ajaxData.existencias}}</td>
+                    <td>{{ajaxData.precio}}</td>
+                    <td>{{ajaxData.foto}}</td>
+                    <td>{{ajaxData.obj_tipoProducto.desc}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="text-center mt-5">
+            <button type="button" style="height: 40px;" class="btn btn-primary" ng-click="volver()">Volver atrás</button>
+        </div>
+    </form>
+</main>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

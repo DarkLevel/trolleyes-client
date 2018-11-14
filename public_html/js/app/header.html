@@ -28,5 +28,19 @@
                 <a class="nav-link" href="tipousuario/plist">Tipo usuario</a>
             </li>
         </ul>
+        <ul class="nav navbar-nav">
+            <li class="nav-item" ng-class="{'active': isSessionActive()}">
+                <a class="nav-link" href="usuario/login"><i class="fas fa-user"> Iniciar Sesión</i></a>
+            </li>
+            <li class="nav-item" ng-class="{'active': isSessionActive()}">
+                <a class="nav-link" href="usuario/create"><i class="fas fa-plus-circle"> Crear Usuario</i></a>
+            </li>
+            <li class="nav-item" ng-class="{'active': isSessionActive()}">
+                <a class="nav-link" href="home"><i class="fas fa-user-cog"> Nombre usuario</i></a>
+            </li>
+            <li class="nav-item" ng-class="{'active': isSessionActive()}">
+                <a class="nav-link" href="home"><i class="fas fa-sign-out-alt"> Cerrar Sesión</i></a>
+            </li>
+        </ul>
     </div>
 </nav>

@@ -1,8 +1,8 @@
-/* global moduleUsuario */
+/* global moduleFactura */
 
 'use strict';
 
-moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+moduleFactura.controller('facturaUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
         $scope.botones = true;
         $scope.alerta = false;
@@ -15,16 +15,13 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $routeParams.id
+            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=get&id=' + $routeParams.id
         }).then(function (response) {
             $scope.status = response.status;
             $scope.id = response.data.message.id;
-            $scope.dni = response.data.message.dni;
-            $scope.nombre = response.data.message.nombre;
-            $scope.ape1 = response.data.message.ape1;
-            $scope.ape2 = response.data.message.ape2;
-            $scope.login = response.data.message.login;
-            $scope.id_tipousuario = response.data.message.obj_tipoUsuario.id;
+            $scope.fecha = response.data.message.fecha;
+            $scope.iva = response.data.message.iva;
+            $scope.id_usuario = response.data.message.obj_usuario.id;
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
@@ -37,16 +34,13 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
         $scope.editar = function () {
             var json = {
                 id: $scope.id,
-                dni: $scope.dni,
-                nombre: $scope.nombre,
-                ape1: $scope.ape1,
-                ape2: $scope.ape2,
-                login: $scope.login,
-                id_tipoUsuario: $scope.id_tipousuario
+                fecha: $scope.fecha,
+                iva: $scope.iva,
+                id_usuario: $scope.id_usuario
             };
             $http({
                 method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=update',
+                url: 'http://localhost:8081/trolleyes/json?ob=factura&op=update',
                 params: {json: JSON.stringify(json)}
             }).then(function (response) {
                 $scope.status = response.status;
