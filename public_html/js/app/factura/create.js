@@ -2,8 +2,8 @@
 
 'use strict';
 
-moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
         
@@ -31,6 +31,7 @@ moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$locati
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
+        
         $scope.isActive = toolService.isActive;
     }
 ]);

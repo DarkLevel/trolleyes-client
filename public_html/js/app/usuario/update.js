@@ -2,8 +2,8 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
 
@@ -17,6 +17,7 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $routeParams.id
         }).then(function (response) {
+            $scope.ajaxDataUsuario = response.data.message;
             $scope.status = response.status;
             $scope.id = response.data.message.id;
             $scope.dni = response.data.message.dni;

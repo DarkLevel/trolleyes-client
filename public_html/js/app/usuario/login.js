@@ -2,8 +2,7 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    'sessionService',
+moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
@@ -15,13 +14,16 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
         };
 
         $scope.iniciarSesion = function () {
+            
+            var login = $scope.login;
+            var pass = forge_sha256($scope.pass);
+            
             $http({
                 method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + $scope.login + '&pass=' + $scope.pass
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + login + '&pass=' + pass
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
-                oSessionService.setSessionActive;
                 $scope.botones = false;
                 $scope.alerta = true;
             }, function (response) {
@@ -29,6 +31,7 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
+        
         $scope.isActive = toolService.isActive;
     }
 ]);

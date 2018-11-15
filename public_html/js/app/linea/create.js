@@ -2,8 +2,8 @@
 
 'use strict';
 
-moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
         
@@ -31,6 +31,7 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
+        
         $scope.isActive = toolService.isActive;
     }
 ]);

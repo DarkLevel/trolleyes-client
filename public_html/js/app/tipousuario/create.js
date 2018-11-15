@@ -2,8 +2,8 @@
 
 'use strict';
 
-moduleTipousuario.controller('tipousuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleTipousuario.controller('tipousuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
 
@@ -29,6 +29,7 @@ moduleTipousuario.controller('tipousuarioCreateController', ['$scope', '$http', 
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
+        
         $scope.isActive = toolService.isActive;
     }
 ]);
