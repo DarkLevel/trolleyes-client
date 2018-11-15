@@ -11,7 +11,7 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
             }).then(function (response) {
                 if (response.data.status == 200) {
-                    oSessionService.setSessionActive;
+                    oSessionService.setSessionActive();
                     oSessionService.setUserName(response.data.message.login);
                     oSessionService.setId(response.data.message.id);
                 } else {
@@ -21,7 +21,7 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http',
                     }
                 }
             }, function (response) {
-                oSessionService.setSessionInactive;
+                oSessionService.setSessionInactive();
                 if (nextUrl != '/' && nextUrl != '/home' && nextUrl != '/usuario/login' && nextUrl != '/usuario/create') {
                     $location.path("/");
                 }

@@ -14,24 +14,27 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
         };
 
         $scope.iniciarSesion = function () {
-            
+
             var login = $scope.login;
             var pass = forge_sha256($scope.pass);
-            
+
             $http({
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + login + '&pass=' + pass
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
-                $scope.botones = false;
-                $scope.alerta = true;
+                if ($scope.status == 200) {
+                    $scope.botones = false;
+                    $scope.alerta = true;
+                    oSessionService.setSessionActive();
+                }
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
-        
+
         $scope.isActive = toolService.isActive;
     }
 ]);
