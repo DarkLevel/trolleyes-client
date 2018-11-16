@@ -10,14 +10,17 @@
         </div>
         <div class="col-4 offset-4">
             <label class="mt-5">Contraseña:</label>
-            <input type="text" class="form-control" ng-model="pass">
+            <input type="password" class="form-control" ng-model="pass">
+        </div>
+        <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="correcto">
+            Sesión iniciada correctamente
+            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
+        </div>
+        <div class="offset-3 col-6 alert alert-danger text-center mt-5" role="alert" ng-show="incorrecto">
+            Nombre de usuario o contraseña incorrectos
         </div>
         <div class="text-center mt-5" ng-show="botones">
             <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="iniciarSesion()">IniciarSesion</button>
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
-        </div>
-        <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
-            Sesión iniciada correctamente
             <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
         </div>
     </form>

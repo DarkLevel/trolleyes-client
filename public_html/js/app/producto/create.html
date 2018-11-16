@@ -4,37 +4,37 @@
     <h1 class="text-center">Crear Producto</h1>
 
     <form>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Código:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Código:</label>
             <input type="text" class="form-control" ng-model="codigo">
         </div>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Descripción:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Descripción:</label>
             <input type="text" class="form-control" ng-model="desc">
         </div>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Existencias:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Existencias:</label>
             <input type="text" class="form-control" ng-model="existencias">
         </div>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Precio:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Precio:</label>
             <input type="text" class="form-control" ng-model="precio">
         </div>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Foto:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Foto:</label>
             <input type="text" class="form-control" ng-model="foto">
         </div>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Tipo de producto:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Tipo de producto:</label>
             <input type="text" class="form-control" ng-model="id_tipoproducto">
         </div>
-        <div class="text-center mt-5" ng-show="botones">
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="crear()">Crear Producto</button>
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-        <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="alerta">
             Producto creado correctamente
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+        </div>
+        <div class="text-center mt-3" ng-show="botones">
+            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="crear()">Crear producto</button>
+            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>
 </main>

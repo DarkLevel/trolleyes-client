@@ -16,13 +16,13 @@
                 </tr>
             </table>
         </div>
-        <div class="text-center mt-5" ng-show="botones">
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="borrar()">Borrar registro</button>
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-        <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="alerta">
             Tipo de producto borrado correctamente
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+        </div>
+        <div class="text-center mt-3" ng-show="botones">
+            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="borrar()">Borrar tipo de producto</button>
+            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>
 </main>

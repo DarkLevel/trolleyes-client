@@ -5,7 +5,8 @@
 moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
-        $scope.alerta = false;
+        $scope.correcto = false;
+        $scope.incorrecto = false;
         $scope.login = "";
         $scope.pass = "";
 
@@ -22,12 +23,17 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + login + '&pass=' + pass
             }).then(function (response) {
-                $scope.status = response.status;
-                $scope.ajaxData = response.data.message;
+                $scope.status = response.data.status;
                 if ($scope.status == 200) {
                     $scope.botones = false;
-                    $scope.alerta = true;
+                    $scope.incorrecto = false;
+                    $scope.correcto = true;
                     oSessionService.setSessionActive();
+                    oSessionService.setUserName();
+                    oSessionService.setId();
+                }
+                if ($scope.status == 401) {
+                    $scope.incorrecto = true;
                 }
             }, function (response) {
                 $scope.status = response.status;

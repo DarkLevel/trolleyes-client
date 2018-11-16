@@ -4,25 +4,25 @@
     <h1 class="text-center">Crear Factura</h1>
 
     <form>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Fecha:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Fecha:</label>
             <input type="text" class="form-control" ng-model="fecha">
         </div>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Iva:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Iva:</label>
             <input type="text" class="form-control" ng-model="iva">
         </div>
-        <div class="col-4 offset-4">
-            <label class="mt-5">Usuario:</label>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+            <label>Usuario:</label>
             <input type="text" class="form-control" ng-model="id_usuario">
         </div>
-        <div class="text-center mt-5" ng-show="botones">
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="crear()">Crear Factura</button>
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-        <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 alert-success text-center" role="alert" ng-show="alerta">
             Factura creada correctamente
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+        </div>
+        <div class="text-center mt-3" ng-show="botones">
+            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="crear()">Crear factura</button>
+            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>
 </main>
