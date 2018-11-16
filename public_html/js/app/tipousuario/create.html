@@ -8,7 +8,10 @@
             <label>Descripción:</label>
             <input type="text" class="form-control" ng-model="desc">
         </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="alerta">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-danger" role="alert" ng-show="comprobarDesc">
+            Solo se admiten letras y espacios
+        </div>
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
             Tipo de usuario creado correctamente
             <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
         </div>

@@ -6,6 +6,26 @@ moduleTipoproducto.controller('tipoproductoUpdateController', ['$scope', '$http'
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
+        
+        $scope.sesionIniciada = false;
+        if (oSessionService.isSessionActive()) {
+            $scope.sesionIniciada = true;
+            $scope.usuario = oSessionService.getUserName();
+            $scope.id = oSessionService.getId();
+        }
+
+        $scope.logout = function () {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
+            }).then(function (response) {
+                if (response.data.status == 200) {
+                    oSessionService.setSessionInactive();
+                    $scope.sesionIniciada = false;
+                    $location.url('/');
+                }
+            });
+        };
 
         $http({
             method: 'GET',

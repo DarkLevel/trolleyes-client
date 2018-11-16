@@ -29,6 +29,26 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
                 $scope.page = 1;
             }
         }
+        
+        $scope.sesionIniciada = false;
+        if (oSessionService.isSessionActive()) {
+            $scope.sesionIniciada = true;
+            $scope.usuario = oSessionService.getUserName();
+            $scope.id = oSessionService.getId();
+        }
+
+        $scope.logout = function () {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
+            }).then(function (response) {
+                if (response.data.status == 200) {
+                    oSessionService.setSessionInactive();
+                    $scope.sesionIniciada = false;
+                    $location.url('/');
+                }
+            });
+        };
 
         $scope.resetOrder = function () {
             $location.url(`tipousuario/plist/` + $scope.rpp + `/` + $scope.page);
@@ -96,6 +116,13 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
                     $scope.list.push("...");
                 }
             }
+        }
+        
+        $scope.sesionIniciada = false;
+        if (oSessionService.isSessionActive()) {
+            $scope.sesionIniciada = true;
+            $scope.usuario = oSessionService.getUserName();
+            $scope.id = oSessionService.getId();
         }
 
         $scope.isActive = toolService.isActive;

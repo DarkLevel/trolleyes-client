@@ -5,8 +5,8 @@
 moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
-        $scope.alerta = false;
-        
+        $scope.correcto = false;
+
         $scope.volverPrincipio = function () {
             $location.url('/');
         };
@@ -26,16 +26,17 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=create',
                 params: {json: JSON.stringify(json)}
             }).then(function (response) {
-                $scope.status = response.status;
-                $scope.ajaxData = response.data.message;
-                $scope.botones = false;
-                $scope.alerta = true;
+                $scope.status = response.data.status;
+                if ($scope.status === 200) {
+                    $scope.botones = false;
+                    $scope.correcto = true;
+                }
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
-        
+
         $scope.isActive = toolService.isActive;
     }
 ]);

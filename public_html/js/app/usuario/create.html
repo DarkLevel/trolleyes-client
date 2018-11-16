@@ -4,41 +4,41 @@
     <h1 class="text-center">Crear usuario</h1>
 
     <form>
-        <div class="col-4 offset-4">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
             <label class="mt-5">Dni:</label>
             <input type="text" class="form-control" ng-model="dni">
         </div>
-        <div class="col-4 offset-4">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
             <label class="mt-5">Nombre:</label>
             <input type="text" class="form-control" ng-model="nombre">
         </div>
-        <div class="col-4 offset-4">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
             <label class="mt-5">Primer apellido:</label>
             <input type="text" class="form-control" ng-model="ape1">
         </div>
-        <div class="col-4 offset-4">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
             <label class="mt-5">Segundo apellido:</label>
             <input type="text" class="form-control" ng-model="ape2">
         </div>
-        <div class="col-4 offset-4">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
             <label class="mt-5">Nombre de usuario:</label>
             <input type="text" class="form-control" ng-model="login">
         </div>
-        <div class="col-4 offset-4">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
             <label class="mt-5">Contraseña:</label>
             <input type="text" class="form-control" ng-model="pass">
         </div>
-        <div class="col-4 offset-4">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
             <label class="mt-5">Tipo de usuario:</label>
             <input type="text" class="form-control" ng-model="id_tipousuario">
         </div>
-        <div class="text-center mt-5" ng-show="botones">
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="crear()">Crear Usuario</button>
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
-        </div>
-        <div class="offset-3 col-6 alert alert-success text-center mt-5" role="alert" ng-show="alerta">
+        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
             Usuario creado correctamente
-            <button type="button" style="height: 40px;" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
+            <button type="button" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
+        </div>
+        <div class="text-center mt-3" ng-show="botones">
+            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="crear()">Crear usuario</button>
+            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>
 </main>
