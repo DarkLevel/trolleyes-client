@@ -4,7 +4,6 @@
         <div>
             <h2 style="display: inline-block">Usuarios</h2>
             <div class="btn-group mx-2" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-outline-primary mt-0 mb-2" ng-click="crear()">Crear</button>
                 <button type="button" class="btn btn-outline-primary mt-0 mb-2" ng-click="resetOrder()">Resetear Orden</button>
             </div>
         </div>
@@ -21,7 +20,7 @@
             <table class="table table-striped">
                 <tr>
                     <th>
-                        ID<br>
+                        <p>ID</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('id', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -32,7 +31,7 @@
                         </div>
                     </th>
                     <th>
-                        Dni<br>
+                        <p>Dni</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('dni', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -43,7 +42,7 @@
                         </div>
                     </th>
                     <th>
-                        Nombre<br>
+                        <p>Nombre</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('nombre', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -54,7 +53,7 @@
                         </div>
                     </th>
                     <th>
-                        Primer apellido<br>
+                        <p>Primer apellido</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('ape1', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -65,7 +64,7 @@
                         </div>
                     </th>
                     <th>
-                        Segundo apellido<br>
+                        <p>Segundo apellido</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('ape2', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -76,7 +75,7 @@
                         </div>
                     </th>
                     <th>
-                        Nombre de usuario<br>
+                        <p>Nombre de usuario</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('login', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -87,7 +86,7 @@
                         </div>
                     </th>
                     <th>
-                        Tipo de usuario<br>
+                        <p>Tipo de usuario</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('id_tipousuario', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -97,6 +96,7 @@
                             </button>
                         </div>
                     </th>
+                    <th>Facturas</th>
                     <th>Operaciones</th>
                 </tr>
                 <tr ng-repeat="fila in ajaxData">
@@ -107,6 +107,8 @@
                     <td>{{fila.ape2}}</td>
                     <td>{{fila.login}}</td>
                     <td>{{fila.obj_tipoUsuario.desc}}</td>
+                    <td><a role="button" ng-class="{'disabled':(fila.link_factura == 0)}" class="btn btn-info"
+                           href="usuario/{{fila.id}}/factura/plist">{{fila.link_factura}}</a></td>
                     <td>
                         <div class="btn-group">
                         <a role="button" class="btn btn-info fas fa-eye" href="usuario/view/{{fila.id}}"></a>

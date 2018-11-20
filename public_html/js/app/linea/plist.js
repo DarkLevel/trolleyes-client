@@ -30,6 +30,18 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
             }
         }
         
+        if (!$routeParams.id_user) {
+            $scope.id_user = 1;
+        } else {
+            $scope.id_user = $routeParams.id_user;
+        }
+        
+        if (!$routeParams.id_factura) {
+            $scope.id_factura = 1;
+        } else {
+            $scope.id_factura = $routeParams.id_factura;
+        }
+        
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
@@ -42,7 +54,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
             }).then(function (response) {
-                if (response.data.status == 200) {
+                if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
                     $location.url('/');
@@ -51,11 +63,12 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         };
 
         $scope.resetOrder = function () {
-            $location.url(`linea/plist/` + $scope.rpp + `/` + $scope.page);
+            $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + '/linea/plist/' + 
+                $scope.rpp + '/' + $scope.page);
         };
         
         $scope.crear = function () {
-            $location.url('linea/create');
+            $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + 'linea/create');
         };
 
         $scope.ordenar = function (order, align) {
@@ -66,12 +79,13 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
                 $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
             }
-            $location.url(`linea/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
+            $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + 'linea/plist/' +
+                $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         };
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getcount'
+            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getcountX&id_fact=' + $scope.id_factura
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataNumber = response.data.message;
@@ -88,7 +102,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpageX&id_fact=' + $scope.id_factura  + '&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
@@ -98,7 +112,8 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         });
 
         $scope.update = function () {
-            $location.url(`linea/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
+            $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + 'linea/plist/' +
+                $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         };
 
         function pagination() {

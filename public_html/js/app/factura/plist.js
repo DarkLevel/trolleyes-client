@@ -30,6 +30,12 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
             }
         }
         
+        if (!$routeParams.id_user) {
+            $scope.id_user = 1;
+        } else {
+            $scope.id_user = $routeParams.id_user;
+        }
+        
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
@@ -42,25 +48,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
             }).then(function (response) {
-                if (response.data.status == 200) {
-                    oSessionService.setSessionInactive();
-                    $scope.sesionIniciada = false;
-                    $location.url('/');
-                }
-            });
-        };$scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id = oSessionService.getId();
-        }
-
-        $scope.logout = function () {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
-            }).then(function (response) {
-                if (response.data.status == 200) {
+                if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
                     $location.url('/');
@@ -69,11 +57,11 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
         };
 
         $scope.resetOrder = function () {
-            $location.url(`factura/plist/` + $scope.rpp + `/` + $scope.page);
+            $location.url('usuario/' + $scope.id_user + '/factura/plist/' + $scope.rpp + '/' + $scope.page);
         };
         
         $scope.crear = function () {
-            $location.url('factura/create');
+            $location.url('usuario/' + $scope.id_user + '/factura/create');
         };
 
         $scope.ordenar = function (order, align) {
@@ -84,12 +72,12 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                 $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
                 $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
             }
-            $location.url(`factura/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
+            $location.url('usuario/' + $scope.id_user + '/factura/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         };
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getcount'
+            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getcountX&id_user=' + $scope.id_user
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataNumber = response.data.message;
@@ -106,17 +94,18 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getpageX&id_user=' + $scope.id_user + '&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
+            $scope.username = $scope.ajaxData[0].obj_usuario.login;
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
         });
 
         $scope.update = function () {
-            $location.url(`factura/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
+            $location.url('usuario/' + $scope.id_user + '/factura/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         };
 
         function pagination() {

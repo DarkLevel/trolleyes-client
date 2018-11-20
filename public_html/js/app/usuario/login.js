@@ -4,7 +4,7 @@
 
 moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
-        $scope.botones = true;
+        $scope.formulario = true;
         $scope.correcto = false;
         $scope.incorrecto = false;
 
@@ -23,7 +23,7 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                 $scope.nombreUsuario = response.data.message.login;
                 $scope.idUsuario = response.data.message.id;
                 if ($scope.status === 200) {
-                    $scope.botones = false;
+                    $scope.formulario = false;
                     $scope.incorrecto = false;
                     $scope.correcto = true;
                     oSessionService.setSessionActive();

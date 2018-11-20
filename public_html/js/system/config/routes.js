@@ -38,7 +38,22 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/tipousuario/remove/:id?', {templateUrl: 'js/app/tipousuario/remove.html', controller: 'tipousuarioRemoveController'});
         $routeProvider.when('/tipousuario/update/:id?', {templateUrl: 'js/app/tipousuario/update.html', controller: 'tipousuarioUpdateController'});
         $routeProvider.when('/tipousuario/view/:id?', {templateUrl: 'js/app/tipousuario/view.html', controller: 'tipousuarioViewController'});
-        $routeProvider.when('/tipousuario/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/tipousuario/plist.html', controller: 'tipousuarioPlistController'});
+        $routeProvider.when('/tipousuario/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/tipousuario/plist.html', controller: 'tipousuarioPlistController'});  
+        
+        
+        /* Pruebas */
+        
+        $routeProvider.when('/usuario/:id_user/factura/create', {templateUrl: 'js/app/factura/create.html', controller: 'facturaCreateController'});
+        $routeProvider.when('/usuario/:id_user/factura/remove/:id?', {templateUrl: 'js/app/factura/remove.html', controller: 'facturaRemoveController'});
+        $routeProvider.when('/usuario/:id_user/factura/update/:id?', {templateUrl: 'js/app/factura/update.html', controller: 'facturaUpdateController'});
+        $routeProvider.when('/usuario/:id_user/factura/view/:id?', {templateUrl: 'js/app/factura/view.html', controller: 'facturaViewController'});
+        $routeProvider.when('/usuario/:id_user/factura/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
+        
+        $routeProvider.when('/usuario/:id_user/factura/:id_factura/linea/create', {templateUrl: 'js/app/linea/create.html', controller: 'lineaCreateController'});
+        $routeProvider.when('/usuario/:id_user/factura/:id_factura/linea/remove/:id?', {templateUrl: 'js/app/linea/remove.html', controller: 'lineaRemoveController'});
+        $routeProvider.when('/usuario/:id_user/factura/:id_factura/linea/update/:id?', {templateUrl: 'js/app/linea/update.html', controller: 'lineaUpdateController'});
+        $routeProvider.when('/usuario/:id_user/factura/:id_factura/linea/view/:id?', {templateUrl: 'js/app/linea/view.html', controller: 'lineaViewController'});
+        $routeProvider.when('/usuario/:id_user/factura/:id_factura/linea/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/linea/plist.html', controller: 'lineaPlistController'});
         
         $routeProvider.otherwise({redirectTo: '/home'});
     }]);

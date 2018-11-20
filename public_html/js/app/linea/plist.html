@@ -21,7 +21,7 @@
             <table class="table table-striped">
                 <tr>
                     <th>
-                        ID<br>
+                        <p>ID</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('linea.id', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -32,7 +32,7 @@
                         </div>
                     </th>
                     <th>
-                        Cantidad<br>
+                        <p>Cantidad</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('linea.cantidad', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -43,7 +43,7 @@
                         </div>
                     </th>
                     <th>
-                        Producto<br>
+                        <p>Producto</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('linea.id_producto', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -54,7 +54,7 @@
                         </div>
                     </th>
                     <th>
-                        Factura<br>
+                        <p>Factura</p>
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('linea.id_factura', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -73,9 +73,9 @@
                     <td>{{fila.obj_factura.id}}</td>
                     <td>
                         <div class="btn-group">
-                        <a role="button" class="btn btn-info fas fa-eye" href="linea/view/{{fila.id}}"></a>
-                        <a role="button" class="btn btn-info fas fa-edit" href="linea/update/{{fila.id}}"></a>
-                        <a role="button" class="btn btn-info fas fa-trash-alt" href="linea/remove/{{fila.id}}"></a>
+                        <a role="button" class="btn btn-info fas fa-eye" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/view/{{fila.id}}"></a>
+                        <a role="button" class="btn btn-info fas fa-edit" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/update/{{fila.id}}"></a>
+                        <a role="button" class="btn btn-info fas fa-trash-alt" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/remove/{{fila.id}}"></a>
                         </div>
                     </td>
                 </tr>
@@ -85,27 +85,27 @@
         <nav aria-label="paginacion" class="mt-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item" ng-class="{'disabled':(page == 1)}">
-                    <a class="page-link" href="linea/plist/{{rpp}}/1/{{orderURLCliente}}"><span>&laquo;</span></a>
+                    <a class="page-link" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/plist/{{rpp}}/1/{{orderURLCliente}}"><span>&laquo;</span></a>
                 </li>
                 <li class="page-item" ng-class="{'disabled':(page == 1)}">
-                    <a class="page-link" href="linea/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}"><span>&lsaquo;</span></a>
+                    <a class="page-link" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}"><span>&lsaquo;</span></a>
                 </li>
                 <li class="page-item" ng-class="{'disabled':(page == 1)}">
-                    <a class="page-link" href="linea/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
+                    <a class="page-link" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
                 </li>
 
                 <li class="page-item" ng-class="{'active':(p == page), 'disabled':(p === '...')}" ng-repeat="p in list track by $index">
-                    <a class="page-link" href="linea/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
+                    <a class="page-link" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
                 </li>
 
                 <li class="page-item" ng-class="{'disabled':(page == totalPages), 'ng-hide':(totalPages == 1)}">
-                    <a class="page-link" href="linea/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
+                    <a class="page-link" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
                 </li>
                 <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
-                    <a class="page-link" href="linea/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}"><span>&rsaquo;</span></a>
+                    <a class="page-link" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}"><span>&rsaquo;</span></a>
                 </li>
                 <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
-                    <a class="page-link" href="linea/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}"><span>&raquo;</span></a>
+                    <a class="page-link" href="usuario/{{id.user}}/factura/{{id.factura}}/linea/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}"><span>&raquo;</span></a>
                 </li>
             </ul>
         </nav>
