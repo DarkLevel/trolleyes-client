@@ -124,6 +124,10 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                 }
             }
         }
+        
+        $scope.atras = function(){
+            window.history.back();
+        };
 
         $scope.isActive = toolService.isActive;
     }

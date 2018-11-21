@@ -68,7 +68,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         };
         
         $scope.crear = function () {
-            $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + 'linea/create');
+            $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + '/linea/create');
         };
 
         $scope.ordenar = function (order, align) {
@@ -79,7 +79,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
                 $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
             }
-            $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + 'linea/plist/' +
+            $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + '/linea/plist/' +
                 $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         };
 
@@ -132,6 +132,10 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 }
             }
         }
+
+        $scope.atras = function(){
+            window.history.back();
+        };
 
         $scope.isActive = toolService.isActive;
     }

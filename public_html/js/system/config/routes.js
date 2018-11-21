@@ -3,17 +3,17 @@
 trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/home', {templateUrl: 'js/app/common/home.html', controller: 'homeController'});
 
-        $routeProvider.when('/factura/create', {templateUrl: 'js/app/factura/create.html', controller: 'facturaCreateController'});
-        $routeProvider.when('/factura/remove/:id?', {templateUrl: 'js/app/factura/remove.html', controller: 'facturaRemoveController'});
-        $routeProvider.when('/factura/update/:id?', {templateUrl: 'js/app/factura/update.html', controller: 'facturaUpdateController'});
-        $routeProvider.when('/factura/view/:id?', {templateUrl: 'js/app/factura/view.html', controller: 'facturaViewController'});
-        $routeProvider.when('/factura/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
-
-        $routeProvider.when('/linea/create', {templateUrl: 'js/app/linea/create.html', controller: 'lineaCreateController'});
-        $routeProvider.when('/linea/remove/:id?', {templateUrl: 'js/app/linea/remove.html', controller: 'lineaRemoveController'});
-        $routeProvider.when('/linea/update/:id?', {templateUrl: 'js/app/linea/update.html', controller: 'lineaUpdateController'});
-        $routeProvider.when('/linea/view/:id?', {templateUrl: 'js/app/linea/view.html', controller: 'lineaViewController'});
-        $routeProvider.when('/linea/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/linea/plist.html', controller: 'lineaPlistController'});
+//        $routeProvider.when('/factura/create', {templateUrl: 'js/app/factura/create.html', controller: 'facturaCreateController'});
+//        $routeProvider.when('/factura/remove/:id?', {templateUrl: 'js/app/factura/remove.html', controller: 'facturaRemoveController'});
+//        $routeProvider.when('/factura/update/:id?', {templateUrl: 'js/app/factura/update.html', controller: 'facturaUpdateController'});
+//        $routeProvider.when('/factura/view/:id?', {templateUrl: 'js/app/factura/view.html', controller: 'facturaViewController'});
+//        $routeProvider.when('/factura/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
+//
+//        $routeProvider.when('/linea/create', {templateUrl: 'js/app/linea/create.html', controller: 'lineaCreateController'});
+//        $routeProvider.when('/linea/remove/:id?', {templateUrl: 'js/app/linea/remove.html', controller: 'lineaRemoveController'});
+//        $routeProvider.when('/linea/update/:id?', {templateUrl: 'js/app/linea/update.html', controller: 'lineaUpdateController'});
+//        $routeProvider.when('/linea/view/:id?', {templateUrl: 'js/app/linea/view.html', controller: 'lineaViewController'});
+//        $routeProvider.when('/linea/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/linea/plist.html', controller: 'lineaPlistController'});
 
         $routeProvider.when('/producto/create', {templateUrl: 'js/app/producto/create.html', controller: 'productoCreateController'});
         $routeProvider.when('/producto/remove/:id?', {templateUrl: 'js/app/producto/remove.html', controller: 'productoRemoveController'});

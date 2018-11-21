@@ -3,36 +3,41 @@
 
     <h1 class="text-center">Iniciar Sesion</h1>
 
-    <form name="formLogin" ng-submit="iniciarSesion()" ng-show="formulario">
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 form-group" ng-class="{'has-error': formLogin.username.$invalid}">
-            <label>Nombre de usuario:</label>
-            <input type="text" name="username" class="form-control" ng-model="login" ng-pattern="/^[a-zA-Z0-9]+$/" required>
-            <p ng-show="formLogin.username.$invalid && !formLogin.username.$pristine" class="help-block red-text">
-                Formato de nombre invalido.
-            </p>
-        </div>
+    <div class="fluid-container">
+        <div class="row">
+            <form name="formLogin" ng-submit="iniciarSesion()" ng-show="formulario" class="col-sm-12 col-lg-8 offset-lg-2">
+                <div class="mt-4 form-group" ng-class="{'has-error': formLogin.username.$invalid}">
+                    <label>Nombre de usuario:</label>
+                    <input type="text" name="username" class="form-control" ng-model="login" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+                    <p ng-show="formLogin.username.$invalid && !formLogin.username.$pristine" class="help-block red-text">
+                        Formato de nombre invalido.
+                    </p>
+                </div>
 
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 form-group" ng-class="{'has-error': formLogin.pass.$invalid}">
-            <label>Contraseña:</label>
-            <input type="password" name="pass" class="form-control" ng-model="pass" ng-pattern="/^[a-zA-Z0-9]+$/" required>
-            <p ng-show="formLogin.pass.$invalid && !formLogin.pass.$pristine" class="help-block red-text">
-                Formato de contraseña invalido.
-            </p>
-        </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': formLogin.pass.$invalid}">
+                    <label>Contraseña:</label>
+                    <input type="password" name="pass" class="form-control" ng-model="pass" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+                    <p ng-show="formLogin.pass.$invalid && !formLogin.pass.$pristine" class="help-block red-text">
+                        Formato de contraseña invalido.
+                    </p>
+                </div>
 
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-danger" role="alert" ng-show="incorrecto">
-            Usuario o contraseña incorrectos
-        </div>
+                <div class="mt-4 text-center alert alert-danger" role="alert" ng-show="incorrecto">
+                    Usuario o contraseña incorrectos
+                </div>
 
-        <div class="text-center mt-3">
-            <button type="submit" class="btn btn-primary mt-2 mx-2" ng-disabled="formLogin.$invalid">IniciarSesion</button>
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volverPrincipio()">Volver atrás</button>
-        </div>
-    </form>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary mt-2 mx-2" ng-disabled="formLogin.$invalid">IniciarSesion</button>
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volverPrincipio()">Volver atrás</button>
+                </div>
+            </form>
 
-    <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
-        Sesión iniciada correctamente
-        <button type="button" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
+            <div class="col-sm-12 col-lg-6 offset-lg-3 mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+                Sesión iniciada correctamente
+                <button type="button" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
+            </div>
+        </div>
     </div>
+
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

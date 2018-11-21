@@ -64,6 +64,10 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             }
             $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
         };
+        
+        $scope.crear = function (){
+            $location.url('usuario/create/');
+        };
 
         $http({
             method: 'GET',

@@ -13,6 +13,8 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
             $scope.usuario = oSessionService.getUserName();
             $scope.id = oSessionService.getId();
         }
+        
+        $scope.id_factura = $routeParams.id_factura;
 
         $scope.logout = function () {
             $http({

@@ -25,7 +25,7 @@ moduleLinea.controller('lineaUpdateController', ['$scope', '$http', '$location',
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
             }).then(function (response) {
-                if (response.data.status == 200) {
+                if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
                     $location.url('/');

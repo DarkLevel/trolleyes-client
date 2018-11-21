@@ -9,24 +9,24 @@
             <li class="nav-item" ng-class="{'active': (isActive('/home') || isActive('/'))}">
                 <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" ng-class="{'active': isActive('/factura')}">
-                <a class="nav-link" href="factura/plistAll">Factura</a>
-            </li>
-            <li class="nav-item" ng-class="{'active': isActive('/linea')}">
-                <a class="nav-link" href="linea/plist">Línea</a>
-            </li>
-            <li class="nav-item" ng-class="{'active': isActive('/producto')}">
-                <a class="nav-link" href="producto/plist">Producto</a>
-            </li>
-            <li class="nav-item" ng-class="{'active': isActive('/tipoproducto')}">
-                <a class="nav-link" href="tipoproducto/plist">Tipo Producto</a>
-            </li>
             <li class="nav-item" ng-class="{'active': isActive('/usuario')}">
                 <a class="nav-link" href="usuario/plist">Usuario</a>
             </li>
             <li class="nav-item" ng-class="{'active': isActive('/tipousuario')}">
                 <a class="nav-link" href="tipousuario/plist">Tipo Usuario</a>
             </li>
+            <li class="nav-item" ng-class="{'active': isActive('/producto')}">
+                <a class="nav-link" href="producto/plist">Producto</a>
+            </li>
+            <li class="nav-item" ng-class="{'active': isActive('/tipoproducto')}">
+                <a class="nav-link" href="tipoproducto/plist">Tipo Producto</a>
+<!--            </li>
+            <li class="nav-item" ng-class="{'active': isActive('/factura')}">
+                <a class="nav-link" href="factura/plistAll">Factura</a>
+            </li>
+            <li class="nav-item" ng-class="{'active': isActive('/linea')}">
+                <a class="nav-link" href="linea/plist">Línea</a>
+            </li>     -->
         </ul>
         <ul class="nav navbar-nav">
             <div ng-show="!sesionIniciada">
