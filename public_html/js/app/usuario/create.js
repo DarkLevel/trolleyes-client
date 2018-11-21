@@ -4,6 +4,7 @@
 
 moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+        $scope.formulario = true;
         $scope.botones = true;
         $scope.correcto = false;
 
@@ -28,6 +29,7 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
             }).then(function (response) {
                 $scope.status = response.data.status;
                 if ($scope.status === 200) {
+                    $scope.formulario = false;
                     $scope.botones = false;
                     $scope.correcto = true;
                 }
