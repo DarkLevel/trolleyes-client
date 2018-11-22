@@ -1,25 +1,20 @@
 <div class="modal-dialog">
     <div class="modal-content">
-        
+
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Seleccionar un tipo de usuario</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+
         <div class="modal-body">
 
-            <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Listado de Tipos de Usuario</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <button type="button" class="btn btn-light" ng-click="c.resetOrder()">
-                        <i class="fa fa-eye"></i>
-                    </button>
-                    <div class="btn-group" style="width:400px;">
-                        <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
-                        <select class="form-control"
-                                ng-change="c.update()"
-                                ng-model="c.rpp">
+            <div class="d-flex justify-content-between flex-wrap align-items-center mb-3 border-bottom">
+                <div class="btn-toolbar mx-auto">
+                    <div class="btn-group">
+                        <p class="mt-2" style="width: 240px;">Selecciona RPP: </p>
+                        <select class="form-control" ng-change="c.update()" ng-model="c.rpp">
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
@@ -29,61 +24,41 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-6">
-                    <nav aria-label="paginacion">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" ng-show="page > 2" href="{{ob}}/plist/{{rpp}}/1/{{order}}/{{align}}">First</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" ng-show="page > 1" href="{{ob}}/plist/{{rpp}}/{{page - 1}}/{{order}}/{{align}}">Previous</a>
-                            </li>
-                            <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
-                                <a class="page-link" href="{{ob}}/plist/{{rpp}}/{{p}}/{{order}}/{{align}}">{{p}}</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plist/{{rpp}}/{{page--1}}/{{order}}/{{align}}">Next</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}">Last</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-
-            <div class="table-responsive">
+            <div class="row text-center mx-auto mt-5 table-responsive">
                 <table class="table table-striped table-sm">
                     <tr>
                         <th>
-                            ID
-                            <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
-                                <i class="fas fa-long-arrow-alt-up"></i>
-                            </button>
-                            <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
-                                <i class="fas fa-long-arrow-alt-down"></i>
-                            </button>
+                            <p>ID</p>
+                            <div class="btn-group mb-2">
+                                <button type="button" class="btn btn-light" ng-click="c.ordenar('tipousuario.id', 'asc')">
+                                    <i class="fas fa-long-arrow-alt-up"></i>
+                                </button>
+                                <button type="button" class="btn btn-light" ng-click="c.ordenar('tipousuario.id', 'desc')">
+                                    <i class="fas fa-long-arrow-alt-down"></i>
+                                </button>
+                            </div>
                         </th>
                         <th>
-                            Descripción
-                            <button type="button" class="btn btn-light" ng-click="ordena('desc', 'asc')">
-                                <i class="fas fa-long-arrow-alt-up"></i>
-                            </button>
-                            <button type="button" class="btn btn-light" ng-click="ordena('desc', 'desc')">
-                                <i class="fas fa-long-arrow-alt-down"></i>
-                            </button>
+                            <p>Descripción</p>
+                            <div class="btn-group mb-2">
+                                <button type="button" class="btn btn-light" ng-click="c.ordenar('tipousuario.desc', 'asc')">
+                                    <i class="fas fa-long-arrow-alt-up"></i>
+                                </button>
+                                <button type="button" class="btn btn-light" ng-click="c.ordenar('tipousuario.desc', 'desc')">
+                                    <i class="fas fa-long-arrow-alt-down"></i>
+                                </button>
+                            </div>
                         </th>
                         <th>
-                            Selección
+                            <p>Selección</p>
                         </th>
                     </tr>
                     <tr ng-repeat="fila in c.data">
-                        <td>{{fila.id}}</td>
-                        <td>{{fila.desc}}</td>
+                        <td class="align-middle">{{fila.id}}</td>
+                        <td class="align-middle">{{fila.desc}}</td>
                         <td>
                             <div class="btn-toolbar" role="toolbar">
-                                <div class="btn-group">
+                                <div class="btn-group mx-auto">
                                     <a class="btn btn-default btn-xs" ng-click="c.save(fila.id, fila.desc)" data-dismiss="modal">
                                         <i class="fa fa-reply" aria-hidden="true"></i>
                                     </a>
@@ -92,15 +67,43 @@
                         </td>
                     </tr>
                 </table>
-
             </div>
+
+            <nav aria-label="paginacion" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" ng-class="{'disabled':(c.page == 1)}">
+                        <a class="page-link" ng-click="c.cambiarPagina(1)"><span>&laquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(c.page == 1)}">
+                        <a class="page-link" ng-click="c.cambiarPagina(c.page-1)"><span>&lsaquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(c.page == 1)}">
+                        <a class="page-link" ng-click="c.cambiarPagina(1)">1</a>
+                    </li>
+
+                    <li class="page-item" ng-class="{'active':(p == c.page), 'disabled':(p === '...')}" ng-repeat="p in c.list track by $index">
+                        <a class="page-link" ng-click="c.cambiarPagina({{p}})">p</a>
+                    </li>
+
+                    <li class="page-item" ng-class="{'disabled':(c.page == c.totalPages), 'ng-hide':(c.totalPages == 1)}">
+                        <a class="page-link" ng-click="c.cambiarPagina(c.totalPages)">{{c.totalPages}}</a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(c.page == c.totalPages)}">
+                        <a class="page-link" ng-click="c.cambiarPagina(c.totalPages--1)"><span>&rsaquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(c.page == c.totalPages)}">
+                        <a class="page-link" ng-click="c.cambiarPagina(c.totalPages)"><span>&raquo;</span></a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
-        
+
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" ng-click="c.newVariableAndValue.name = '';c.newVariableAndValue.value = ''">Reset</button>
+            <button type="button" class="btn btn-primary" ng-click="c.resetOrder()">Reiniciar</button>
+            <button type="button" class="btn btn-danger" ng-click="c.resetOrder()">Resetear Orden</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ng-click="c.save()">Save</button>
         </div>
-        
+
     </div>
 </div>

@@ -6,15 +6,14 @@ moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$locati
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
+        $scope.id_usuario = $routeParams.id_user;
         
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
             $scope.usuario = oSessionService.getUserName();
-            $scope.id = oSessionService.getId();
+            $scope.id_sesion = oSessionService.getId();
         }
-        
-        $scope.id_usuario = $routeParams.id_user;
 
         $scope.logout = function () {
             $http({

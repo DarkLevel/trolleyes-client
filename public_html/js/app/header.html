@@ -1,5 +1,5 @@
 <!-- Fixed navbar -->
-<nav class="navbar navbar-expand-xl navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="home">TROLLEYES</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,32 +20,32 @@
             </li>
             <li class="nav-item" ng-class="{'active': isActive('/tipoproducto')}">
                 <a class="nav-link" href="tipoproducto/plist">Tipo Producto</a>
-<!--            </li>
-            <li class="nav-item" ng-class="{'active': isActive('/factura')}">
+            </li>
+<!--            <li class="nav-item" ng-class="{'active': isActive('/factura')}">
                 <a class="nav-link" href="factura/plistAll">Factura</a>
             </li>
             <li class="nav-item" ng-class="{'active': isActive('/linea')}">
                 <a class="nav-link" href="linea/plist">Línea</a>
-            </li>     -->
+            </li>-->
         </ul>
         <ul class="nav navbar-nav">
             <div ng-show="!sesionIniciada">
-                <a class="btn btn-primary mx-1" role="button" href="usuario/login"><i class="fas fa-user"></i> Iniciar Sesión</a>
+                <a class="btn btn-outline-primary mx-1" role="button" href="usuario/login"><i class="fas fa-user"></i> Iniciar Sesión</a>
             </div>
             <div ng-show="!sesionIniciada">
-                <a class="btn btn-primary mx-1" role="button" href="usuario/create"><i class="fas fa-plus-circle"></i> Crear Usuario</a>
+                <a class="btn btn-outline-primary mx-1" role="button" href="usuario/create"><i class="fas fa-plus-circle"></i> Crear Usuario</a>
             </div>
             <div class="dropdown mx-1" ng-show="sesionIniciada">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
                     {{usuario}}
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="usuario/view/{{id}}">Ver</a>
-                    <a class="dropdown-item" href="usuario/update/{{id}}">Editar</a>
+                    <a class="dropdown-item" href="usuario/view/{{id_sesion}}">Ver</a>
+                    <a class="dropdown-item" href="usuario/update/{{id_sesion}}">Editar</a>
                 </div>
             </div>
             <div ng-show="sesionIniciada">
-                <a class="btn btn-primary mx-1" role="button" href="home" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                <a class="btn btn-outline-primary mx-1" role="button" href="home" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
             </div>
         </ul>
     </div>

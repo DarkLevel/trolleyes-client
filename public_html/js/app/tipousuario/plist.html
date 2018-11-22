@@ -17,11 +17,11 @@
         </select>
     </div> 
     <form>
-        <div class="row form-group text-center mx-auto mt-5 table-responsive">
+        <div class="row text-center mx-auto mt-5 table-responsive">
             <table class="table table-striped">
                 <tr>
                     <th>
-                        ID<br>
+                        ID
                         <div class="btn-group">
                             <button type="button" class="btn" ng-click="ordenar('id', 'asc')">
                                 <i class="fas fa-long-arrow-alt-up"></i>
@@ -45,8 +45,8 @@
                     <th>Operaciones</th>
                 </tr>
                 <tr ng-repeat="fila in ajaxData">
-                    <td>{{fila.id}}</td>
-                    <td>{{fila.desc}}</td>
+                    <td class="align-middle">{{fila.id}}</td>
+                    <td class="align-middle">{{fila.desc}}</td>
                     <td>
                         <div class="btn-group">
                             <a role="button" class="btn btn-info fas fa-eye" href="tipousuario/view/{{fila.id}}"></a>

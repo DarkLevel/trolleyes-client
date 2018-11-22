@@ -43,3 +43,8 @@ code {
 .red-text{
     color:red;
 }
+
+.enlace:hover {
+    text-decoration: none;
+    color: #000066;
+}

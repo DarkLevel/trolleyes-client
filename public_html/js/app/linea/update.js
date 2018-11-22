@@ -17,7 +17,7 @@ moduleLinea.controller('lineaUpdateController', ['$scope', '$http', '$location',
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
             $scope.usuario = oSessionService.getUserName();
-            $scope.id = oSessionService.getId();
+            $scope.id_sesion = oSessionService.getId();
         }
 
         $scope.logout = function () {

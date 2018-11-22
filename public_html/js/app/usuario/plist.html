@@ -101,20 +101,24 @@
                     <th>Operaciones</th>
                 </tr>
                 <tr ng-repeat="fila in ajaxData">
-                    <td>{{fila.id}}</td>
-                    <td>{{fila.dni}}</td>
-                    <td>{{fila.nombre}}</td>
-                    <td>{{fila.ape1}}</td>
-                    <td>{{fila.ape2}}</td>
-                    <td>{{fila.login}}</td>
-                    <td>{{fila.obj_tipoUsuario.desc}}</td>
-                    <td><a role="button" ng-class="{'disabled':(fila.link_factura == 0)}" class="btn btn-info"
-                           href="usuario/{{fila.id}}/factura/plist">{{fila.link_factura}}</a></td>
+                    <td class="align-middle">{{fila.id}}</td>
+                    <td class="align-middle">{{fila.dni}}</td>
+                    <td class="align-middle">{{fila.nombre}}</td>
+                    <td class="align-middle">{{fila.ape1}}</td>
+                    <td class="align-middle">{{fila.ape2}}</td>
+                    <td class="align-middle">{{fila.login}}</td>
+                    <td class="align-middle"><a class="enlace" href="tipousuario/view/{{fila.obj_tipoUsuario.id}}">{{fila.obj_tipoUsuario.desc}}</a></td>
                     <td>
                         <div class="btn-group">
-                        <a role="button" class="btn btn-info fas fa-eye" href="usuario/view/{{fila.id}}"></a>
-                        <a role="button" class="btn btn-info fas fa-edit" href="usuario/update/{{fila.id}}"></a>
-                        <a role="button" class="btn btn-info fas fa-trash-alt" href="usuario/remove/{{fila.id}}"></a>
+                            <a role="button" ng-class="{'disabled':(fila.link_factura == 0)}" class="btn btn-outline-primary" href="usuario/{{fila.id}}/factura/plist">{{fila.link_factura}}</a>
+                            <a role="button" class="btn btn-outline-primary" href="usuario/{{fila.id}}/factura/create"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a role="button" class="btn btn-outline-primary fas fa-eye" href="usuario/view/{{fila.id}}"></a>
+                            <a role="button" class="btn btn-outline-primary fas fa-edit" href="usuario/update/{{fila.id}}"></a>
+                            <a role="button" class="btn btn-outline-primary fas fa-trash-alt" href="usuario/remove/{{fila.id}}"></a>
                         </div>
                     </td>
                 </tr>

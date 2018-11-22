@@ -100,13 +100,13 @@
                     <th>Operaciones</th>
                 </tr>
                 <tr ng-repeat="fila in ajaxData">
-                    <td>{{fila.id}}</td>
-                    <td>{{fila.codigo}}</td>
-                    <td>{{fila.desc}}</td>
-                    <td>{{fila.existencias}}</td>
-                    <td>{{fila.precio}}</td>
-                    <td>{{fila.foto}}</td>
-                    <td>{{fila.obj_tipoProducto.desc}}</td>
+                    <td class="align-middle">{{fila.id}}</td>
+                    <td class="align-middle">{{fila.codigo}}</td>
+                    <td class="align-middle">{{fila.desc}}</td>
+                    <td class="align-middle">{{fila.existencias}}</td>
+                    <td class="align-middle">{{fila.precio}}</td>
+                    <td class="align-middle">{{fila.foto}}</td>
+                    <td class="align-middle"><a class="enlace" href="tipoproducto/view/{{fila.obj_tipoProducto.id}}">{{fila.obj_tipoProducto.desc}}</a></td>
                     <td>
                         <div class="btn-group">
                         <a role="button" class="btn btn-info fas fa-eye" href="producto/view/{{fila.id}}"></a>
