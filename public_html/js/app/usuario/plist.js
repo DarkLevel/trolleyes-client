@@ -5,6 +5,8 @@
 moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.totalPages = 1;
+        $scope.registros = true;
+        $scope.alerta = false;
         
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -36,7 +38,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.usuario = oSessionService.getUserName();
             $scope.id_sesion = oSessionService.getId();
         }
-
+        
         $scope.logout = function () {
             $http({
                 method: 'GET',
@@ -45,7 +47,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -75,6 +77,10 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataNumber = response.data.message;
+            if($scope.ajaxDataNumber == 0){
+                $scope.registros = false;
+                $scope.alerta = true;
+            }
             $scope.totalPages = Math.ceil($scope.ajaxDataNumber / $scope.rpp);
             if ($scope.page > $scope.totalPages) {
                 $scope.page = $scope.totalPages;

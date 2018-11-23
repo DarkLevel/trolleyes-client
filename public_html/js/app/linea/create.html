@@ -3,23 +3,73 @@
 
     <h1 class="text-center">Crear Línea</h1>
 
-    <form>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Cantidad:</label>
-            <input type="text" class="form-control" ng-model="cantidad">
+    <div class="fluid-container">
+        <div class="row">
+            <ng-form name="form" ng-show="formulario" class="col-10 col-lg-8 mx-auto">
+                <div class="mt-4 form-group" ng-class="{'has-error': form.cantidad.$invalid}">
+                    <label>Cantidad:</label>
+                    <input type="text" name="cantidad" class="form-control" ng-model="cantidad" ng-pattern="/^[0-9]+$/" required>
+                    <p ng-show="form.cantidad.$invalid && !form.cantidad.$pristine" class="help-block red-text">
+                        Formato de cantidad inválido.
+                    </p>
+                </div>
+                
+                <div class="mt-4 form-group" ng-class="{'has-error': form.obj_producto.$invalid}">
+                    <producto-selection 
+                        class="modal fade" 
+                        id="cadd-location-modal" 
+                        obj="obj_producto"
+                        on-producto-set="productoRefresh(this,false)">                          
+                    </producto-selection>
+                    
+                    <label>Producto:</label>
+                    <div class="control">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"
+                                      data-toggle="modal"
+                                      data-target="#cadd-location-modal">
+                                    <span class="fas fa-search"></span>
+                                </span>
+                            </div>
+                            <input ng-model="obj_producto.id"
+                                   ng-change="productoRefresh(this,true)"
+                                   aria-describedby="basic-addon2"
+                                   class="form-control"
+                                   id="obj_producto"
+                                   name="obj_producto"
+                                   type="number"
+                                   min="1"
+                                   ng-pattern="/^[1-9][0-9]*$/"
+                                   required
+                                   ng-model-options="{debounce: 1000}">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <a href="producto/view/{{obj_producto.id}}">
+                                        <span class="p-2 bd-highlight"><i class="fas fa-users fa-1x"></i></span>
+                                        Producto: {{obj_producto.codigo}}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <p ng-show="form.obj_producto.$invalid && !form.obj_producto.$pristine"  class="help-block red-text">
+                            Id de producto inválido.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4" ng-show="botones">
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-disabled="form.$invalid" ng-click="crear()">Crear Línea</button>
+                    <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+                </div>
+            </ng-form>
+
+            <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+                Línea creada correctamente
+                <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            </div>
         </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Producto:</label>
-            <input type="text" class="form-control" ng-model="id_producto">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 alert alert-success text-center" role="alert" ng-show="alerta">
-            Línea creada correctamente
-            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-        <div class="text-center mt-3" ng-show="botones">
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="crear()">Crear línea</button>
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-    </form>
+    </div>
+    
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

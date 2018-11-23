@@ -4,9 +4,10 @@
 
 moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+        $scope.formulario = true;
         $scope.botones = true;
         $scope.alerta = false;
-        
+        $scope.obj_producto = {id: null, codigo: null};
         $scope.id_factura = $routeParams.id_factura;
 
        $scope.sesionIniciada = false;
@@ -24,7 +25,7 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -36,7 +37,7 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
         $scope.crear = function () {
             var json = {
                 cantidad: $scope.cantidad,
-                id_producto: $scope.id_producto,
+                id_producto: $scope.obj_producto.id,
                 id_factura: $scope.id_factura
             };
             $http({
@@ -46,12 +47,36 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
-                $scope.botones = false;
-                $scope.alerta = true;
+                if ($scope.status === 200) {
+                    $scope.formulario = false;
+                    $scope.botones = false;
+                    $scope.correcto = true;
+                }
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
+        };
+        
+        $scope.productoRefresh = function (f, consultar) {
+            var form = f;
+            if ($scope.obj_producto.id != null) {
+                if (consultar) {
+                    $http({
+                        method: 'GET',
+                        url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.obj_producto.id
+                    }).then(function (response) {
+                        $scope.obj_producto = response.data.message;
+                        form.form.obj_producto.$setValidity('valid', true);
+                    }, function (response) {
+                        form.form.obj_producto.$setValidity('valid', false);
+                    });
+                } else {
+                    form.form.obj_producto.$setValidity('valid', true);
+                }
+            } else {
+                $scope.obj_producto.desc = "";
+            }
         };
         
         $scope.isActive = toolService.isActive;

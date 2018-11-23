@@ -1,11 +1,11 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container" style="margin-top: 75px;">
 
-    <h1 class="text-center">Iniciar Sesion</h1>
+    <h1 class="text-center">Iniciar Sesión</h1>
 
     <div class="fluid-container">
         <div class="row">
-            <form name="form" ng-submit="iniciarSesion()" ng-show="formulario" class="col-sm-12 col-lg-8 mx-auto">
+            <form name="form" ng-submit="iniciarSesion()" ng-show="formulario" class="col-10 col-lg-8 mx-auto">
                 <div class="mt-4 form-group" ng-class="{'has-error': form.username.$invalid}">
                     <label>Nombre de usuario:</label>
                     <input type="text" name="username" class="form-control" ng-model="login" ng-pattern="/^[a-zA-Z0-9]+$/" required>
@@ -28,13 +28,13 @@
 
                 <div class="text-center mt-3">
                     <button type="submit" class="btn btn-primary mt-2 mx-2" ng-disabled="form.$invalid">IniciarSesion</button>
-                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volverPrincipio()">Volver atrás</button>
+                    <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volverPrincipio()">Volver atrás</button>
                 </div>
             </form>
 
-            <div class="col-sm-12 col-lg-6 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+            <div class="col-10 col-lg-6 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
                 Sesión iniciada correctamente
-                <button type="button" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Volver atrás</button>
+                <button type="button" class="btn btn-primary mx-2" ng-click="volverPrincipio()">Ir a inicio</button>
             </div>
         </div>
     </div>

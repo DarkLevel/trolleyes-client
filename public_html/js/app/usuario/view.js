@@ -16,7 +16,7 @@ moduleUsuario.controller('usuarioViewController', ['$scope', '$http', '$location
             $scope.usuario = oSessionService.getUserName();
             $scope.id_sesion = oSessionService.getId();
         }
-
+        
         $scope.logout = function () {
             $http({
                 method: 'GET',
@@ -25,7 +25,7 @@ moduleUsuario.controller('usuarioViewController', ['$scope', '$http', '$location
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };

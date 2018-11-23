@@ -3,19 +3,28 @@
 
     <h1 class="text-center">Crear tipo de producto</h1>
 
-    <form>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Descripción:</label>
-            <input type="text" class="form-control" ng-model="desc">
+    <div class="fluid-container">
+        <div class="row">
+            <ng-form name="form" ng-show="formulario" class="col-10 col-lg-8 mx-auto">
+                <div class="mt-4 form-group" ng-class="{'has-error': form.desc.$invalid}">
+                    <label>Descripción:</label>
+                    <input type="text" name="desc" class="form-control" ng-model="desc" ng-maxlength="50" ng-pattern="/^([A-Z]|[a-z])[a-z]*$/" required>
+                    <p ng-show="form.desc.$invalid && !form.desc.$pristine" class="help-block red-text">
+                        Formato de descripción inválido.
+                    </p>
+                </div>
+                <div class="text-center mt-3" ng-show="botones">
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="crear()">Crear tipo de producto</button>
+                    <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+                </div>
+            </ng-form>
+
+            <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+                Tipo de producto creado correctamente
+                <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            </div>
         </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="alerta">
-            Tipo de producto creado correctamente
-            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-        <div class="text-center mt-3" ng-show="botones">
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="crear()">Crear tipo de producto</button>
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-    </form>
+    </div>
+
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

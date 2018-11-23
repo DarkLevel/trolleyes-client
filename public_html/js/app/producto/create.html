@@ -3,39 +3,102 @@
 
     <h1 class="text-center">Crear Producto</h1>
 
-    <form>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Código:</label>
-            <input type="text" class="form-control" ng-model="codigo">
+    <div class="fluid-container">
+        <div class="row">
+            <ng-form name="form" ng-show="formulario" class="col-10 col-lg-8 mx-auto">
+                <div class="mt-4 form-group" ng-class="{'has-error': form.codigo.$invalid}">
+                    <label>Código:</label>
+                    <input type="text" name="codigo" class="form-control" ng-model="codigo" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+                    <p ng-show="form.codigo.$invalid && !form.codigo.$pristine" class="help-block red-text">
+                        Formato de código inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.desc.$invalid}">
+                    <label>Descripción:</label>
+                    <input type="text" name="desc" class="form-control" ng-model="desc" ng-maxlength="50" ng-pattern="/^[a-zA-Z ,.'-]+$/" required>
+                    <p ng-show="form.desc.$invalid && !form.desc.$pristine" class="help-block red-text">
+                        Formato de descripción inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.existencias.$invalid}">
+                    <label>Existencias:</label>
+                    <input type="text" name="existencias" class="form-control" ng-model="existencias" ng-pattern="/^[0-9]+$/" required>
+                    <p ng-show="form.existencias.$invalid && !form.existencias.$pristine" class="help-block red-text">
+                        Formato de existencias inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.precio.$invalid}">
+                    <label>Precio:</label>
+                    <input type="text" name="precio" class="form-control" ng-model="precio" ng-pattern="/^[0-9]+(,[0-9]?[1-9])?$/" required>
+                    <p ng-show="form.precio.$invalid && !form.precio.$pristine" class="help-block red-text">
+                        Formato de precio inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.foto.$invalid}">
+                    <label>Foto:</label>
+                    <input type="text" name="foto" class="form-control" ng-model="foto" ng-pattern="/^[a-zA-Z]+$/" required>
+                    <p ng-show="form.foto.$invalid && !form.foto.$pristine" class="help-block red-text">
+                        Formato de foto inválido.
+                    </p>
+                </div>
+                
+                <div class="mt-4 form-group" ng-class="{'has-error': form.obj_tipoProducto.$invalid}">
+                    <tipoproducto-selection 
+                        class="modal fade" 
+                        id="cadd-location-modal" 
+                        obj="obj_tipoProducto"
+                        on-tipoproducto-set="tipoProductoRefresh(this,false)">                          
+                    </tipoproducto-selection>
+                    
+                    <label>Tipo de producto:</label>
+                    <div class="control">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"
+                                      data-toggle="modal"
+                                      data-target="#cadd-location-modal">
+                                    <span class="fas fa-search"></span>
+                                </span>
+                            </div>
+                            <input ng-model="obj_tipoProducto.id"
+                                   ng-change="tipoProductoRefresh(this,true)"
+                                   aria-describedby="basic-addon2"
+                                   class="form-control"
+                                   id="obj_tipoProducto"
+                                   name="obj_tipoProducto"
+                                   type="number"
+                                   min="1"
+                                   max="100"
+                                   ng-pattern="/^[1-9][0-9]?$|^100$/"
+                                   required
+                                   ng-model-options="{debounce: 1000}">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <a href="tipoproducto/view/{{obj_tipoProducto.id}}">
+                                        <span class="p-2 bd-highlight"><i class="fas fa-users fa-1x"></i></span>
+                                        Tipo de producto: {{obj_tipoProducto.desc}}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <p ng-show="form.obj_tipoProducto.$invalid && !form.obj_tipoProducto.$pristine"  class="help-block red-text">
+                            Id de tipo de producto inválido.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4" ng-show="botones">
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-disabled="form.$invalid" ng-click="crear()">Crear Producto</button>
+                    <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+                </div>
+            </ng-form>
+
+            <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+                Producto creado correctamente
+                <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            </div>
         </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Descripción:</label>
-            <input type="text" class="form-control" ng-model="desc">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Existencias:</label>
-            <input type="text" class="form-control" ng-model="existencias">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Precio:</label>
-            <input type="text" class="form-control" ng-model="precio">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Foto:</label>
-            <input type="text" class="form-control" ng-model="foto">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Tipo de producto:</label>
-            <input type="text" class="form-control" ng-model="id_tipoproducto">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="alerta">
-            Producto creado correctamente
-            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-        <div class="text-center mt-3" ng-show="botones">
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="crear()">Crear producto</button>
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-    </form>
+    </div>
+    
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

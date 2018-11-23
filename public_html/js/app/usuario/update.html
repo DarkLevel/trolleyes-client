@@ -3,43 +3,106 @@
 
     <h1 class="text-center">Editar usuario: {{ajaxDataUsuario.login}}</h1>
 
-    <form>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>ID:</label>
-            <input type="text" class="form-control" ng-model="id" disabled>
+    <div class="fluid-container">
+        <div class="row">
+            <ng-form name="form" ng-show="formulario" class="col-10 col-lg-8 mx-auto">
+                <div class="mt-4 form-group">
+                    <label>ID:</label>
+                    <input type="text" class="form-control" ng-model="id" disabled>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.dni.$invalid}">
+                    <label>Dni:</label>
+                    <input type="text" name="dni" class="form-control" ng-model="dni" ng-pattern="/^[0-9]{8}([A-Z]|[a-z])$/" required>
+                    <p ng-show="form.dni.$invalid && !form.dni.$pristine" class="help-block red-text">
+                        Formato de dni inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.nombre.$invalid}">
+                    <label>Nombre:</label>
+                    <input type="text" name="nombre" class="form-control" ng-model="nombre" ng-pattern="/^([A-Z]|[a-z])[a-z]*$/" required>
+                    <p ng-show="form.nombre.$invalid && !form.nombre.$pristine" class="help-block red-text">
+                        Formato de nombre inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.ape1.$invalid}">
+                    <label>Primer apellido:</label>
+                    <input type="text" name="ape1" class="form-control" ng-model="ape1" ng-pattern="/^([A-Z]|[a-z])[a-z]*$/" required>
+                    <p ng-show="form.ape1.$invalid && !form.ape1.$pristine" class="help-block red-text">
+                        Formato de apellido inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.ape2.$invalid}">
+                    <label>Segundo apellido:</label>
+                    <input type="text" name="ape2" class="form-control" ng-model="ape2" ng-pattern="/^([A-Z]|[a-z])[a-z]*$/" required>
+                    <p ng-show="form.ape2.$invalid && !form.ape2.$pristine" class="help-block red-text">
+                        Formato de apellido inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.login.$invalid}">
+                    <label>Nombre de usuario:</label>
+                    <input type="text" name="login" class="form-control" ng-model="login" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+                    <p ng-show="form.login.$invalid && !form.login.$pristine" class="help-block red-text">
+                        Formato de nombre de usuario inválido.
+                    </p>
+                </div>
+
+                <div class="mt-4 form-group" ng-class="{'has-error': form.obj_tipoUsuario.$invalid}">
+                    <tipousuario-selection 
+                        class="modal fade" 
+                        id="cadd-location-modal" 
+                        obj="obj_tipoUsuario"
+                        on-tipousuario-set="tipoUsuarioRefresh(this,false)">                          
+                    </tipousuario-selection>
+
+                    <label>Tipo de usuario:</label>
+                    <div class="control">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"
+                                      data-toggle="modal"
+                                      data-target="#cadd-location-modal">
+                                    <span class="fas fa-search"></span>
+                                </span>
+                            </div>
+                            <input ng-model="obj_tipoUsuario.id"
+                                   ng-change="tipoUsuarioRefresh(this, true)"
+                                   aria-describedby="basic-addon2"
+                                   class="form-control"
+                                   id="obj_tipoUsuario"
+                                   name="obj_tipoUsuario"
+                                   type="number"
+                                   min="1"
+                                   max="100"
+                                   ng-pattern="/^[1-9][0-9]?$|^100$/"
+                                   required
+                                   ng-model-options="{debounce: 1000}">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <a href="tipousuario/view/{{obj_tipoUsuario.id}}">
+                                        <span class="p-2 bd-highlight"><i class="fas fa-users fa-1x"></i></span>
+                                        Tipo de usuario: {{obj_tipoUsuario.desc}}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <p ng-show="form.obj_tipoUsuario.$invalid && !form.obj_tipoUsuario.$pristine"  class="help-block red-text">
+                            Id de usuario inválido.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3" ng-show="botones">
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-disabled="form.$invalid" ng-click="editar()">Editar usuario</button>
+                    <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+                </div>
+            </ng-form>
+
+            <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+                Usuario editado correctamente
+                <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            </div>
         </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Dni:</label>
-            <input type="text" class="form-control" ng-model="dni">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Nombre:</label>
-            <input type="text" class="form-control" ng-model="nombre">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Primer apellido:</label>
-            <input type="text" class="form-control" ng-model="ape1">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Segundo apellido:</label>
-            <input type="text" class="form-control" ng-model="ape2">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Nombre de usuario:</label>
-            <input type="text" class="form-control" ng-model="login">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Tipo de usuario:</label>
-            <input type="text" class="form-control" ng-model="id_tipousuario">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 alert alert-success text-center" role="alert" ng-show="alerta">
-            Usuario editado correctamente
-            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-        <div class="text-center mt-3" ng-show="botones">
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="editar()">Editar usuario</button>
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-    </form>
+    </div>
+
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

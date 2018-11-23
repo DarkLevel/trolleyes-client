@@ -3,27 +3,39 @@
 
     <h1 class="text-center">Editar Factura</h1>
 
-    <form>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>ID:</label>
-            <input type="text" class="form-control" ng-model="id" disabled>
+    <div class="fluid-container">
+        <div class="row">
+            <ng-form name="form" ng-show="formulario" class="col-10 col-lg-8 mx-auto">
+                <div class="mt-4 form-group">
+                    <label>ID:</label>
+                    <input type="text" class="form-control" ng-model="id" disabled>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.fecha.$invalid && !form.fecha.$pristine}">
+                    <label>Fecha:</label>
+                    <md-datepicker name="fecha" ng-model="fecha" md-placeholder="Introduce fecha"></md-datepicker>
+                    <p ng-show="form.fecha.$invalid && !form.fecha.$pristine" class="help-block red-text">
+                        Formato de fecha inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.iva.$invalid}">
+                    <label>Iva:</label>
+                    <input type="text" name="iva" class="form-control" ng-model="iva" ng-pattern="/^[0-9]+$/" required>
+                    <p ng-show="form.iva.$invalid && !form.iva.$pristine" class="help-block red-text">
+                        Formato de iva inválido.
+                    </p>
+                </div>
+                
+                <div class="text-center mt-3" ng-show="botones">
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="editar()">Editar factura</button>
+                    <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+                </div>
+            </ng-form>
+
+            <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+                Factura editada correctamente
+                <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            </div>
         </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Fecha:</label>
-            <input type="text" class="form-control" ng-model="fecha">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
-            <label>Iva:</label>
-            <input type="text" class="form-control" ng-model="iva">
-        </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 alert alert-success text-center" role="alert" ng-show="alerta">
-            Factura editado correctamente
-            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-        <div class="text-center mt-3" ng-show="botones">
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="editar()">Editar factura</button>
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
-    </form>
+    </div>
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

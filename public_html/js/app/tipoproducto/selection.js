@@ -2,20 +2,20 @@
 
 'use strict';
 
-moduleComponent.component('tipousuarioSelection', {
-    templateUrl: 'js/app/tipousuario/selection.html',
+moduleComponent.component('tipoproductoSelection', {
+    templateUrl: 'js/app/tipoproducto/selection.html',
     controllerAs: 'c',
     controller: cController,
     bindings: {
         obj: '=',
-        onTipousuarioSet: '&'
+        onTipoproductoSet: '&'
     }
 });
 
 function cController($http) {
     var self = this;
 
-    self.ob = "tipousuario";
+    self.ob = "tipoproducto";
     self.rpp = 5;
     self.page = 1;
     self.totalPages = 1;
@@ -27,14 +27,14 @@ function cController($http) {
         url: 'http://localhost:8081/trolleyes/json?ob=' + self.ob + '&op=getcount'
     }).then(function (response) {
         self.status = response.status;
-        self.ajaxDataUsuariosNumber = response.data.message;
-        self.totalPages = Math.ceil(self.ajaxDataUsuariosNumber / self.rpp);
+        self.ajaxDataProductosNumber = response.data.message;
+        self.totalPages = Math.ceil(self.ajaxDataProductosNumber / self.rpp);
         if (self.page > self.totalPages) {
             self.page = self.totalPages;
         }
         pagination();
     }, function (response) {
-        self.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
+        self.ajaxDataProductosNumber = response.data.message || 'Request failed';
         self.status = response.status;
     });
 
@@ -53,7 +53,7 @@ function cController($http) {
     self.save = function (id, desc) {
         self.obj.id = id;
         self.obj.desc = desc;
-        self.onTipousuarioSet();
+        self.onTipoproductoSet();
     };
     
 
@@ -63,14 +63,14 @@ function cController($http) {
             url: 'http://localhost:8081/trolleyes/json?ob=' + self.ob + '&op=getcount'
         }).then(function (response) {
             self.status = response.status;
-            self.ajaxDataUsuariosNumber = response.data.message;
-            self.totalPages = Math.ceil(self.ajaxDataUsuariosNumber / self.rpp);
+            self.ajaxDataProductosNumber = response.data.message;
+            self.totalPages = Math.ceil(self.ajaxDataProductosNumber / self.rpp);
             if (self.page > self.totalPages) {
                 self.page = self.totalPages;
             }
             pagination();
         }, function (response) {
-            self.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
+            self.ajaxDataProductosNumber = response.data.message || 'Request failed';
             self.status = response.status;
         });
 
@@ -89,7 +89,7 @@ function cController($http) {
 
     self.cambiarPagina = function (pagina) {
         self.page = pagina;
-        
+
         $http({
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=' + self.ob + '&op=getcount'

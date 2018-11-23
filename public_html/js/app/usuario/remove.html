@@ -3,7 +3,7 @@
 
     <h1 class="text-center">Borrar usuario {{ajaxData.id}}</h1>
 
-    <form>
+    <form ng-show="formulario">
         <div class="row form-group text-center mx-auto mt-5 table-responsive">
             <table class="table table-striped">
                 <tr>
@@ -16,24 +16,25 @@
                     <th>Tipo de usuario</th>
                 </tr>
                 <tr>
-                    <td>{{ajaxData.id}}</td>
-                    <td>{{ajaxData.dni}}</td>
-                    <td>{{ajaxData.nombre}}</td>
-                    <td>{{ajaxData.ape1}}</td>
-                    <td>{{ajaxData.ape2}}</td>
-                    <td>{{ajaxData.login}}</td>
-                    <td>{{ajaxData.obj_tipoUsuario.desc}}</td>
+                    <td class="align-middle">{{ajaxData.id}}</td>
+                    <td class="align-middle">{{ajaxData.dni}}</td>
+                    <td class="align-middle">{{ajaxData.nombre}}</td>
+                    <td class="align-middle">{{ajaxData.ape1}}</td>
+                    <td class="align-middle">{{ajaxData.ape2}}</td>
+                    <td class="align-middle">{{ajaxData.login}}</td>
+                    <td class="align-middle">{{ajaxData.obj_tipoUsuario.desc}}</td>
                 </tr>
             </table>
         </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 text-center alert alert-success" role="alert" ng-show="alerta">
-            Usuario borrado correctamente
-            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
         <div class="text-center mt-3" ng-show="botones">
             <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="borrar()">Borrar usuario</button>
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+            <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>
+    
+    <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="alerta">
+        Usuario borrado correctamente
+        <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+    </div>
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

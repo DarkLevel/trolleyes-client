@@ -4,6 +4,7 @@
 
 moduleLinea.controller('lineaUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+        $scope.formulario = true;
         $scope.botones = true;
         $scope.alerta = false;
 
@@ -28,7 +29,7 @@ moduleLinea.controller('lineaUpdateController', ['$scope', '$http', '$location',
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -40,8 +41,11 @@ moduleLinea.controller('lineaUpdateController', ['$scope', '$http', '$location',
             $scope.status = response.status;
             $scope.id = response.data.message.id;
             $scope.cantidad = response.data.message.cantidad;
-            $scope.id_producto = response.data.message.obj_producto.id;
             $scope.id_factura = response.data.message.obj_factura.id;
+            
+            var id_producto = response.data.message.obj_producto.id;
+            var codigo_producto = response.data.message.obj_producto.codigo;
+            $scope.obj_producto = {id: id_producto, codigo: codigo_producto};
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
@@ -55,7 +59,7 @@ moduleLinea.controller('lineaUpdateController', ['$scope', '$http', '$location',
             var json = {
                 id: $scope.id,
                 cantidad: $scope.cantidad,
-                id_producto: $scope.id_producto,
+                id_producto: $scope.obj_producto.id,
                 id_factura: $scope.id_factura
             };
             $http({
@@ -65,12 +69,36 @@ moduleLinea.controller('lineaUpdateController', ['$scope', '$http', '$location',
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
-                $scope.botones = false;
-                $scope.alerta = true;
+                if ($scope.status === 200) {
+                    $scope.formulario = false;
+                    $scope.botones = false;
+                    $scope.correcto = true;
+                }
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
+        };
+        
+        $scope.productoRefresh = function (f, consultar) {
+            var form = f;
+            if ($scope.obj_producto.id != null) {
+                if (consultar) {
+                    $http({
+                        method: 'GET',
+                        url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.obj_producto.id
+                    }).then(function (response) {
+                        $scope.obj_producto = response.data.message;
+                        form.form.obj_producto.$setValidity('valid', true);
+                    }, function (response) {
+                        form.form.obj_producto.$setValidity('valid', false);
+                    });
+                } else {
+                    form.form.obj_producto.$setValidity('valid', true);
+                }
+            } else {
+                $scope.obj_producto.desc = "";
+            }
         };
 
         $scope.isActive = toolService.isActive;

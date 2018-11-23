@@ -5,21 +5,22 @@
 moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
-        $scope.alerta = false;
+        $scope.correcto = false;
+        $scope.formulario = true;
 
         if (!$routeParams.id) {
             $scope.id = 1;
         } else {
             $scope.id = $routeParams.id;
         }
-        
+
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
             $scope.usuario = oSessionService.getUserName();
             $scope.id_sesion = oSessionService.getId();
         }
-
+        
         $scope.logout = function () {
             $http({
                 method: 'GET',
@@ -28,7 +29,7 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -45,7 +46,10 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
             $scope.ape1 = response.data.message.ape1;
             $scope.ape2 = response.data.message.ape2;
             $scope.login = response.data.message.login;
-            $scope.id_tipousuario = response.data.message.obj_tipoUsuario.id;
+            
+            var id_tipousuario = response.data.message.obj_tipoUsuario.id;
+            var desc_tipousuario = response.data.message.obj_tipoUsuario.desc;
+            $scope.obj_tipoUsuario = {id: id_tipousuario, desc: desc_tipousuario};
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
@@ -63,7 +67,7 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
                 ape1: $scope.ape1,
                 ape2: $scope.ape2,
                 login: $scope.login,
-                id_tipoUsuario: $scope.id_tipousuario
+                id_tipoUsuario: $scope.obj_tipoUsuario.id
             };
             $http({
                 method: 'GET',
@@ -72,12 +76,36 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$locati
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
-                $scope.botones = false;
-                $scope.alerta = true;
+                if ($scope.status === 200) {
+                    $scope.botones = false;
+                    $scope.correcto = true;
+                    $scope.formulario = false;
+                }
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
+        };
+        
+        $scope.tipoUsuarioRefresh = function (f, consultar) {
+            var form = f;
+            if ($scope.obj_tipoUsuario.id != null) {
+                if (consultar) {
+                    $http({
+                        method: 'GET',
+                        url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=' + $scope.obj_tipoUsuario.id
+                    }).then(function (response) {
+                        $scope.obj_tipoUsuario = response.data.message;
+                        form.form.obj_tipoUsuario.$setValidity('valid', true);
+                    }, function (response) {
+                        form.form.obj_tipoUsuario.$setValidity('valid', false);
+                    });
+                } else {
+                    form.form.obj_tipoUsuario.$setValidity('valid', true);
+                }
+            } else {
+                $scope.obj_tipoUsuario.desc = "";
+            }
         };
 
         $scope.isActive = toolService.isActive;

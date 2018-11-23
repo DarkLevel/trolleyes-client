@@ -6,13 +6,14 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$locati
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
-        
+        $scope.formulario = true;
+
         if (!$routeParams.id) {
             $scope.id = 1;
         } else {
             $scope.id = $routeParams.id;
         }
-        
+
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
@@ -28,7 +29,7 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$locati
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -55,12 +56,13 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$locati
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
+                $scope.formulario = false;
                 $scope.botones = false;
-            $scope.alerta = true;
+                $scope.alerta = true;
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
-            });            
+            });
         };
 
         $scope.isActive = toolService.isActive;

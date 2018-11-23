@@ -6,6 +6,7 @@ moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
+        $scope.formulario = true;
 
         if (!$routeParams.id) {
             $scope.id = 1;
@@ -28,7 +29,7 @@ moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -55,6 +56,7 @@ moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
+                $scope.formulario = false;
                 $scope.botones = false;
                 $scope.alerta = true;
             }, function (response) {

@@ -3,7 +3,7 @@
 
     <h1 class="text-center">Borrar línea {{ajaxData.id}}</h1>
 
-    <form>
+    <form ng-show="formulario">
         <div class="row form-group text-center mx-auto mt-5 table-responsive">
             <table class="table table-striped">
                 <tr>
@@ -20,14 +20,16 @@
                 </tr>
             </table>
         </div>
-        <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4 alert alert-success text-center" role="alert" ng-show="alerta">
-            Línea borrado correctamente
-            <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
-        </div>
+
         <div class="text-center mt-3" ng-show="botones">
             <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="borrar()">Borrar línea</button>
-            <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+            <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
         </div>
     </form>
+
+    <div class="col-10 col-lg-8 mx-auto mt-4 alert alert-success text-center" role="alert" ng-show="alerta">
+        Línea borrada correctamente
+        <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+    </div>
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

@@ -9,8 +9,16 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
         $scope.incorrecto = false;
 
         $scope.volverPrincipio = function () {
-            $location.url('/');
+            $location.url('home');
         };
+        
+        $scope.sesionIniciada = false;
+        if (oSessionService.isSessionActive()) {
+            $scope.sesionIniciada = true;
+            $scope.usuario = oSessionService.getUserName();
+            $scope.id_sesion = oSessionService.getId();
+            $location.url('home');
+        }
 
         $scope.iniciarSesion = function () {
             var login = $scope.login;
@@ -23,12 +31,12 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                 $scope.nombreUsuario = response.data.message.login;
                 $scope.idUsuario = response.data.message.id;
                 if ($scope.status === 200) {
-                    $scope.formulario = false;
-                    $scope.incorrecto = false;
-                    $scope.correcto = true;
                     oSessionService.setSessionActive();
                     oSessionService.setUserName($scope.nombreUsuario);
                     oSessionService.setId($scope.idUsuario);
+                    $scope.formulario = false;
+                    $scope.incorrecto = false;
+                    $scope.correcto = true;
                 }
                 if ($scope.status === 401) {
                     $scope.incorrecto = true;
@@ -39,6 +47,5 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
             });
         };
 
-        $scope.isActive = toolService.isActive;
     }
 ]);

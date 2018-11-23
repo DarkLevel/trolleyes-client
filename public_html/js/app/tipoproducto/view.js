@@ -25,7 +25,7 @@ moduleTipoproducto.controller('tipoproductoViewController', ['$scope', '$http', 
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };

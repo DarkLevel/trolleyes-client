@@ -6,6 +6,7 @@ moduleLinea.controller('lineaRemoveController', ['$scope', '$http', '$location',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.botones = true;
         $scope.alerta = false;
+        $scope.formulario = true;
         
         if (!$routeParams.id) {
             $scope.id = 1;
@@ -28,7 +29,7 @@ moduleLinea.controller('lineaRemoveController', ['$scope', '$http', '$location',
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -55,8 +56,9 @@ moduleLinea.controller('lineaRemoveController', ['$scope', '$http', '$location',
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
+                $scope.formulario = false;
                 $scope.botones = false;
-            $scope.alerta = true;
+                $scope.alerta = true;
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';

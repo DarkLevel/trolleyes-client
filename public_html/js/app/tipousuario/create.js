@@ -4,10 +4,10 @@
 
 moduleTipousuario.controller('tipousuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+        $scope.formulario = true;
         $scope.botones = true;
         $scope.correcto = false;
-        $scope.comprobarDesc = false;
-        
+
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
@@ -23,7 +23,7 @@ moduleTipousuario.controller('tipousuarioCreateController', ['$scope', '$http', 
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -48,9 +48,11 @@ moduleTipousuario.controller('tipousuarioCreateController', ['$scope', '$http', 
                 }).then(function (response) {
                     $scope.status = response.status;
                     $scope.ajaxData = response.data.message;
-                    $scope.botones = false;
-                    $scope.comprobarDesc = false;
-                    $scope.correcto = true;
+                    if ($scope.status === 200) {
+                        $scope.formulario = false;
+                        $scope.botones = false;
+                        $scope.correcto = true;
+                    }
                 }, function (response) {
                     $scope.status = response.status;
                     $scope.ajaxData = response.data.message || 'Request failed';

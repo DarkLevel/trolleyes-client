@@ -4,6 +4,7 @@
 
 moduleFactura.controller('facturaUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+        $scope.formulario = true;
         $scope.botones = true;
         $scope.alerta = false;
 
@@ -28,7 +29,7 @@ moduleFactura.controller('facturaUpdateController', ['$scope', '$http', '$locati
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -39,7 +40,7 @@ moduleFactura.controller('facturaUpdateController', ['$scope', '$http', '$locati
         }).then(function (response) {
             $scope.status = response.status;
             $scope.id = response.data.message.id;
-            $scope.fecha = response.data.message.fecha;
+            $scope.fecha = new Date(response.data.message.fecha);
             $scope.iva = response.data.message.iva;
             $scope.id_usuario = response.data.message.obj_usuario.id;
         }, function (response) {
@@ -65,8 +66,11 @@ moduleFactura.controller('facturaUpdateController', ['$scope', '$http', '$locati
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
-                $scope.botones = false;
-                $scope.alerta = true;
+                if ($scope.status === 200) {
+                    $scope.formulario = false;
+                    $scope.botones = false;
+                    $scope.correcto = true;
+                }
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';

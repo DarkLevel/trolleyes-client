@@ -4,8 +4,9 @@
 
 moduleTipoproducto.controller('tipoproductoUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+        $scope.formulario = true;
         $scope.botones = true;
-        $scope.alerta = false;
+        $scope.correcto = false;
         
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
@@ -22,7 +23,7 @@ moduleTipoproducto.controller('tipoproductoUpdateController', ['$scope', '$http'
                 if (response.data.status === 200) {
                     oSessionService.setSessionInactive();
                     $scope.sesionIniciada = false;
-                    $location.url('/');
+                    $location.url('home');
                 }
             });
         };
@@ -55,8 +56,11 @@ moduleTipoproducto.controller('tipoproductoUpdateController', ['$scope', '$http'
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;
-                $scope.botones = false;
-                $scope.alerta = true;
+                if ($scope.status === 200) {
+                    $scope.formulario = false;
+                    $scope.botones = false;
+                    $scope.correcto = true;
+                }
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
