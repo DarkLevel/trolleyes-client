@@ -7,7 +7,7 @@ moduleProducto.controller('productoUpdateController', ['$scope', '$http', '$loca
         $scope.formulario = true;
         $scope.botones = true;
         $scope.alerta = false;
-        
+
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
@@ -43,9 +43,9 @@ moduleProducto.controller('productoUpdateController', ['$scope', '$http', '$loca
             $scope.codigo = response.data.message.codigo;
             $scope.desc = response.data.message.desc;
             $scope.existencias = response.data.message.existencias;
-            $scope.precio = response.data.message.precio;
+            $scope.precio = reemplazar(response.data.message.precio);
             $scope.foto = response.data.message.foto;
-            
+
             var id_tipoProducto = response.data.message.obj_tipoProducto.id;
             var desc_tipoProducto = response.data.message.obj_tipoProducto.desc;
             $scope.obj_tipoProducto = {id: id_tipoProducto, desc: desc_tipoProducto};
@@ -64,7 +64,7 @@ moduleProducto.controller('productoUpdateController', ['$scope', '$http', '$loca
                 codigo: $scope.codigo,
                 desc: $scope.desc,
                 existencias: $scope.existencias,
-                precio: $scope.precio,
+                precio: $scope.precio.replace(',', '.'),
                 foto: $scope.foto,
                 id_tipoProducto: $scope.obj_tipoProducto.id
             };
@@ -85,7 +85,7 @@ moduleProducto.controller('productoUpdateController', ['$scope', '$http', '$loca
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
-        
+
         $scope.tipoProductoRefresh = function (f, consultar) {
             var form = f;
             if ($scope.obj_tipoProducto.id != null) {
@@ -106,6 +106,13 @@ moduleProducto.controller('productoUpdateController', ['$scope', '$http', '$loca
                 $scope.obj_tipoProducto.desc = "";
             }
         };
+
+        function reemplazar(precio) {
+            var precioString = precio.toString();
+            var precioCambiado = precioString.replace(".", ",");
+
+            return precioCambiado;
+        }
 
         $scope.isActive = toolService.isActive;
     }

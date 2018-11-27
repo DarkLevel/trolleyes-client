@@ -11,11 +11,8 @@
                     <input type="text" class="form-control" ng-model="id" disabled>
                 </div>
                 <div class="mt-4 form-group" ng-class="{'has-error': form.fecha.$invalid && !form.fecha.$pristine}">
-                    <label>Fecha:</label>
-                    <md-datepicker name="fecha" ng-model="fecha" md-placeholder="Introduce fecha"></md-datepicker>
-                    <p ng-show="form.fecha.$invalid && !form.fecha.$pristine" class="help-block red-text">
-                        Formato de fecha inválido.
-                    </p>
+                    <label>Fecha:</label><br>
+                    <md-datepicker name="fecha" ng-model="fecha" md-placeholder="Introduce fecha" required></md-datepicker>
                 </div>
                 <div class="mt-4 form-group" ng-class="{'has-error': form.iva.$invalid}">
                     <label>Iva:</label>
@@ -26,7 +23,7 @@
                 </div>
                 
                 <div class="text-center mt-3" ng-show="botones">
-                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="editar()">Editar factura</button>
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-disabled="form.$invalid" ng-click="editar()">Editar factura</button>
                     <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
                 </div>
             </ng-form>

@@ -2,13 +2,19 @@
 
 'use strict';
 
-moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
+moduleFactura.controller('facturaCreateController', [
+    '$scope',
+    '$http',
+    '$location',
+    'toolService',
+    '$routeParams',
+    'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.formulario = true;
         $scope.botones = true;
         $scope.alerta = false;
         $scope.id_usuario = $routeParams.id_user;
-        
+
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
@@ -28,7 +34,7 @@ moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$locati
                 }
             });
         };
-        
+
         $scope.volver = function () {
             window.history.back();
         };
@@ -56,7 +62,7 @@ moduleFactura.controller('facturaCreateController', ['$scope', '$http', '$locati
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
-        
+
         $scope.isActive = toolService.isActive;
     }
 ]);

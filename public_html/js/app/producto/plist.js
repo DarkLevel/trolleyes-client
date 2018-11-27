@@ -98,6 +98,9 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
+            for (var i = 0; i < $scope.ajaxData.length; i++) {
+                $scope.ajaxData[i].precio = reemplazar($scope.ajaxData[i].precio);
+            }
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
@@ -122,6 +125,13 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
                     $scope.list.push("...");
                 }
             }
+        }
+        
+        function reemplazar(precio){
+            var precioString = precio.toString();
+            var precioCambiado = precioString.replace(".", ",");
+            
+            return precioCambiado;
         }
 
         $scope.isActive = toolService.isActive;

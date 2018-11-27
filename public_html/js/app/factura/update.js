@@ -64,7 +64,7 @@ moduleFactura.controller('facturaUpdateController', ['$scope', '$http', '$locati
                 url: 'http://localhost:8081/trolleyes/json?ob=factura&op=update',
                 params: {json: JSON.stringify(json)}
             }).then(function (response) {
-                $scope.status = response.status;
+                $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message;
                 if ($scope.status === 200) {
                     $scope.formulario = false;

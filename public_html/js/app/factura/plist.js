@@ -31,13 +31,13 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
-        
+
         if (!$routeParams.id_user) {
             $scope.id_user = 1;
         } else {
             $scope.id_user = $routeParams.id_user;
         }
-        
+
         $scope.sesionIniciada = false;
         if (oSessionService.isSessionActive()) {
             $scope.sesionIniciada = true;
@@ -61,7 +61,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
         $scope.resetOrder = function () {
             $location.url('usuario/' + $scope.id_user + '/factura/plist/' + $scope.rpp + '/' + $scope.page);
         };
-        
+
         $scope.crear = function () {
             $location.url('usuario/' + $scope.id_user + '/factura/create');
         };
@@ -83,7 +83,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataNumber = response.data.message;
-            if($scope.ajaxDataNumber == 0){
+            if ($scope.ajaxDataNumber == 0) {
                 $scope.registros = false;
                 $scope.alerta = true;
             }
@@ -103,6 +103,9 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
+            for (var i = 0; i < $scope.ajaxData.length; i++) {
+                $scope.ajaxData[i].fecha = formatDate($scope.ajaxData[i].fecha);
+            }
             $scope.username = $scope.ajaxData[0].obj_usuario.login;
         }, function (response) {
             $scope.status = response.status;
@@ -117,11 +120,11 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
             $scope.list = [];
             $scope.valorNeighbourhood = 1;
             $scope.prev_1 = ($scope.page - $scope.valorNeighbourhood);
-            $scope.prev_2 = ($scope.page - $scope.valorNeighbourhood-1);
+            $scope.prev_2 = ($scope.page - $scope.valorNeighbourhood - 1);
             $scope.post_1 = ($scope.page - -$scope.valorNeighbourhood);
-            $scope.post_2 = ($scope.page - -$scope.valorNeighbourhood+1);
+            $scope.post_2 = ($scope.page - -$scope.valorNeighbourhood + 1);
 
-            for (var i = 2; i <= $scope.totalPages-1; i++) {
+            for (var i = 2; i <= $scope.totalPages - 1; i++) {
                 if (i >= $scope.prev_1 && i <= $scope.post_1) {
                     $scope.list.push(i);
                 } else if (i === $scope.prev_2 || i === $scope.post_2) {
@@ -129,9 +132,60 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                 }
             }
         }
-        
-        $scope.atras = function(){
+
+        $scope.atras = function () {
             $location.url('usuario/plist');
+        };
+
+        function formatDate(fecha) {
+            var fechaCambiada = fecha.replace(', ', ' ');
+            var fechaSeparada = fechaCambiada.split(" ");
+
+            var dia = fechaSeparada[1];
+            var mes;
+            var anyo = fechaSeparada[2];
+
+            switch (fechaSeparada[0]) {
+                case "ene":
+                    mes = "1";
+                    break;
+                case "feb":
+                    mes = "2";
+                    break;
+                case "mar":
+                    mes = "3";
+                    break;
+                case "abr":
+                    mes = "4";
+                    break;
+                case "may":
+                    mes = "5";
+                    break;
+                case "jun":
+                    mes = "6";
+                    break;
+                case "jul":
+                    mes = "7";
+                    break;
+                case "ago":
+                    mes = "8";
+                    break;
+                case "sep":
+                    mes = "9";
+                    break;
+                case "oct":
+                    mes = "10";
+                    break;
+                case "nov":
+                    mes = "11";
+                    break;
+                case "dic":
+                    mes = "12";
+                    break;
+            }
+
+            var fechaFinal = dia + '/' + mes + '/' + anyo;
+            return fechaFinal;
         };
 
         $scope.isActive = toolService.isActive;
