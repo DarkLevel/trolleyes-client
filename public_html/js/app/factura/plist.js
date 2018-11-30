@@ -140,53 +140,68 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
         function formatDate(fecha) {
             var fechaCambiada = fecha.replace(', ', ' ');
             var fechaSeparada = fechaCambiada.split(" ");
+            var horaSeparada = fechaSeparada[3].split(":");
 
             var dia = fechaSeparada[1];
             var mes;
             var anyo = fechaSeparada[2];
+            var hora;
+            var minuto = horaSeparada[1];
+            var segundo  = horaSeparada[2];
 
             switch (fechaSeparada[0]) {
-                case "ene":
+                case "Ene":
                     mes = "1";
                     break;
-                case "feb":
+                case "Feb":
                     mes = "2";
                     break;
-                case "mar":
+                case "Mar":
                     mes = "3";
                     break;
-                case "abr":
+                case "Abr":
                     mes = "4";
                     break;
-                case "may":
+                case "May":
                     mes = "5";
                     break;
-                case "jun":
+                case "Jun":
                     mes = "6";
                     break;
-                case "jul":
+                case "Jul":
                     mes = "7";
                     break;
-                case "ago":
+                case "Ago":
                     mes = "8";
                     break;
-                case "sep":
+                case "Sep":
                     mes = "9";
                     break;
-                case "oct":
+                case "Oct":
                     mes = "10";
                     break;
-                case "nov":
+                case "Nov":
                     mes = "11";
                     break;
-                case "dic":
+                case "Dic":
                     mes = "12";
                     break;
             }
 
-            var fechaFinal = dia + '/' + mes + '/' + anyo;
+            if (fechaSeparada[4] === "AM") {
+                if (horaSeparada[0] === "12") {
+                    hora = "0";
+                } else {
+                    hora = horaSeparada[0];
+                }
+            } else {
+                hora = horaSeparada[0];
+            }
+
+            var fechaFinal = dia + '/' + mes + '/' + anyo + ' ' + hora + ':' + minuto + ':' + segundo;
             return fechaFinal;
-        };
+        }
+        ;
 
         $scope.isActive = toolService.isActive;
     }
