@@ -17,7 +17,7 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', '$http',
         }
 
         if (!$routeParams.rpp) {
-            $scope.rpp = 5;
+            $scope.rpp = "5";
         } else {
             $scope.rpp = $routeParams.rpp;
         }
@@ -77,7 +77,7 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', '$http',
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataNumber = response.data.message;
-            if($scope.ajaxDataNumber == 0){
+            if($scope.ajaxDataNumber === 0){
                 $scope.registros = false;
                 $scope.alerta = true;
             }
@@ -122,6 +122,10 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', '$http',
                 }
             }
         }
+        
+        $scope.atras = function () {
+            window.history.back();
+        };
 
         $scope.isActive = toolService.isActive;
     }

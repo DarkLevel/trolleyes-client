@@ -17,7 +17,7 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
         }
 
         if (!$routeParams.rpp) {
-            $scope.rpp = 5;
+            $scope.rpp = "5";
         } else {
             $scope.rpp = $routeParams.rpp;
         }
@@ -130,6 +130,10 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
             $scope.usuario = oSessionService.getUserName();
             $scope.id = oSessionService.getId();
         }
+        
+        $scope.atras = function () {
+            window.history.back();
+        };
 
         $scope.isActive = toolService.isActive;
     }

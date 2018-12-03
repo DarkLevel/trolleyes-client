@@ -20,6 +20,7 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/producto/update/:id?', {templateUrl: 'js/app/producto/update.html', controller: 'productoUpdateController'});
         $routeProvider.when('/producto/view/:id?', {templateUrl: 'js/app/producto/view.html', controller: 'productoViewController'});
         $routeProvider.when('/producto/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/producto/plist.html', controller: 'productoPlistController'});
+        $routeProvider.when('/producto/plistCliente/:rpp?/:page?/:order?', {templateUrl: 'js/app/producto/plistCliente.html', controller: 'productoPlistClienteController'});
 
         $routeProvider.when('/tipoproducto/create', {templateUrl: 'js/app/tipoproducto/create.html', controller: 'tipoproductoCreateController'});
         $routeProvider.when('/tipoproducto/remove/:id?', {templateUrl: 'js/app/tipoproducto/remove.html', controller: 'tipoproductoRemoveController'});
@@ -40,6 +41,9 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/tipousuario/update/:id?', {templateUrl: 'js/app/tipousuario/update.html', controller: 'tipousuarioUpdateController'});
         $routeProvider.when('/tipousuario/view/:id?', {templateUrl: 'js/app/tipousuario/view.html', controller: 'tipousuarioViewController'});
         $routeProvider.when('/tipousuario/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/tipousuario/plist.html', controller: 'tipousuarioPlistController'});
+        
+        $routeProvider.when('/carrito/plist', {templateUrl: 'js/app/carrito/plist.html', controller: 'carritoPlistController'});
+        $routeProvider.when('/carrito/buy', {templateUrl: 'js/app/carrito/buy.html', controller: 'carritoBuyController'});
         
         $routeProvider.otherwise({redirectTo: '/home'});
     }]);

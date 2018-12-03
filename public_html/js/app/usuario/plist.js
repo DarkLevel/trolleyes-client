@@ -17,7 +17,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         }
 
         if (!$routeParams.rpp) {
-            $scope.rpp = 5;
+            $scope.rpp = "5";
         } else {
             $scope.rpp = $routeParams.rpp;
         }
@@ -123,6 +123,10 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 }
             }
         }
+        
+        $scope.atras = function () {
+            window.history.back();
+        };
         
         $scope.isActive = toolService.isActive;
     }

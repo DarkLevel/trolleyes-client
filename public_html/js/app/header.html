@@ -15,6 +15,9 @@
             <li class="nav-item" ng-class="{'active': isActive('/producto')}">
                 <a class="nav-link" href="producto/plist"><i class="fas fa-box"></i> Productos</a>
             </li>
+            <li class="nav-item" ng-class="{'active': isActive('/producto/plistCliente')}">
+                <a class="nav-link" href="producto/plistCliente"><i class="fas fa-box"></i> Productos Cliente</a>
+            </li>
             <li class="nav-item" ng-class="{'active': isActive('/tipoproducto')}">
                 <a class="nav-link" href="tipoproducto/plist"><i class="fas fa-boxes"></i> Tipos Producto</a>
             </li>
@@ -31,6 +34,8 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="usuario/view/{{id_sesion}}">Ver</a>
                     <a class="dropdown-item" href="usuario/update/{{id_sesion}}">Editar</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="carrito/plist"><i class="fas fa-shopping-cart"></i> Carrito</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
                 </div>

@@ -37,7 +37,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         }
 
         if (!$routeParams.rpp) {
-            $scope.rpp = 5;
+            $scope.rpp = "5";
         } else {
             $scope.rpp = $routeParams.rpp;
         }
@@ -133,6 +133,10 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             
             return precioCambiado;
         }
+
+        $scope.atras = function () {
+            window.history.back();
+        };
 
         $scope.isActive = toolService.isActive;
     }

@@ -1,0 +1,31 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container" style="margin-top: 50px;">
+
+    <div class="container-fluid pt-4">
+        <div class="row">
+            <div class="col-8 border-bottom text-center mx-auto">
+                <h2 class="mb-3">Seguro que quieres comprar</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="mt-4" ng-show="botones">
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="buy()">Comprar</button>
+                    <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="atras()">Volver atrás</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+            Compra realizada correctamente
+            <button type="button" class="btn btn-primary mx-2" ng-click="atras()">Volver atrás</button>
+        </div>
+
+        <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-danger" role="alert" ng-show="alerta">
+            Se ha cancelado la compra debido a un problema
+            <button type="button" class="btn btn-danger mx-2" ng-click="atras()">Volver atrás</button>
+        </div>
+    </div>
+
+</main>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

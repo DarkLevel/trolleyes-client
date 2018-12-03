@@ -17,7 +17,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         }
 
         if (!$routeParams.rpp) {
-            $scope.rpp = 5;
+            $scope.rpp = "5";
         } else {
             $scope.rpp = $routeParams.rpp;
         }
