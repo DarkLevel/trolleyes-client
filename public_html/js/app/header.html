@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" ng-show="sesionIniciada">
             <li class="nav-item" ng-class="{'active': isActive('/usuario')}">
                 <a class="nav-link" href="usuario/plist"><i class="fas fa-users"></i> Usuarios</a>
             </li>
@@ -25,17 +25,17 @@
                 <a class="nav-link" href="tipoproducto/plist"><i class="fas fa-boxes"></i> Tipos Producto</a>
             </li>
         </ul>
-        <ul class="nav navbar-nav">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item" ng-show="!sesionIniciada" ng-class="{'active': isActive('/usuario/login')}">
                 <a class="nav-link" href="usuario/login"><i class="fas fa-user"></i> Iniciar Sesión</a>
             </li>
             <li class="nav-item" ng-show="!sesionIniciada" ng-class="{'active': isActive('/usuario/create')}">
                 <a class="nav-link" href="usuario/create"><i class="fas fa-plus-circle"></i> Crear Usuario</a>
             </li>
-            <li class="nav-item"ng-class="{'active': isActive('/usuario/view/{{id_sesion}}') ||
+            <li class="nav-item" ng-show="sesionIniciada" ng-class="{'active': isActive('/usuario/view/{{id_sesion}}') ||
                         isActive('/usuario/update/{{id_sesion}}') ||
                                     isActive('/carrito')}">
-                <div class="nav-link dropdown" ng-show="sesionIniciada">
+                <div class="nav-link dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">{{usuario}}<span class="caret"></span></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="usuario/view/{{id_sesion}}">Ver</a>
