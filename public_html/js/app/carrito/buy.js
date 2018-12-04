@@ -36,6 +36,16 @@ moduleCarrito.controller('carritoBuyController', ['$scope', '$http', '$location'
                 $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message;
                 if ($scope.status === 200) {
+                    $http({
+                        method: 'GET',
+                        url: 'http://localhost:8081/trolleyes/json?ob=carrito&op=empty'
+                    }).then(function (response) {
+                        $scope.status = response.data.status;
+                        $scope.ajaxDataEmpty = response.data.message;
+                    }, function (response) {
+                        $scope.status = response.status;
+                        $scope.ajaxDataEmpty = response.data.message || 'Request failed';
+                    });
                     $scope.botones = false;
                     $scope.correcto = true;
                 } else {
@@ -50,6 +60,10 @@ moduleCarrito.controller('carritoBuyController', ['$scope', '$http', '$location'
 
         $scope.atras = function () {
             window.history.back();
+        };
+
+        $scope.volver = function () {
+            $location.url('producto/plistCliente');
         };
     }
 ]);
