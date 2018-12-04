@@ -150,9 +150,6 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
             var segundo = horaSeparada[2];
 
             switch (fechaSeparada[0]) {
-                case "Ene":
-                    mes = "1";
-                    break;
                 case "Jan":
                     mes = "1";
                     break;
@@ -161,9 +158,6 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                     break;
                 case "Mar":
                     mes = "3";
-                    break;
-                case "Abr":
-                    mes = "4";
                     break;
                 case "Apr":
                     mes = "4";
@@ -177,9 +171,6 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                 case "Jul":
                     mes = "7";
                     break;
-                case "Ago":
-                    mes = "8";
-                    break;
                 case "Aug":
                     mes = "8";
                     break;
@@ -191,9 +182,6 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
                     break;
                 case "Nov":
                     mes = "11";
-                    break;
-                case "Dic":
-                    mes = "12";
                     break;
                 case "Dec":
                     mes = "12";
@@ -216,8 +204,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
 
             var fechaFinal = dia + '/' + mes + '/' + anyo + ' ' + hora + ':' + minuto + ':' + segundo;
             return fechaFinal;
-        }
-        ;
+        };
 
         $scope.isActive = toolService.isActive;
     }
