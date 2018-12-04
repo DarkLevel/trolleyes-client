@@ -41,3 +41,40 @@ code {
     text-decoration: none;
     color: #000066;
 }
+
+.producto{
+    border: 2px solid lightgrey;
+}
+
+.producto:hover{
+    border: 2px solid orange;
+}
+
+.tipoProducto{
+    border: 2px solid lightgrey;
+}
+
+.tipoProducto:hover{
+    border: 2px solid darkblue;
+}
+
+
+.listaCarrito{
+    width: 50%;
+}
+
+.imagenProducto{
+    width: 50%;
+}
+
+@media (max-width: 575px) {
+    .listaCarrito{
+        width: 75%;
+    }
+}
+
+@media (max-width: 991px) {
+    .imagenProducto{
+        width: 75%;
+    }
+}

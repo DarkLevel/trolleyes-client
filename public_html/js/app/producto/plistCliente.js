@@ -32,13 +32,15 @@ moduleProducto.controller('productoPlistClienteController', ['$scope', '$http', 
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
             $scope.orderURLCliente = "";
+            $scope.order = "producto.id,asc";
         } else {
             $scope.orderURLServidor = "&order=" + $routeParams.order;
             $scope.orderURLCliente = $routeParams.order;
+            $scope.order = $routeParams.order;
         }
 
         if (!$routeParams.rpp) {
-            $scope.rpp = "5";
+            $scope.rpp = "4";
         } else {
             $scope.rpp = $routeParams.rpp;
         }
@@ -87,35 +89,15 @@ moduleProducto.controller('productoPlistClienteController', ['$scope', '$http', 
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
         });
-        
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=carrito&op=show'
-        }).then(function (response) {
-            $scope.status = response.data.status;
-            $scope.ajaxDataCarrito = response.data.message;
-        }, function (response) {
-            $scope.status = response.status;
-            $scope.ajaxData = response.data.message || 'Request failed';
-        });
 
         $scope.update = function () {
             $location.url(`producto/plistCliente/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         };
 
-        $scope.resetOrder = function () {
-            $location.url(`producto/plistCliente/` + $scope.rpp + `/` + $scope.page);
-        };
-
-        $scope.ordenar = function (order, align) {
-            if ($scope.orderURLServidor === "") {
-                $scope.orderURLServidor = "&order=" + order + "," + align;
-                $scope.orderURLCliente = order + "," + align;
-            } else {
-                $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
-                $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
-            }
-            $location.url(`producto/plistCliente/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
+        $scope.ordenar = function () {
+            $scope.orderURLServidor = "&order=" + $scope.order;
+            $scope.orderURLCliente = $scope.order;
+            $location.url('producto/plistCliente/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         };
 
         $scope.add = function (id_producto, cantidad) {

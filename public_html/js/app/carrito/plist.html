@@ -5,63 +5,48 @@
         <div class="row">
             <div class="col-8 border-bottom text-center mx-auto">
                 <h2>Carrito</h2>
-                <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-outline-primary mb-2" ng-disabled="(ajaxData === null) || comprar" ng-click="buy()">Comprar</button>
-                    <button type="button" class="btn btn-outline-primary mb-2" ng-disabled="(ajaxData === null)" ng-click="empty()">Vaciar</button>
-                    <button type="button" class="btn btn-outline-primary mb-2" ng-click="atras()">Volver atrás</button>
+                <div class="my-2">
+                    <button type="button" class="btn btn-outline-primary mx-1 my-1" ng-disabled="(ajaxData === null) || comprar" ng-click="buy()">Comprar</button>
+                    <button type="button" class="btn btn-outline-primary mx-1 my-1" ng-click="atras()">Volver atrás</button>
                 </div>
             </div>
         </div>
 
-        <div class="row form-group text-center mx-auto mt-5 table-responsive" ng-show="registros">
-            <table class="table table-striped">
-                <tr>
-                    <th>
-                        <p>ID</p>
-                    </th>
-                    <th>
-                        <p>Descripción</p>
-                    </th>
-                    <th>
-                        <p>Existencias</p>
-                    </th>
-                    <th>
-                        <p>Precio</p>
-                    </th>
-                    <th>
-                        <p>Foto</p>
-                    </th>
-                    <th>
-                        <p>Tipo de producto</p>
-                    </th>
-                    <th>Añadir/Restar</th>
-                    <th>Borrar</th>
-                </tr>
-                <tr ng-repeat="fila in ajaxData">
-                    <td class="align-middle">{{fila.obj_producto.id}}</td>
-                    <td class="align-middle">{{fila.obj_producto.desc}}</td>
-                    <td class="align-middle">{{fila.obj_producto.existencias}}</td>
-                    <td class="align-middle">{{fila.obj_producto.precio}}</td>
-                    <td class="align-middle">{{fila.obj_producto.foto}}</td>
-                    <td class="align-middle">{{fila.obj_producto.obj_tipoProducto.desc}}</td>
-                    <td>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-primary" ng-click="reduce(fila.obj_producto.id)"><i class="fas fa-minus"></i></button>
-                            </div>
-                            <input class="form-control text-center"
-                                   value="{{fila.cantidad}}"
-                                   disabled>
-                            <div class="input-group-append">
-                                <button ng-disabled="fila.cantidad >= fila.obj_producto.existencias" class="btn btn-primary" ng-click="add(fila.obj_producto.id)"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary" ng-click="remove(fila.obj_producto.id)">Borrar</button>
-                    </td>
-                </tr>
-            </table>
+        <div class="row m-3">
+            <button type="button" class="btn btn-outline-primary mx-auto" ng-disabled="(ajaxData === null)" ng-click="empty()">Vaciar Carrito</button>
+        </div>
+
+
+        <div class="row mx-auto listaCarrito my-4 producto" ng-repeat="productoCarrito in ajaxData" ng-show="registros">
+            <div class="col-md-6 col-sm-12 text-center">
+                <img class="imagenProducto my-4 my-xl-3" src="/trolleyes-client/public_html/css/gris.jpg" alt="{{productoCarrito.obj_producto.foto}}">
+            </div>
+            <div class="col-md-6 col-sm-12 text-center">
+                <p class="my-3">ID: {{productoCarrito.obj_producto.id}}</p>
+                <p>Descripción: {{productoCarrito.obj_producto.desc}}</p>
+                <p>Existencias: {{productoCarrito.obj_producto.existencias}}</p>
+            </div>
+            <div class="col-12 text-center">
+                <p>Precio: {{productoCarrito.obj_producto.precio}}</p>
+                <p>Tipo de producto: {{productoCarrito.obj_producto.obj_tipoProducto.desc}}</p>
+            </div>
+            <div class="mb-3 col-12 text-center">
+                <div class="input-group w-75 mx-auto">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-primary" ng-click="reduce(productoCarrito.obj_producto.id)"><i class="fas fa-minus"></i></button>
+                    </div>
+                    <input class="form-control text-center"
+                           value="{{productoCarrito.cantidad}}"
+                           disabled>
+                    <div class="input-group-append">
+                        <button ng-disabled="productoCarrito.cantidad >= productoCarrito.obj_producto.existencias" class="btn btn-primary" ng-click="add(productoCarrito.obj_producto.id)"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                <p ng-show="{{productoCarrito.obj_producto.existencias}} &lt {{productoCarrito.cantidad}}" class="red-text mt-2 mb-0">La cantidad solicitada es mayor a las existencias</p>
+            </div>
+            <div class="col-12 mb-3 text-center">
+                <button class="btn btn-primary" ng-click="remove(productoCarrito.obj_producto.id)">Borrar</button>
+            </div>
         </div>
 
         <div class="row" ng-show="alerta">
@@ -70,6 +55,5 @@
             </div>
         </div>
     </div>
-
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

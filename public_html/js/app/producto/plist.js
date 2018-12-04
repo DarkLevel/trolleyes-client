@@ -77,7 +77,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataNumber = response.data.message;
-            if($scope.ajaxDataNumber == 0){
+            if($scope.ajaxDataNumber === 0){
                 $scope.registros = false;
                 $scope.alerta = true;
             }
