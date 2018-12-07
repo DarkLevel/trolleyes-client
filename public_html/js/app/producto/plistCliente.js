@@ -2,32 +2,12 @@
 
 'use strict';
 
-moduleProducto.controller('productoPlistClienteController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleProducto.controller('productoPlistClienteController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'countCarritoService',
+    function ($scope, $http, $location, toolService, $routeParams, countCarritoService) {
         $scope.totalPages = 1;
         $scope.registros = true;
         $scope.alerta = false;
         $scope.cantidad = 0;
-
-        $scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id_sesion = oSessionService.getId();
-        }
-
-        $scope.logout = function () {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
-            }).then(function (response) {
-                if (response.data.status === 200) {
-                    oSessionService.setSessionInactive();
-                    $scope.sesionIniciada = false;
-                    $location.url('home');
-                }
-            });
-        };
 
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -107,6 +87,7 @@ moduleProducto.controller('productoPlistClienteController', ['$scope', '$http', 
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxDataAdd = response.data.message;
+                countCarritoService.updateCarrito();
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxDataAdd = response.data.message || 'Request failed';

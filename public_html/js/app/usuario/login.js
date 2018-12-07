@@ -3,7 +3,7 @@
 'use strict';
 
 moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+    function ($scope, $http, $location, oSessionService) {
         $scope.formulario = true;
         $scope.correcto = false;
         $scope.incorrecto = false;
@@ -11,14 +11,6 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
         $scope.volverPrincipio = function () {
             $location.url('home');
         };
-        
-        $scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id_sesion = oSessionService.getId();
-            $location.url('home');
-        }
 
         $scope.iniciarSesion = function () {
             var login = $scope.login;

@@ -9,26 +9,6 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
         $scope.alerta = false;
         $scope.obj_producto = {id: null, codigo: null};
         $scope.id_factura = $routeParams.id_factura;
-
-       $scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id_sesion = oSessionService.getId();
-        }
-
-        $scope.logout = function () {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
-            }).then(function (response) {
-                if (response.data.status === 200) {
-                    oSessionService.setSessionInactive();
-                    $scope.sesionIniciada = false;
-                    $location.url('home');
-                }
-            });
-        };
         
         $scope.volver = function () {
             window.history.back();

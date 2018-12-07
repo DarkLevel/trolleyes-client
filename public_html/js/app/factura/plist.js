@@ -38,26 +38,6 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
             $scope.id_user = $routeParams.id_user;
         }
 
-        $scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id_sesion = oSessionService.getId();
-        }
-
-        $scope.logout = function () {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
-            }).then(function (response) {
-                if (response.data.status === 200) {
-                    oSessionService.setSessionInactive();
-                    $scope.sesionIniciada = false;
-                    $location.url('home');
-                }
-            });
-        };
-
         $scope.resetOrder = function () {
             $location.url('usuario/' + $scope.id_user + '/factura/plist/' + $scope.rpp + '/' + $scope.page);
         };

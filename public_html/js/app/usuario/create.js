@@ -3,31 +3,11 @@
 'use strict';
 
 moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+    function ($scope, $http, toolService) {
         $scope.formulario = true;
         $scope.botones = true;
         $scope.correcto = false;
         $scope.obj_tipoUsuario = {id: null, desc: null};
-
-        $scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id_sesion = oSessionService.getId();
-        }
-        
-        $scope.logout = function () {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
-            }).then(function (response) {
-                if (response.data.status === 200) {
-                    oSessionService.setSessionInactive();
-                    $scope.sesionIniciada = false;
-                    $location.url('home');
-                }
-            });
-        };
 
         $scope.crear = function () {
             var json = {
