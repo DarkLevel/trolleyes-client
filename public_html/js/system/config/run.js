@@ -1,7 +1,7 @@
 /* global trolleyes */
 
-trolleyes.run(['$rootScope', 'sessionService', '$location', '$http',
-    function ($rootScope, oSessionService, $location, $http) {
+trolleyes.run(['$rootScope', 'sessionService', '$location', '$http', 'countCarritoService',
+    function ($rootScope, oSessionService, $location, $http, countCarritoService) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             
             var nextUrl = next.$$route.originalPath;
@@ -14,6 +14,7 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http',
                     oSessionService.setSessionActive();
                     oSessionService.setUserName(response.data.message.login);
                     oSessionService.setId(response.data.message.id);
+                    countCarritoService.updateCarrito();
                 } else {
                     oSessionService.setSessionInactive;
                     if (nextUrl !== 'home' && nextUrl !== '/usuario/login' && nextUrl !== '/usuario/create') {

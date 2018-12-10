@@ -10,7 +10,7 @@ moduleService.service('countCarritoService', ['$http', 'sessionService', functio
                     url: 'http://localhost:8081/trolleyes/json?ob=carrito&op=show'
                 }).then(function (response) {
                     var cantidad = 0;
-                    if (response.data.message === null) {
+                    if (response.data.message !== null) {
                         for (var i = 0; i < response.data.message.length; i++) {
                             cantidad += response.data.message[i].cantidad;
                         }
