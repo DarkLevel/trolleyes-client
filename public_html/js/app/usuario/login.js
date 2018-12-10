@@ -2,7 +2,7 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
+moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'sessionService',
     function ($scope, $http, $location, oSessionService) {
         $scope.formulario = true;
         $scope.correcto = false;

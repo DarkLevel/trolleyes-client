@@ -6,7 +6,7 @@
             <div class="col-8 border-bottom text-center mx-auto">
                 <h2>Carrito</h2>
                 <div class="my-2">
-                    <button type="button" class="btn btn-outline-primary mx-1 my-1" ng-disabled="(ajaxData === null) || comprar" ng-click="buy()">Comprar</button>
+                    <button type="button" class="btn btn-outline-primary mx-1 my-1" ng-disabled="!comprar" ng-click="buy()">Comprar</button>
                     <button type="button" class="btn btn-outline-primary mx-1 my-1" ng-click="atras()">Volver atrás</button>
                 </div>
             </div>

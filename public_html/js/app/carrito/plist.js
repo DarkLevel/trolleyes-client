@@ -2,10 +2,9 @@
 
 'use strict';
 
-moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'countCarritoService',
+    function ($scope, $http, $location, countCarritoService) {
         $scope.alerta = false;
-        $scope.comprar = false;
 
         $http({
             method: 'GET',
@@ -13,12 +12,14 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
         }).then(function (response) {
             $scope.status = response.data.status;
             $scope.ajaxData = response.data.message;
+            $scope.comprar = true;
             if ($scope.ajaxData === null) {
                 $scope.alerta = true;
+                $scope.comprar = false;
             } else {
                 for (var i = 0; i < $scope.ajaxData.length; i++) {
                     if ($scope.ajaxData[i].cantidad > $scope.ajaxData[i].obj_producto.existencias) {
-                        $scope.comprar = true;
+                        $scope.comprar = false;
                     }
                 }
             }
@@ -34,6 +35,7 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
             }).then(function (response) {
                 $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message;
+                countCarritoService.updateCarrito();
             }, function (response) {
                 $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
@@ -47,13 +49,15 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
             }).then(function (response) {
                 $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message;
+                countCarritoService.updateCarrito();
+                $scope.comprar = true;
                 if ($scope.ajaxData === null) {
                     $scope.alerta = true;
-                } else {
                     $scope.comprar = false;
+                } else {
                     for (var i = 0; i < $scope.ajaxData.length; i++) {
                         if ($scope.ajaxData[i].cantidad > $scope.ajaxData[i].obj_producto.existencias) {
-                            $scope.comprar = true;
+                            $scope.comprar = false;
                         }
                     }
                 }
@@ -70,13 +74,15 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
             }).then(function (response) {
                 $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message;
+                countCarritoService.updateCarrito();
+                $scope.comprar = true;
                 if ($scope.ajaxData === null) {
                     $scope.alerta = true;
-                } else {
                     $scope.comprar = false;
+                } else {
                     for (var i = 0; i < $scope.ajaxData.length; i++) {
                         if ($scope.ajaxData[i].cantidad > $scope.ajaxData[i].obj_producto.existencias) {
-                            $scope.comprar = true;
+                            $scope.comprar = false;
                         }
                     }
                 }
@@ -93,16 +99,9 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
             }).then(function (response) {
                 $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message;
-                if ($scope.ajaxData === null) {
-                    $scope.alerta = true;
-                } else {
-                    $scope.comprar = false;
-                    for (var i = 0; i < $scope.ajaxData.length; i++) {
-                        if ($scope.ajaxData[i].cantidad > $scope.ajaxData[i].obj_producto.existencias) {
-                            $scope.comprar = true;
-                        }
-                    }
-                }
+                countCarritoService.updateCarrito();
+                $scope.alerta = true;
+                $scope.comprar = false;
             }, function (response) {
                 $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message || 'Request failed';
