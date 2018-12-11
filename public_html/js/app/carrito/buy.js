@@ -2,8 +2,8 @@
 
 'use strict';
 
-moduleCarrito.controller('carritoBuyController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleCarrito.controller('carritoBuyController', ['$scope', '$http', '$location', 'countCarritoService',
+    function ($scope, $http, $location, countCarritoService) {
         $scope.botones = true;
         $scope.correcto = false;
         $scope.alerta = false;
@@ -22,6 +22,7 @@ moduleCarrito.controller('carritoBuyController', ['$scope', '$http', '$location'
                     }).then(function (response) {
                         $scope.status = response.data.status;
                         $scope.ajaxDataEmpty = response.data.message;
+                        countCarritoService.updateCarrito();
                     }, function (response) {
                         $scope.status = response.status;
                         $scope.ajaxDataEmpty = response.data.message || 'Request failed';

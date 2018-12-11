@@ -43,7 +43,7 @@
                 </div>
                 <div class="mt-4 form-group" ng-class="{'has-error': form.pass.$invalid}">
                     <label>Contraseña:</label>
-                    <input type="text" name="pass" class="form-control" ng-model="pass" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+                    <input type="password" name="pass" class="form-control" ng-model="pass" ng-pattern="/^[a-zA-Z0-9]+$/" required>
                     <p ng-show="form.pass.$invalid && !form.pass.$pristine" class="help-block red-text">
                         Formato de contraseña inválido.
                     </p>

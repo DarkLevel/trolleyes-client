@@ -37,7 +37,11 @@ code {
 /* mi CSS */
 
 .red-text{
-    color:red;
+    color: red;
+}
+
+.green-text{
+    color: green;
 }
 
 .enlace:hover {
