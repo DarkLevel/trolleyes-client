@@ -81,3 +81,8 @@ code {
         width: 75%;
     }
 }
+
+.margenes{
+    margin-top: 75px;
+    margin-bottom: 75px;
+}
