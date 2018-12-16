@@ -96,7 +96,6 @@ moduleFactura.controller('facturaViewController', ['$scope', '$http', 'toolServi
             var fechaFinal = dia + '/' + mes + '/' + anyo + ' ' + hora + ':' + minuto + ':' + segundo;
             return fechaFinal;
         }
-        ;
 
         $scope.isActive = toolService.isActive;
     }

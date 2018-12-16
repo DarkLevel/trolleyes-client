@@ -89,6 +89,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         });
 
         $scope.update = function () {
+            $scope.page = 1;
             $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         };
 

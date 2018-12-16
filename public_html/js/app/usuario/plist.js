@@ -86,6 +86,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         });
 
         $scope.update = function () {
+            $scope.page = 1;
             $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         };
 

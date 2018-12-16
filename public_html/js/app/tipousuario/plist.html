@@ -4,11 +4,9 @@
     <div class="container-fluid pt-4">
         <div class="row">
             <div class="col-8 border-bottom text-center mx-auto">
-                <h2>Tipos de usuario</h2>
-                <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-outline-primary mb-2" ng-click="crear()">Crear</button>
-                    <button type="button" class="btn btn-outline-primary mb-2" ng-click="atras()">Volver atrás</button>
-                </div>
+                <h2><i class="fas fa-user-tag"></i> Tipos de usuario</h2>
+                <button type="button" class="btn btn-outline-primary mb-2" ng-click="crear()">Crear</button>
+                <button type="button" class="btn btn-outline-danger mb-2" ng-click="atras()">Volver atrás</button>
             </div>
         </div>
 
@@ -99,7 +97,7 @@
                 </ul>
             </nav>
         </div>
-        
+
         <div class="row" ng-show="alerta">
             <div class="mx-auto mt-4 alert alert-warning text-center" role="alert">
                 No existen tipos de usuario

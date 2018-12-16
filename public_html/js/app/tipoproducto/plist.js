@@ -85,6 +85,7 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', '$http',
         });
 
         $scope.update = function () {
+            $scope.page = 1;
             $location.url(`tipoproducto/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         };
 

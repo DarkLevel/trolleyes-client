@@ -22,6 +22,7 @@ moduleFactura.controller('facturaRemoveController', ['$scope', '$http', 'toolSer
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
+            $scope.ajaxData.fecha = formatDate($scope.ajaxData.fecha);
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
@@ -46,6 +47,75 @@ moduleFactura.controller('facturaRemoveController', ['$scope', '$http', 'toolSer
                 $scope.ajaxData = response.data.message || 'Request failed';
             });            
         };
+        
+        function formatDate(fecha) {
+            var fechaCambiada = fecha.replace(', ', ' ');
+            var fechaSeparada = fechaCambiada.split(" ");
+            var horaSeparada = fechaSeparada[3].split(":");
+
+            var dia = fechaSeparada[1];
+            var mes;
+            var anyo = fechaSeparada[2];
+            var hora;
+            var minuto = horaSeparada[1];
+            var segundo = horaSeparada[2];
+
+            switch (fechaSeparada[0]) {
+                case "Jan":
+                    mes = "1";
+                    break;
+                case "Feb":
+                    mes = "2";
+                    break;
+                case "Mar":
+                    mes = "3";
+                    break;
+                case "Apr":
+                    mes = "4";
+                    break;
+                case "May":
+                    mes = "5";
+                    break;
+                case "Jun":
+                    mes = "6";
+                    break;
+                case "Jul":
+                    mes = "7";
+                    break;
+                case "Aug":
+                    mes = "8";
+                    break;
+                case "Sep":
+                    mes = "9";
+                    break;
+                case "Oct":
+                    mes = "10";
+                    break;
+                case "Nov":
+                    mes = "11";
+                    break;
+                case "Dec":
+                    mes = "12";
+                    break;
+            }
+
+            if (fechaSeparada[4] === "AM") {
+                if (horaSeparada[0] === "12") {
+                    hora = "0";
+                } else {
+                    hora = horaSeparada[0];
+                }
+            } else {
+                if (horaSeparada[0] === "12") {
+                    horaSeparada[0] = "0";
+                }
+                var horaAm = parseInt(horaSeparada[0]);
+                hora = horaAm + 12;
+            }
+
+            var fechaFinal = dia + '/' + mes + '/' + anyo + ' ' + hora + ':' + minuto + ':' + segundo;
+            return fechaFinal;
+        }
 
         $scope.isActive = toolService.isActive;
     }

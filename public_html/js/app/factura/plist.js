@@ -5,7 +5,7 @@
 moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', '$anchorScroll',
     function ($scope, $http, $location, toolService, $routeParams, $anchorScroll) {
         $anchorScroll();
-        
+
         $scope.totalPages = 1;
         $scope.registros = true;
         $scope.alerta = false;
@@ -88,13 +88,17 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
             for (var i = 0; i < $scope.ajaxData.length; i++) {
                 $scope.ajaxData[i].fecha = formatDate($scope.ajaxData[i].fecha);
             }
-            $scope.username = $scope.ajaxData[0].obj_usuario.login;
+            if($scope.ajaxData === 0){
+                $scope.page = 1;
+                $location.url('usuario/' + $scope.id_user + '/factura/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
+            }
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
         });
 
         $scope.update = function () {
+            $scope.page = 1;
             $location.url('usuario/' + $scope.id_user + '/factura/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         };
 
@@ -186,7 +190,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
 
             var fechaFinal = dia + '/' + mes + '/' + anyo + ' ' + hora + ':' + minuto + ':' + segundo;
             return fechaFinal;
-        };
+        }
 
         $scope.isActive = toolService.isActive;
     }

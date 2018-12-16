@@ -86,6 +86,7 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
         });
 
         $scope.update = function () {
+            $scope.page = 1;
             $location.url(`tipousuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         };
 

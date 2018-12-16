@@ -1,7 +1,7 @@
 <header-component></header-component>
 <main role="main" class="container margenes">
 
-    <h1 class="text-center">Edit tipo usuario</h1>
+    <h1 class="text-center"><i class="fas fa-user-tag"></i> Editar tipo de usuario {{id}}</h1>
 
     <div class="fluid-container">
         <div class="row">
@@ -18,7 +18,7 @@
                     </p>
                 </div>
                 <div class="text-center mt-3" ng-show="botones">
-                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="editar()">Editar tipo de usuario</button>
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-click="editar()">Guardar</button>
                     <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
                 </div>
             </ng-form>

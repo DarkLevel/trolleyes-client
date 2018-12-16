@@ -93,12 +93,17 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
+            if($scope.ajaxData.length === 0){
+                $scope.page = 1;
+                $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + '/linea/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
+            }
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message || 'Request failed';
         });
-
+        
         $scope.update = function () {
+            $scope.page = 1;
             $location.url('usuario/' + $scope.id_user + '/factura/' + $scope.id_factura + '/linea/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         };
 

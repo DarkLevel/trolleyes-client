@@ -1,7 +1,7 @@
 <header-component></header-component>
 <main role="main" class="container margenes">
 
-    <h1 class="text-center">Editar línea</h1>
+    <h1 class="text-center"><i class="fas fa-sliders-h"></i> Editar línea {{id}}</h1>
 
     <div class="fluid-container">
         <div class="row">
@@ -63,7 +63,7 @@
                 </div>
                 
                 <div class="text-center mt-4" ng-show="botones">
-                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-disabled="form.$invalid" ng-click="editar()">Editar Línea</button>
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-disabled="form.$invalid" ng-click="editar()">Guardar</button>
                     <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
                 </div>
             </ng-form>

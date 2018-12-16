@@ -1,27 +1,37 @@
 <header-component></header-component>
 <main role="main" class="container margenes">
 
-    <h1 class="text-center">Ver producto</h1>
+    <h1 class="text-center"><i class="fas fa-box"></i> Ver producto {{ajaxData.id}}</h1>
 
     <form>
         <div class="row form-group text-center mx-auto mt-5 table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped text-center">
                 <tr>
                     <th>ID</th>
-                    <th>Código</th>
-                    <th>Descripción</th>
-                    <th>Existencias</th>
-                    <th>Precio</th>
-                    <th>Foto</th>
-                    <th>Tipo de producto</th>
+                    <td class="align-middle">{{ajaxData.id}}</td>
                 </tr>
                 <tr>
-                    <td class="align-middle">{{ajaxData.id}}</td>
+                    <th>Código</th>
                     <td class="align-middle">{{ajaxData.codigo}}</td>
+                </tr>
+                <tr>
+                    <th>Descripción</th>
                     <td class="align-middle">{{ajaxData.desc}}</td>
+                </tr>
+                <tr>
+                    <th>Existencias</th>
                     <td class="align-middle">{{ajaxData.existencias}}</td>
+                </tr>
+                <tr>
+                    <th>Precio</th>
                     <td class="align-middle">{{ajaxData.precio}}</td>
+                </tr>
+                <tr>
+                    <th>Foto</th>
                     <td class="align-middle">{{ajaxData.foto}}</td>
+                </tr>
+                <tr>
+                    <th>Tipo de producto</th>
                     <td class="align-middle">{{ajaxData.obj_tipoProducto.desc}}</td>
                 </tr>
             </table>
