@@ -2,9 +2,10 @@
 
 'use strict';
 
-moduleProducto.controller('productoPlistClienteController', ['$scope', '$http', '$location', 'toolService',
-    '$routeParams', 'countCarritoService', '$timeout',
-    function ($scope, $http, $location, toolService, $routeParams, countCarritoService, $timeout) {
+moduleProducto.controller('productoPlistClienteController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'countCarritoService', '$timeout', '$anchorScroll',
+    function ($scope, $http, $location, toolService, $routeParams, countCarritoService, $timeout, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.totalPages = 1;
         $scope.registros = true;
         $scope.alerta = false;

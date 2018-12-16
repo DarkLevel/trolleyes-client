@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, toolService) {
+moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', 'toolService', '$anchorScroll',
+    function ($scope, $http, toolService, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.formulario = true;
         $scope.botones = true;
         $scope.correcto = false;
@@ -46,7 +48,7 @@ moduleUsuario.controller('usuarioCreateController', ['$scope', '$http', '$locati
                     }).then(function (response) {
                         $scope.obj_tipoUsuario = response.data.message;
                         form.form.obj_tipoUsuario.$setValidity('valid', true);
-                    }, function (response) {
+                    }, function () {
                         form.form.obj_tipoUsuario.$setValidity('valid', false);
                     });
                 } else {

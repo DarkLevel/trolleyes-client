@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', '$anchorScroll',
+    function ($scope, $http, $location, toolService, $routeParams, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.totalPages = 1;
         $scope.registros = true;
         $scope.alerta = false;
@@ -102,13 +104,6 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
                     $scope.list.push("...");
                 }
             }
-        }
-        
-        $scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id = oSessionService.getId();
         }
         
         $scope.atras = function () {

@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleProducto.controller('productoRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleProducto.controller('productoRemoveController', ['$scope', '$http', 'toolService', '$routeParams', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.botones = true;
         $scope.alerta = false;
         $scope.formulario = true;

@@ -2,4 +2,8 @@
 
 'use strict';
 
-moduleCommon.controller('homeController', [function () {}]);
+moduleCommon.controller('homeController', ['$anchorScroll',
+    function ($anchorScroll) {
+        $anchorScroll();
+    }
+]);

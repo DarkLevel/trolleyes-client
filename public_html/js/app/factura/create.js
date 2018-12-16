@@ -2,14 +2,10 @@
 
 'use strict';
 
-moduleFactura.controller('facturaCreateController', [
-    '$scope',
-    '$http',
-    '$location',
-    'toolService',
-    '$routeParams',
-    'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleFactura.controller('facturaCreateController', ['$scope', '$http', 'toolService', '$routeParams', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.formulario = true;
         $scope.botones = true;
         $scope.alerta = false;

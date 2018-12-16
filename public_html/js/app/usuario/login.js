@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'sessionService',
-    function ($scope, $http, $location, oSessionService) {
+moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'sessionService', '$anchorScroll',
+    function ($scope, $http, $location, oSessionService, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.formulario = true;
         $scope.correcto = false;
         $scope.incorrecto = false;

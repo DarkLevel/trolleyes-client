@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', '$anchorScroll',
+    function ($scope, $http, $location, toolService, $routeParams, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.totalPages = 1;
         $scope.registros = true;
         $scope.alerta = false;
@@ -31,13 +33,6 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }    
-        
-        $scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id_sesion = oSessionService.getId();
-        }
 
         $scope.resetOrder = function () {
             $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page);

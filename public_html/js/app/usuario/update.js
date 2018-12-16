@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', 'toolService', '$routeParams', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.botones = true;
         $scope.correcto = false;
         $scope.formulario = true;

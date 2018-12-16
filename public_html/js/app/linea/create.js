@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleLinea.controller('lineaCreateController', ['$scope', '$http', 'toolService', '$routeParams', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.formulario = true;
         $scope.botones = true;
         $scope.alerta = false;
@@ -40,7 +42,7 @@ moduleLinea.controller('lineaCreateController', ['$scope', '$http', '$location',
         
         $scope.productoRefresh = function (f, consultar) {
             var form = f;
-            if ($scope.obj_producto.id != null) {
+            if ($scope.obj_producto.id !== null) {
                 if (consultar) {
                     $http({
                         method: 'GET',

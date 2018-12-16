@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 'toolService', '$routeParams', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.botones = true;
         $scope.alerta = false;
         $scope.formulario = true;
@@ -44,13 +46,6 @@ moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 
                 $scope.ajaxData = response.data.message || 'Request failed';
             });
         };
-        
-        $scope.sesionIniciada = false;
-        if (oSessionService.isSessionActive()) {
-            $scope.sesionIniciada = true;
-            $scope.usuario = oSessionService.getUserName();
-            $scope.id = oSessionService.getId();
-        }
 
         $scope.isActive = toolService.isActive;
     }

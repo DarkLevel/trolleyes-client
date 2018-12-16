@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleTipoproducto.controller('tipoproductoCreateController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleTipoproducto.controller('tipoproductoCreateController', ['$scope', '$http', 'toolService', '$anchorScroll',
+    function ($scope, $http, toolService, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.formulario = true;
         $scope.botones = true;
         $scope.correcto = false;

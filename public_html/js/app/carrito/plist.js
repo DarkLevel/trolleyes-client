@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'countCarritoService',
-    function ($scope, $http, $location, countCarritoService) {
+moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'countCarritoService', '$anchorScroll',
+    function ($scope, $http, $location, countCarritoService, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.alerta = false;
 
         $http({

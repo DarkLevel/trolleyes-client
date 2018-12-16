@@ -2,8 +2,10 @@
 
 'use strict';
 
-moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams', '$anchorScroll',
+    function ($scope, $http, $location, toolService, $routeParams, $anchorScroll) {
+        $anchorScroll();
+        
         $scope.totalPages = 1;
         $scope.registros = true;
         $scope.alerta = false;
