@@ -24,10 +24,12 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                 $scope.status = response.data.status;
                 $scope.nombreUsuario = response.data.message.login;
                 $scope.idUsuario = response.data.message.id;
+                $scope.idTipoUsuario = response.data.message.obj_tipoUsuario.id;
                 if ($scope.status === 200) {
                     oSessionService.setSessionActive();
                     oSessionService.setUserName($scope.nombreUsuario);
                     oSessionService.setId($scope.idUsuario);
+                    oSessionService.setIdTipoUsuario($scope.idTipoUsuario);
                     $scope.formulario = false;
                     $scope.incorrecto = false;
                     $scope.correcto = true;

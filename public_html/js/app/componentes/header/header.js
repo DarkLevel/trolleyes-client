@@ -15,26 +15,28 @@ function js(toolService, sessionService, $scope, $http, $location) {
     self.logged = sessionService.isSessionActive();
     self.nameUserLogged = sessionService.getUserName();
     self.idUserLogged = sessionService.getId();
+    self.idLoggedUserType = sessionService.getIdTipoUsuario();
     self.isActive = toolService.isActive;
     self.carrito = sessionService.getCountCarrito();
 
     sessionService.registerObserverCallback(function () {
+        self.logged = sessionService.isSessionActive();
         self.nameUserLogged = sessionService.getUserName();
         self.idUserLogged = sessionService.getId();
+        self.idLoggedUserType = sessionService.getIdTipoUsuario();
         self.carrito = sessionService.getCountCarrito();
-        self.logged = sessionService.isSessionActive();
     });
 
     $scope.logout = function () {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
-            }).then(function (response) {
-                if (response.data.status === 200) {
-                    sessionService.setSessionInactive();
-                    $location.url('home');
-                }
-            });
-        };
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'
+        }).then(function (response) {
+            if (response.data.status === 200) {
+                sessionService.setSessionInactive();
+                $location.url('home');
+            }
+        });
+    };
 
 }

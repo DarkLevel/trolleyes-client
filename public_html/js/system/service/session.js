@@ -4,8 +4,9 @@
 
 moduleService.service('sessionService', [function () {
         var isSessionActive = false;
-        var userName = "";
-        var userId = "";
+        var userName;
+        var userId;
+        var userIdTipoUsuario;
         var productosCarrito = 0;
         var observerCallbacks = [];
         return {
@@ -24,6 +25,16 @@ moduleService.service('sessionService', [function () {
             },
             setId: function (id) {
                 userId = id;
+                
+                angular.forEach(observerCallbacks, function (callback) {
+                    callback();
+                });
+            },
+            getIdTipoUsuario: function () {
+                return userIdTipoUsuario;
+            },
+            setIdTipoUsuario: function (IdTipoUsuario) {
+                userIdTipoUsuario = IdTipoUsuario;
                 
                 angular.forEach(observerCallbacks, function (callback) {
                     callback();
@@ -55,7 +66,7 @@ moduleService.service('sessionService', [function () {
                 angular.forEach(observerCallbacks, function (callback) {
                     callback();
                 });
-            },            
+            },
             registerObserverCallback: function (callback) {
                 observerCallbacks.push(callback);
             }

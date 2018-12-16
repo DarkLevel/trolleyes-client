@@ -1,0 +1,57 @@
+<header-component></header-component>
+<main role="main" class="container margenes">
+
+    <h1 class="text-center"><i class="fas fa-user-cog"></i> Cambiar contraseña</h1>
+
+    <div class="fluid-container">
+        <div class="row">
+            <ng-form name="form" ng-show="formulario" class="col-10 col-lg-8 mx-auto">
+                <div class="mt-4 form-group" ng-class="{'has-error': form.oldPass.$invalid}">
+                    <label>Antigua contraseña:</label>
+                    <input type="password" name="oldPass" class="form-control" ng-model="oldPass" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+                    <p ng-show="form.oldPass.$invalid && !form.oldPass.$pristine" class="help-block red-text">
+                        Formato de contraseña inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.newPass1.$invalid}">
+                    <label>Nueva contraseña:</label>
+                    <input type="password" name="newPass1" class="form-control" ng-model="newPass1" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+                    <p ng-show="form.newPass1.$invalid && !form.newPass1.$pristine" class="help-block red-text">
+                        Formato de contraseña inválido.
+                    </p>
+                </div>
+                <div class="mt-4 form-group" ng-class="{'has-error': form.newPass2.$invalid}">
+                    <label>Nueva contraseña:</label>
+                    <input type="password" name="newPass2" class="form-control" ng-model="newPass2" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+                    <p ng-show="form.newPass2.$invalid && !form.newPass2.$pristine" class="help-block red-text">
+                        Formato de contraseña inválido.
+                    </p>
+                </div>
+
+                <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-danger" role="alert" ng-show="distintas">
+                    Las contraseñas son distintas.
+                </div>
+                
+                <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-danger" role="alert" ng-show="previousPass">
+                    La contraseña antigua es igual que la nueva.
+                </div>
+                
+                <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-danger" role="alert" ng-show="incorrecto">
+                    La contraseña antigua es incorrecta.
+                </div>
+
+                <div class="text-center mt-4" ng-show="botones">
+                    <button type="button" class="btn btn-primary mt-2 mx-2" ng-disabled="form.$invalid" ng-click="crear()">Cambiar contraseña</button>
+                    <button type="button" class="btn btn-danger mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+                </div>
+            </ng-form>
+
+            <div class="col-10 col-lg-8 mx-auto mt-4 text-center alert alert-success" role="alert" ng-show="correcto">
+                Contraseña cambiada correctamente.
+                <button type="button" class="btn btn-primary mx-2" ng-click="volver()">Volver atrás</button>
+            </div>
+        </div>
+    </div>
+
+</main>
+<footer-component></footer-component>

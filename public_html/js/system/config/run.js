@@ -17,13 +17,13 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http', 'countCarri
                     countCarritoService.updateCarrito();
                 } else {
                     oSessionService.setSessionInactive;
-                    if (nextUrl !== 'home' && nextUrl !== '/usuario/login' && nextUrl !== '/usuario/create') {
+                    if (nextUrl !== 'home' && nextUrl !== '/usuario/login' && nextUrl !== '/usuario/createCliente') {
                         $location.path("home");
                     }
                 }
             }, function (response) {
                 oSessionService.setSessionInactive();
-                if (nextUrl !== 'home' && nextUrl !== '/usuario/login' && nextUrl !== '/usuario/create') {
+                if (nextUrl !== 'home' && nextUrl !== '/usuario/login' && nextUrl !== '/usuario/createCliente') {
                     $location.path("home");
                 }
             });

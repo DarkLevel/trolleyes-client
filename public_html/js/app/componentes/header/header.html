@@ -29,8 +29,8 @@
             <li class="nav-item" ng-show="!c.logged" ng-class="{'active': c.isActive('/usuario/login')}">
                 <a class="nav-link" href="usuario/login"><i class="fas fa-user"></i> Iniciar Sesión</a>
             </li>
-            <li class="nav-item" ng-show="!c.logged" ng-class="{'active': c.isActive('/usuario/create')}">
-                <a class="nav-link" href="usuario/create"><i class="fas fa-plus-circle"></i> Crear Usuario</a>
+            <li class="nav-item" ng-show="!c.logged" ng-class="{'active': c.isActive('/usuario/createCliente')}">
+                <a class="nav-link" href="usuario/createCliente"><i class="fas fa-plus-circle"></i> Crear Usuario</a>
             </li>
             <li class="nav-item" ng-show="c.logged" ng-class="{'active': c.isActive('/carrito/plist')}">
                 <a class="nav-link" href="carrito/plist"><i class="fas fa-shopping-cart"></i> ({{c.carrito}})</a>
@@ -41,7 +41,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="usuario/view/{{c.idUserLogged}}">Ver</a>
                         <a class="dropdown-item" href="usuario/update/{{c.idUserLogged}}">Editar</a>
-                        <a class="dropdown-item">Cambio contraseña</a>
+                        <a class="dropdown-item" href="usuario/changePass">Cambio contraseña</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
                     </div>
