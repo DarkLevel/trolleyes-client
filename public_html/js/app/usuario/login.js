@@ -5,7 +5,7 @@
 moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'sessionService', '$anchorScroll',
     function ($scope, $http, $location, oSessionService, $anchorScroll) {
         $anchorScroll();
-        
+
         $scope.formulario = true;
         $scope.correcto = false;
         $scope.incorrecto = false;
@@ -22,14 +22,20 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + login + '&pass=' + pass
             }).then(function (response) {
                 $scope.status = response.data.status;
-                $scope.nombreUsuario = response.data.message.login;
-                $scope.idUsuario = response.data.message.id;
-                $scope.idTipoUsuario = response.data.message.obj_tipoUsuario.id;
+                $scope.message = response.data.message;
                 if ($scope.status === 200) {
+                    $scope.nombreUsuario = response.data.message.login;
+                    $scope.idUsuario = response.data.message.id;
+                    $scope.idTipoUsuario = response.data.message.obj_tipoUsuario.id;
                     oSessionService.setSessionActive();
                     oSessionService.setUserName($scope.nombreUsuario);
                     oSessionService.setId($scope.idUsuario);
-                    oSessionService.setIdTipoUsuario($scope.idTipoUsuario);
+                    if($scope.idTipoUsuario === 1){
+                        oSessionService.setAdminActive();
+                    }
+                    if($scope.idTipoUsuario === 2){
+                        oSessionService.setClientActive();
+                    }
                     $scope.formulario = false;
                     $scope.incorrecto = false;
                     $scope.correcto = true;

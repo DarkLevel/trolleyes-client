@@ -15,7 +15,6 @@ moduleUsuario.controller('usuarioChangePassController', ['$scope', '$http', 'too
 
         $scope.crear = function () {
             var samePass = false;
-            var pass;
             if ($scope.newPass1 === $scope.newPass2) {
                 samePass = true;
             }

@@ -13,17 +13,19 @@ function js(toolService, sessionService, $scope, $http, $location) {
     var self = this;
 
     self.logged = sessionService.isSessionActive();
+    self.isAdmin = sessionService.isAdmin();
+    self.isClient = sessionService.isClient();
     self.nameUserLogged = sessionService.getUserName();
     self.idUserLogged = sessionService.getId();
-    self.idLoggedUserType = sessionService.getIdTipoUsuario();
     self.isActive = toolService.isActive;
     self.carrito = sessionService.getCountCarrito();
 
     sessionService.registerObserverCallback(function () {
         self.logged = sessionService.isSessionActive();
+        self.isAdmin = sessionService.isAdmin();
+        self.isClient = sessionService.isClient();
         self.nameUserLogged = sessionService.getUserName();
         self.idUserLogged = sessionService.getId();
-        self.idLoggedUserType = sessionService.getIdTipoUsuario();
         self.carrito = sessionService.getCountCarrito();
     });
 
@@ -34,6 +36,8 @@ function js(toolService, sessionService, $scope, $http, $location) {
         }).then(function (response) {
             if (response.data.status === 200) {
                 sessionService.setSessionInactive();
+                sessionService.setAdminInactive();
+                sessionService.setClientInactive();
                 $location.url('home');
             }
         });

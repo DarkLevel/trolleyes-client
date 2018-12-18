@@ -1,0 +1,40 @@
+<header-component></header-component>
+<main role="main" class="container margenes">
+
+    <h1 class="text-center"><i class="fas fa-user"></i> Ver usuario {{ajaxData.id}}</h1>
+
+    <form>
+        <div class="row form-group text-center mx-auto mt-5 table-responsive">
+            <table class="table table-striped text-center">
+                <tr>
+                    <th>ID</th>
+                    <td class="align-middle">{{ajaxData.id}}</td>
+                </tr>
+                <tr>
+                    <th>Dni</th>
+                    <td class="align-middle">{{ajaxData.dni}}</td>
+                </tr>
+                <tr>
+                    <th>Nombre</th>
+                    <td class="align-middle">{{ajaxData.nombre}}</td>
+                </tr>
+                <tr>
+                    <th>Primer apellido</th>
+                    <td class="align-middle">{{ajaxData.ape1}}</td>
+                </tr>
+                <tr>
+                    <th>Segundo apellido</th>
+                    <td class="align-middle">{{ajaxData.ape2}}</td>
+                </tr>
+                <tr>
+                    <th>Nombre de usuario</th>
+                    <td class="align-middle">{{ajaxData.login}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="text-center mt-5">
+            <button type="button" class="btn btn-danger" ng-click="volver()">Volver atrás</button>
+        </div>
+    </form>
+</main>
+<footer-component></footer-component>

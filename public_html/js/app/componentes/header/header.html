@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto" ng-show="c.logged">
+        <ul class="navbar-nav mr-auto" ng-show="c.isAdmin">
             <li class="nav-item" ng-class="{'active': c.isActive('/usuario')}">
                 <a class="nav-link" href="usuario/plist"><i class="fas fa-users"></i> Usuarios</a>
             </li>
@@ -25,6 +25,11 @@
                 <a class="nav-link" href="tipoproducto/plist"><i class="fas fa-boxes"></i> Tipos Producto</a>
             </li>
         </ul>
+        <ul class="navbar-nav mr-auto" ng-show="c.isClient">
+            <li class="nav-item" ng-class="{'active': c.isActive('/producto')}">
+                <a class="nav-link" href="producto/plistCliente"><i class="fas fa-boxes"></i> Productos</a>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" ng-show="!c.logged" ng-class="{'active': c.isActive('/usuario/login')}">
                 <a class="nav-link" href="usuario/login"><i class="fas fa-user"></i> Iniciar Sesión</a>
@@ -35,12 +40,24 @@
             <li class="nav-item" ng-show="c.logged" ng-class="{'active': c.isActive('/carrito/plist')}">
                 <a class="nav-link" href="carrito/plist"><i class="fas fa-shopping-cart"></i> ({{c.carrito}})</a>
             </li>
-            <li class="nav-item" ng-show="c.logged">
+            <li class="nav-item" ng-show="c.isAdmin">
                 <div class="nav-link dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">{{c.nameUserLogged}}<span class="caret"></span></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="usuario/view/{{c.idUserLogged}}">Ver</a>
                         <a class="dropdown-item" href="usuario/update/{{c.idUserLogged}}">Editar</a>
+                        <a class="dropdown-item" href="usuario/changePass">Cambio contraseña</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item" ng-show="c.isClient">
+                <div class="nav-link dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">{{c.nameUserLogged}}<span class="caret"></span></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="usuario/viewCliente/{{c.idUserLogged}}">Ver</a>
+                        <a class="dropdown-item" href="usuario/updateCliente/{{c.idUserLogged}}">Editar</a>
                         <a class="dropdown-item" href="usuario/changePass">Cambio contraseña</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>

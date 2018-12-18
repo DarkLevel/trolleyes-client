@@ -18,7 +18,7 @@ moduleUsuario.controller('usuarioCreateClienteController', ['$scope', '$http', '
                 ape2: $scope.ape2,
                 login: $scope.login,
                 pass: forge_sha256($scope.pass),
-                id_tipoUsuario: 1
+                id_tipoUsuario: 2
             };
             $http({
                 method: 'GET',
