@@ -2,7 +2,7 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioCreateClienteController', ['$scope', '$http', 'toolService', '$anchorScroll',
+moduleUsuario.controller('usuarioCreateUserController', ['$scope', '$http', 'toolService', '$anchorScroll',
     function ($scope, $http, toolService, $anchorScroll) {
         $anchorScroll();
         
@@ -17,12 +17,11 @@ moduleUsuario.controller('usuarioCreateClienteController', ['$scope', '$http', '
                 ape1: $scope.ape1,
                 ape2: $scope.ape2,
                 login: $scope.login,
-                pass: forge_sha256($scope.pass),
-                id_tipoUsuario: 2
+                pass: forge_sha256($scope.pass)
             };
             $http({
                 method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=create',
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=createuser',
                 params: {json: JSON.stringify(json)}
             }).then(function (response) {
                 $scope.status = response.data.status;

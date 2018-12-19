@@ -71,7 +71,7 @@ moduleUsuario.controller('usuarioUpdateController', ['$scope', '$http', 'toolSer
         
         $scope.tipoUsuarioRefresh = function (f, consultar) {
             var form = f;
-            if ($scope.obj_tipoUsuario.id != null) {
+            if ($scope.obj_tipoUsuario.id !== null) {
                 if (consultar) {
                     $http({
                         method: 'GET',

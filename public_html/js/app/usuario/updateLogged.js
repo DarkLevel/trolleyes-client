@@ -2,26 +2,20 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioUpdateClienteController', ['$scope', '$http', 'toolService', '$routeParams', '$anchorScroll', 'sessionService',
-    function ($scope, $http, toolService, $routeParams, $anchorScroll, oSessionService) {
+moduleUsuario.controller('usuarioUpdateLoggedController', ['$scope', '$http', 'toolService', '$anchorScroll',
+    function ($scope, $http, toolService, $anchorScroll) {
         $anchorScroll();
         
         $scope.botones = true;
         $scope.correcto = false;
         $scope.formulario = true;
 
-        if (!$routeParams.id) {
-            $scope.id = oSessionService.getId();
-        } else {
-            $scope.id = $routeParams.id;
-        }
-
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $routeParams.id
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getprofile'
         }).then(function (response) {
             $scope.ajaxDataUsuario = response.data.message;
-            $scope.status = response.status;
+            $scope.status = response.data.status;
             $scope.id = response.data.message.id;
             $scope.dni = response.data.message.dni;
             $scope.nombre = response.data.message.nombre;
@@ -39,20 +33,18 @@ moduleUsuario.controller('usuarioUpdateClienteController', ['$scope', '$http', '
 
         $scope.editar = function () {
             var json = {
-                id: $scope.id,
                 dni: $scope.dni,
                 nombre: $scope.nombre,
                 ape1: $scope.ape1,
                 ape2: $scope.ape2,
-                login: $scope.login,
-                id_tipoUsuario: 2
+                login: $scope.login
             };
             $http({
                 method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=update',
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=updateprofile',
                 params: {json: JSON.stringify(json)}
             }).then(function (response) {
-                $scope.status = response.status;
+                $scope.status = response.data.status;
                 $scope.ajaxData = response.data.message;
                 if ($scope.status === 200) {
                     $scope.botones = false;

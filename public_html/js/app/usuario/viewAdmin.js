@@ -2,7 +2,7 @@
 
 'use strict';
 
-moduleUsuario.controller('usuarioViewClienteController', ['$scope', '$http', 'toolService', '$anchorScroll',
+moduleUsuario.controller('usuarioViewAdminController', ['$scope', '$http', 'toolService', '$anchorScroll',
     function ($scope, $http, toolService, $anchorScroll) {
         $anchorScroll();
 

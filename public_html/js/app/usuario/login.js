@@ -30,10 +30,12 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                     oSessionService.setSessionActive();
                     oSessionService.setUserName($scope.nombreUsuario);
                     oSessionService.setId($scope.idUsuario);
-                    if($scope.idTipoUsuario === 1){
+                    if ($scope.idTipoUsuario === 1) {
                         oSessionService.setAdminActive();
+                        oSessionService.setClientInactive();
                     }
-                    if($scope.idTipoUsuario === 2){
+                    if ($scope.idTipoUsuario === 2) {
+                        oSessionService.setAdminInactive();
                         oSessionService.setClientActive();
                     }
                     $scope.formulario = false;
@@ -41,6 +43,9 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                     $scope.correcto = true;
                 }
                 if ($scope.status === 401) {
+                    oSessionService.setSessionInactive();
+                    oSessionService.setAdminInactive();
+                    oSessionService.setClientActive();
                     $scope.incorrecto = true;
                 }
             }, function (response) {

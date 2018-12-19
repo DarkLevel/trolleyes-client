@@ -1,17 +1,16 @@
 /* global trolleyes */
 
-console.log("hola");
-
 var autenticacionAdministrador = function ($q, $location, $http, sessionService, countCarritoService) {
     var deferred = $q.defer();
     $http({
         method: 'GET',
-        url: 'json?ob=usuario&op=check'
+        url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
     }).then(function (response) {
         if (response.data.status === 200) {
             if (response.data.message.obj_tipoUsuario.id === 1) {
                 sessionService.setSessionActive();
                 sessionService.setAdminActive();
+                sessionService.setClientInactive();
                 sessionService.setUserName(response.data.message.login);
                 sessionService.setId(response.data.message.id);
                 countCarritoService.updateCarrito();
@@ -19,9 +18,13 @@ var autenticacionAdministrador = function ($q, $location, $http, sessionService,
             }
         } else {
             sessionService.setSessionInactive();
+            sessionService.setAdminInactive();
+            sessionService.setClientInactive();
         }
     }, function () {
         sessionService.setSessionInactive();
+        sessionService.setAdminInactive();
+        sessionService.setClientInactive();
         $location.path('/home');
     });
     return deferred.promise;
@@ -32,12 +35,13 @@ var autenticacionCliente = function ($q, $location, $http, sessionService, count
     var deferred = $q.defer();
     $http({
         method: 'GET',
-        url: 'json?ob=usuario&op=check'
+        url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
     }).then(function (response) {
         if (response.data.status === 200) {
             if (response.data.message.obj_tipoUsuario.id === 2) {
                 sessionService.setSessionActive();
-                sessionService.setAdminActive();
+                sessionService.setAdminInactive();
+                sessionService.setClientActive();
                 sessionService.setUserName(response.data.message.login);
                 sessionService.setId(response.data.message.id);
                 countCarritoService.updateCarrito();
@@ -45,9 +49,13 @@ var autenticacionCliente = function ($q, $location, $http, sessionService, count
             }
         } else {
             sessionService.setSessionInactive();
+            sessionService.setAdminInactive();
+            sessionService.setClientInactive();
         }
     }, function () {
         sessionService.setSessionInactive();
+        sessionService.setAdminInactive();
+        sessionService.setClientInactive();
         $location.path('/home');
     });
     return deferred.promise;
@@ -57,12 +65,22 @@ var autenticacionAny = function ($q, $location, $http, sessionService, countCarr
     var deferred = $q.defer();
     $http({
         method: 'GET',
-        url: 'json?ob=usuario&op=check'
+        url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
     }).then(function (response) {
         if (response.data.status === 200) {
-            if ((response.data.message.obj_tipoUsuario.id >= 1)) {
+            if (response.data.message.obj_tipoUsuario.id === 1) {
                 sessionService.setSessionActive();
                 sessionService.setAdminActive();
+                sessionService.setClientInactive();
+                sessionService.setUserName(response.data.message.login);
+                sessionService.setId(response.data.message.id);
+                countCarritoService.updateCarrito();
+                deferred.resolve();
+            }
+            if (response.data.message.obj_tipoUsuario.id === 2) {
+                sessionService.setSessionActive();
+                sessionService.setAdminInactive();
+                sessionService.setClientActive();
                 sessionService.setUserName(response.data.message.login);
                 sessionService.setId(response.data.message.id);
                 countCarritoService.updateCarrito();
@@ -70,9 +88,13 @@ var autenticacionAny = function ($q, $location, $http, sessionService, countCarr
             }
         } else {
             sessionService.setSessionInactive();
+            sessionService.setAdminInactive();
+            sessionService.setClientInactive();
         }
     }, function () {
         sessionService.setSessionInactive();
+        sessionService.setAdminInactive();
+        sessionService.setClientInactive();
         $location.path('/home');
     });
     return deferred.promise;
@@ -82,21 +104,65 @@ var noAutenticacion = function ($q, $location, $http, sessionService) {
     var deferred = $q.defer();
     $http({
         method: 'GET',
-        url: 'json?ob=usuario&op=check'
+        url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
     }).then(function (response) {
         if (response.data.status === 401) {
             sessionService.setSessionInactive();
+            sessionService.setAdminInactive();
+            sessionService.setClientInactive();
             deferred.resolve();
         }
     }, function () {
         sessionService.setSessionInactive();
+        sessionService.setAdminInactive();
+        sessionService.setClientInactive();
+        $location.path('/home');
+    });
+    return deferred.promise;
+};
+
+var everyone = function ($q, $location, $http, sessionService, countCarritoService) {
+    var deferred = $q.defer();
+    $http({
+        method: 'GET',
+        url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
+    }).then(function (response) {
+        if (response.data.status === 200) {
+            if (response.data.message.obj_tipoUsuario.id === 1) {
+                sessionService.setSessionActive();
+                sessionService.setAdminActive();
+                sessionService.setClientInactive();
+                sessionService.setUserName(response.data.message.login);
+                sessionService.setId(response.data.message.id);
+                countCarritoService.updateCarrito();
+                deferred.resolve();
+            }
+            if (response.data.message.obj_tipoUsuario.id === 2) {
+                sessionService.setSessionActive();
+                sessionService.setAdminInactive();
+                sessionService.setClientActive();
+                sessionService.setUserName(response.data.message.login);
+                sessionService.setId(response.data.message.id);
+                countCarritoService.updateCarrito();
+                deferred.resolve();
+            }
+        } else {
+            sessionService.setSessionInactive();
+            sessionService.setAdminInactive();
+            sessionService.setClientInactive();
+            deferred.resolve();
+        }
+    }, function () {
+        sessionService.setSessionInactive();
+        sessionService.setAdminInactive();
+        sessionService.setClientInactive();
         $location.path('/home');
     });
     return deferred.promise;
 };
 
 trolleyes.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/home', {templateUrl: 'js/app/common/home.html', controller: 'homeController'});
+        $routeProvider.when('/home', {templateUrl: 'js/app/common/home.html', controller: 'homeController', resolve: {auth: everyone}});
 
 
 
@@ -128,6 +194,7 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/remove/:id?', {templateUrl: 'js/app/usuario/remove.html', controller: 'usuarioRemoveController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/usuario/update/:id?', {templateUrl: 'js/app/usuario/update.html', controller: 'usuarioUpdateController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/usuario/view/:id?', {templateUrl: 'js/app/usuario/view.html', controller: 'usuarioViewController', resolve: {auth: autenticacionAdministrador}});
+        $routeProvider.when('/profile/viewAdmin', {templateUrl: 'js/app/usuario/viewAdmin.html', controller: 'usuarioViewAdminController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/usuario/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/usuario/plist.html', controller: 'usuarioPlistController', resolve: {auth: autenticacionAdministrador}});
 
         $routeProvider.when('/tipousuario/create', {templateUrl: 'js/app/tipousuario/create.html', controller: 'tipousuarioCreateController', resolve: {auth: autenticacionAdministrador}});
@@ -138,23 +205,22 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
 
 
 
-        $routeProvider.when('/usuario/viewCliente/:id?', {templateUrl: 'js/app/usuario/viewCliente.html', controller: 'usuarioViewClienteController', resolve: {auth: autenticacionCliente}});
-        $routeProvider.when('/usuario/updateCliente/:id?', {templateUrl: 'js/app/usuario/updateCliente.html', controller: 'usuarioUpdateClienteController', resolve: {auth: autenticacionCliente}});
-        
-        $routeProvider.when('/producto/plistCliente/:rpp?/:page?/:order?', {templateUrl: 'js/app/producto/plistCliente.html', controller: 'productoPlistClienteController', resolve: {auth: autenticacionCliente}});
+        $routeProvider.when('/profile/viewCliente', {templateUrl: 'js/app/usuario/viewCliente.html', controller: 'usuarioViewClienteController', resolve: {auth: autenticacionCliente}});
 
 
 
-        $routeProvider.when('/usuario/logout', {templateUrl: 'js/app/usuario/logout.html', controller: 'usuarioLogoutController', resolve: {auth: autenticacionAny}});
-        $routeProvider.when('/usuario/changePass', {templateUrl: 'js/app/usuario/changePass.html', controller: 'usuarioChangePassController', resolve: {auth: autenticacionAny}});
-        
+        $routeProvider.when('/profile/updateLogged', {templateUrl: 'js/app/usuario/updateLogged.html', controller: 'usuarioUpdateLoggedController', resolve: {auth: autenticacionAny}});
+        $routeProvider.when('/profile/changePass', {templateUrl: 'js/app/usuario/changePass.html', controller: 'usuarioChangePassController', resolve: {auth: autenticacionAny}});
+
+        $routeProvider.when('/producto/plistCliente/:rpp?/:page?/:order?', {templateUrl: 'js/app/producto/plistCliente.html', controller: 'productoPlistClienteController', resolve: {auth: autenticacionAny}});
+
         $routeProvider.when('/carrito/plist', {templateUrl: 'js/app/carrito/plist.html', controller: 'carritoPlistController', resolve: {auth: autenticacionAny}});
         $routeProvider.when('/carrito/buy', {templateUrl: 'js/app/carrito/buy.html', controller: 'carritoBuyController', resolve: {auth: autenticacionAny}});
 
 
 
         $routeProvider.when('/usuario/login', {templateUrl: 'js/app/usuario/login.html', controller: 'usuarioLoginController', resolve: {auth: noAutenticacion}});
-        $routeProvider.when('/usuario/createCliente', {templateUrl: 'js/app/usuario/createCliente.html', controller: 'usuarioCreateClienteController', resolve: {auth: noAutenticacion}});
+        $routeProvider.when('/usuario/createUser', {templateUrl: 'js/app/usuario/createUser.html', controller: 'usuarioCreateUserController', resolve: {auth: noAutenticacion}});
 
 
 
