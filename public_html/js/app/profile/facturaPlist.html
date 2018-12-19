@@ -73,7 +73,7 @@
                         <a role="button" ng-class="{'disabled':(fila.link_linea == 0)}" class="btn btn-outline-primary" href="profile/factura/{{fila.id}}/linea/plist">{{fila.link_linea}}</a>
                     </td>
                     <td>
-                        <a role="button" ng-class="{'disabled':(fila.link_linea == 0)}" class="btn btn-outline-primary"><i class="fas fa-print"></i> PDF</a>
+                        <a role="button" ng-click="crearPDF(fila.id)" ng-class="{'disabled':(fila.link_linea == 0)}" class="btn btn-outline-primary"><i class="fas fa-print"></i> PDF</a>
                     </td>
                 </tr>
             </table>
