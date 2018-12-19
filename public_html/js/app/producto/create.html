@@ -6,6 +6,19 @@
     <div class="fluid-container">
         <div class="row">
             <ng-form name="form" ng-show="formulario" class="col-10 col-lg-8 mx-auto">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="mx-auto pb-5">
+                            <img id="output" ng-src="http://localhost:8081/imagenes/Default.png" style="width: 128px; height: 128px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mx-auto pb-5">
+                            <!--ARREGLO EN UNA LINEA DE PREVIEW DE NUEVA FOTO-->
+                            <input type="file" file-model="myFile" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" ng-model="foto">
+                        </div>
+                    </div>
+                </div>
                 <div class="mt-4 form-group" ng-class="{'has-error': form.codigo.$invalid}">
                     <label>Código:</label>
                     <input type="text" name="codigo" class="form-control" ng-model="codigo" ng-pattern="/^[a-zA-Z0-9]+$/" required>
@@ -32,13 +45,6 @@
                     <input type="text" name="precio" class="form-control" ng-model="precio" ng-pattern="/^[0-9]+(,[0-9]?[1-9])?$/" required>
                     <p ng-show="form.precio.$invalid && !form.precio.$pristine" class="help-block red-text">
                         Formato de precio inválido.
-                    </p>
-                </div>
-                <div class="mt-4 form-group" ng-class="{'has-error': form.foto.$invalid}">
-                    <label>Foto:</label>
-                    <input type="text" name="foto" class="form-control" ng-model="foto" ng-pattern="/^[a-zA-Z]+$/" required>
-                    <p ng-show="form.foto.$invalid && !form.foto.$pristine" class="help-block red-text">
-                        Formato de foto inválido.
                     </p>
                 </div>
                 

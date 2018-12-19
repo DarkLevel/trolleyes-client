@@ -2,43 +2,39 @@
 <main role="main" class="container margenes">
 
     <h1 class="text-center"><i class="fas fa-box"></i> Ver producto {{ajaxData.id}}</h1>
-
-    <form>
-        <div class="row form-group text-center mx-auto mt-5 table-responsive">
-            <table class="table table-striped text-center">
-                <tr>
-                    <th>ID</th>
-                    <td class="align-middle">{{ajaxData.id}}</td>
-                </tr>
-                <tr>
-                    <th>Código</th>
-                    <td class="align-middle">{{ajaxData.codigo}}</td>
-                </tr>
-                <tr>
-                    <th>Descripción</th>
-                    <td class="align-middle">{{ajaxData.desc}}</td>
-                </tr>
-                <tr>
-                    <th>Existencias</th>
-                    <td class="align-middle">{{ajaxData.existencias}}</td>
-                </tr>
-                <tr>
-                    <th>Precio</th>
-                    <td class="align-middle">{{ajaxData.precio}}</td>
-                </tr>
-                <tr>
-                    <th>Foto</th>
-                    <td class="align-middle">{{ajaxData.foto}}</td>
-                </tr>
-                <tr>
-                    <th>Tipo de producto</th>
-                    <td class="align-middle">{{ajaxData.obj_tipoProducto.desc}}</td>
-                </tr>
-            </table>
-        </div>
-        <div class="text-center mt-5">
-            <button type="button" class="btn btn-danger" ng-click="volver()">Volver atrás</button>
-        </div>
-    </form>
+    <div class="text-center">
+        <img class="mt-4 w-25" ng-src="http://localhost:8081/imagenes/{{ajaxData.foto}}" alt="foto_producto.png">
+    </div>
+    <div class="row form-group text-center mx-auto mt-5 table-responsive">
+        <table class="table table-striped text-center">
+            <tr>
+                <th>ID</th>
+                <td class="align-middle">{{ajaxData.id}}</td>
+            </tr>
+            <tr>
+                <th>Código</th>
+                <td class="align-middle">{{ajaxData.codigo}}</td>
+            </tr>
+            <tr>
+                <th>Descripción</th>
+                <td class="align-middle">{{ajaxData.desc}}</td>
+            </tr>
+            <tr>
+                <th>Existencias</th>
+                <td class="align-middle">{{ajaxData.existencias}}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td class="align-middle">{{ajaxData.precio}}</td>
+            </tr>
+            <tr>
+                <th>Tipo de producto</th>
+                <td class="align-middle">{{ajaxData.obj_tipoProducto.desc}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="text-center mt-5">
+        <button type="button" class="btn btn-danger" ng-click="volver()">Volver atrás</button>
+    </div>
 </main>
 <footer-component></footer-component>

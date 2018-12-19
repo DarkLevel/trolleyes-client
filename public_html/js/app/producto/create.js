@@ -16,6 +16,13 @@ moduleProducto.controller('productoCreateController', ['$scope', '$http', 'toolS
         };
 
         $scope.crear = function () {
+            if($scope.myFile === undefined){
+                $scope.foto = "Default.png";
+            } else{
+                $scope.foto = guid()+$scope.myFile.name;
+                uploadPhoto($scope.foto);
+            }
+            
             var json = {
                 codigo: $scope.codigo,
                 desc: $scope.desc,
@@ -24,6 +31,7 @@ moduleProducto.controller('productoCreateController', ['$scope', '$http', 'toolS
                 foto: $scope.foto,
                 id_tipoProducto: $scope.obj_tipoProducto.id
             };
+            
             $http({
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=producto&op=create',
@@ -44,7 +52,7 @@ moduleProducto.controller('productoCreateController', ['$scope', '$http', 'toolS
 
         $scope.tipoProductoRefresh = function (f, consultar) {
             var form = f;
-            if ($scope.obj_tipoProducto.id != null) {
+            if ($scope.obj_tipoProducto.id !== null) {
                 if (consultar) {
                     $http({
                         method: 'GET',
@@ -62,7 +70,48 @@ moduleProducto.controller('productoCreateController', ['$scope', '$http', 'toolS
                 $scope.obj_tipoProducto.desc = "";
             }
         };
+        
+        function uploadPhoto(name) {
+            //Solucion mas cercana
+            //https://stackoverflow.com/questions/37039852/send-formdata-with-other-field-in-angular
+            var file = $scope.myFile;
+            file = new File([file], name, {type: file.type});
+            //Api FormData 
+            //https://developer.mozilla.org/es/docs/Web/API/XMLHttpRequest/FormData
+            var oFormData = new FormData();
+            oFormData.append('file', file);
+            $http({
+                headers: {'Content-Type': undefined},
+                method: 'POST',
+                data: oFormData,
+                url: `http://localhost:8081/trolleyes/json?ob=producto&op=addimage`
+            });
+        }
+
+        function guid() {
+            return "ss-s-s-s-sss".replace(/s/g, s4);
+        }
+
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+        }
 
         $scope.isActive = toolService.isActive;
     }
-]);
+]).directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function () {
+                    scope.$apply(function () {
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }]);

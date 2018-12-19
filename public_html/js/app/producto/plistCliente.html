@@ -70,7 +70,7 @@
         <div class="row mx-auto text-center mt-3" ng-show="registros">
             <div class="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 mx-auto my-3" ng-repeat="producto in productos">
                 <div class="producto mx-2">
-                    <img class="mt-4 w-75" src="/trolleyes-client/public_html/css/gris.jpg" alt="{{producto.producto.foto}}">
+                    <img class="mt-4 w-75" ng-src="http://localhost:8081/imagenes/{{producto.producto.foto}}" alt="foto_producto.png">
                     <p class="mt-3">ID: {{producto.producto.id}}</p>
                     <p>Descripción: {{producto.producto.desc}}</p>
                     <p>Existencias: {{producto.producto.existencias}}</p>

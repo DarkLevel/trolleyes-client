@@ -19,7 +19,7 @@
 
         <div class="row mx-auto listaCarrito my-4 producto" ng-repeat="productoCarrito in ajaxData">
             <div class="col-md-6 col-sm-12 text-center">
-                <img class="imagenProducto my-4 my-xl-3" src="/trolleyes-client/public_html/css/gris.jpg" alt="{{productoCarrito.obj_producto.foto}}">
+                <img class="mt-4 w-50" ng-src="http://localhost:8081/imagenes/{{productoCarrito.obj_producto.foto}}" alt="foto_producto.png">
             </div>
             <div class="col-md-6 col-sm-12 text-center">
                 <p class="my-3">ID: {{productoCarrito.obj_producto.id}}</p>
