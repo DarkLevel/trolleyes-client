@@ -20,6 +20,7 @@ var autenticacionAdministrador = function ($q, $location, $http, sessionService,
             sessionService.setSessionInactive();
             sessionService.setAdminInactive();
             sessionService.setClientInactive();
+            $location.path('/home');
         }
     }, function () {
         sessionService.setSessionInactive();
@@ -51,6 +52,7 @@ var autenticacionCliente = function ($q, $location, $http, sessionService, count
             sessionService.setSessionInactive();
             sessionService.setAdminInactive();
             sessionService.setClientInactive();
+            $location.path('/home');
         }
     }, function () {
         sessionService.setSessionInactive();
@@ -89,6 +91,7 @@ var autenticacionAny = function ($q, $location, $http, sessionService, countCarr
             sessionService.setSessionInactive();
             sessionService.setAdminInactive();
             sessionService.setClientInactive();
+            $location.path('/home');
         }
     }, function () {
         sessionService.setSessionInactive();
