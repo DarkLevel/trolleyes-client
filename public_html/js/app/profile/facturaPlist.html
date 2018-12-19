@@ -63,6 +63,7 @@
                         </div>
                     </th>
                     <th>Líneas</th>
+                    <th>Imprimir</th>
                 </tr>
                 <tr ng-repeat="fila in ajaxData">
                     <td class="align-middle">{{fila.id}}</td>
@@ -70,6 +71,9 @@
                     <td class="align-middle">{{fila.iva}}</td>
                     <td>
                         <a role="button" ng-class="{'disabled':(fila.link_linea == 0)}" class="btn btn-outline-primary" href="profile/factura/{{fila.id}}/linea/plist">{{fila.link_linea}}</a>
+                    </td>
+                    <td>
+                        <a role="button" ng-class="{'disabled':(fila.link_linea == 0)}" class="btn btn-outline-primary"><i class="fas fa-print"></i> PDF</a>
                     </td>
                 </tr>
             </table>
