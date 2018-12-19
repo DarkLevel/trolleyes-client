@@ -1,0 +1,112 @@
+<header-component></header-component>
+<main role="main" class="container margenes">
+
+    <div class="container-fluid pt-4">
+        <div class="row">
+            <div class="col-8 border-bottom text-center mx-auto">
+                <h2><i class="fas fa-sliders-h"></i> Líneas de la factura <a class="enlace" href="profile/factura/view/{{id_factura}}">{{id_factura}}</a></h2>
+                <button type="button" class="btn btn-outline-danger mb-2" ng-click="atras()">Volver atrás</button>
+            </div>
+        </div>
+
+        <div class="row mt-3" ng-show="registros">
+            <div class="col-12">
+                <h5 class="text-center">Selecciona Registros: </h5>
+            </div>
+            <div class="col-12">
+                <select class="form-control mx-auto col-6 col-lg-4" ng-change="update()" ng-model="rpp">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+            <div class="col-12 text-center mt-2">
+                <button type="button" class="btn btn-outline-primary" ng-click="resetOrder()">Resetear Orden</button>
+            </div>
+        </div>
+
+        <div class="row form-group text-center mx-auto mt-5 table-responsive" ng-show="registros">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        <p>ID</p>
+                        <div class="btn-group">
+                            <button type="button" class="btn" ng-click="ordenar('linea.id', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('linea.id', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
+                    </th>
+                    <th>
+                        <p>Cantidad</p>
+                        <div class="btn-group">
+                            <button type="button" class="btn" ng-click="ordenar('linea.cantidad', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('linea.cantidad', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
+                    </th>
+                    <th>
+                        <p>Producto</p>
+                        <div class="btn-group">
+                            <button type="button" class="btn" ng-click="ordenar('linea.id_producto', 'asc')">
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button type="button" class="btn" ng-click="ordenar('linea.id_producto', 'desc')">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </div>
+                    </th>
+                </tr>
+                <tr ng-repeat="fila in ajaxData">
+                    <td class="align-middle">{{fila.id}}</td>
+                    <td class="align-middle">{{fila.cantidad}}</td>
+                    <td class="align-middle"><a class="enlace" href="producto/view/{{fila.obj_producto.id}}">{{fila.obj_producto.codigo}}</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="row mt-5" ng-show="registros">
+            <nav aria-label="paginacion" class="mx-auto">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" ng-class="{'disabled':(page == 1)}">
+                        <a class="page-link" href="profile/factura/{{id_factura}}/linea/plist/{{rpp}}/1/{{orderURLCliente}}"><span>&laquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(page == 1)}">
+                        <a class="page-link" href="profile/factura/{{id_factura}}/linea/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}"><span>&lsaquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(page == 1)}">
+                        <a class="page-link" href="profile/factura/{{id_factura}}/linea/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
+                    </li>
+
+                    <li class="page-item" ng-class="{'active':(p == page), 'disabled':(p === '...')}" ng-repeat="p in list track by $index">
+                        <a class="page-link" href="profile/factura/{{id_factura}}/linea/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
+                    </li>
+
+                    <li class="page-item" ng-class="{'disabled':(page == totalPages), 'ng-hide':(totalPages == 1)}">
+                        <a class="page-link" href="profile/factura/{{id_factura}}/linea/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
+                        <a class="page-link" href="profile/factura/{{id_factura}}/linea/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}"><span>&rsaquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
+                        <a class="page-link" href="profile/factura/{{id_factura}}/linea/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}"><span>&raquo;</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row" ng-show="alerta">
+            <div class="mx-auto mt-4 alert alert-warning text-center" role="alert">
+                No existen líneas
+            </div>
+        </div>
+
+    </div>
+</main>
+<footer-component></footer-component>

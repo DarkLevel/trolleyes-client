@@ -75,7 +75,6 @@ var autenticacionAny = function ($q, $location, $http, sessionService, countCarr
                 sessionService.setUserName(response.data.message.login);
                 sessionService.setId(response.data.message.id);
                 countCarritoService.updateCarrito();
-                deferred.resolve();
             }
             if (response.data.message.obj_tipoUsuario.id === 2) {
                 sessionService.setSessionActive();
@@ -84,8 +83,8 @@ var autenticacionAny = function ($q, $location, $http, sessionService, countCarr
                 sessionService.setUserName(response.data.message.login);
                 sessionService.setId(response.data.message.id);
                 countCarritoService.updateCarrito();
-                deferred.resolve();
             }
+            deferred.resolve();
         } else {
             sessionService.setSessionInactive();
             sessionService.setAdminInactive();
@@ -135,7 +134,6 @@ var everyone = function ($q, $location, $http, sessionService, countCarritoServi
                 sessionService.setUserName(response.data.message.login);
                 sessionService.setId(response.data.message.id);
                 countCarritoService.updateCarrito();
-                deferred.resolve();
             }
             if (response.data.message.obj_tipoUsuario.id === 2) {
                 sessionService.setSessionActive();
@@ -144,8 +142,8 @@ var everyone = function ($q, $location, $http, sessionService, countCarritoServi
                 sessionService.setUserName(response.data.message.login);
                 sessionService.setId(response.data.message.id);
                 countCarritoService.updateCarrito();
-                deferred.resolve();
             }
+            deferred.resolve();
         } else {
             sessionService.setSessionInactive();
             sessionService.setAdminInactive();
@@ -181,7 +179,6 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/producto/create', {templateUrl: 'js/app/producto/create.html', controller: 'productoCreateController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/producto/remove/:id?', {templateUrl: 'js/app/producto/remove.html', controller: 'productoRemoveController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/producto/update/:id?', {templateUrl: 'js/app/producto/update.html', controller: 'productoUpdateController', resolve: {auth: autenticacionAdministrador}});
-        $routeProvider.when('/producto/view/:id?', {templateUrl: 'js/app/producto/view.html', controller: 'productoViewController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/producto/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/producto/plist.html', controller: 'productoPlistController', resolve: {auth: autenticacionAdministrador}});
 
         $routeProvider.when('/tipoproducto/create', {templateUrl: 'js/app/tipoproducto/create.html', controller: 'tipoproductoCreateController', resolve: {auth: autenticacionAdministrador}});
@@ -194,7 +191,7 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/remove/:id?', {templateUrl: 'js/app/usuario/remove.html', controller: 'usuarioRemoveController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/usuario/update/:id?', {templateUrl: 'js/app/usuario/update.html', controller: 'usuarioUpdateController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/usuario/view/:id?', {templateUrl: 'js/app/usuario/view.html', controller: 'usuarioViewController', resolve: {auth: autenticacionAdministrador}});
-        $routeProvider.when('/profile/viewAdmin', {templateUrl: 'js/app/usuario/viewAdmin.html', controller: 'usuarioViewAdminController', resolve: {auth: autenticacionAdministrador}});
+        $routeProvider.when('/profile/viewAdmin', {templateUrl: 'js/app/profile/viewAdmin.html', controller: 'usuarioViewAdminController', resolve: {auth: autenticacionAdministrador}});
         $routeProvider.when('/usuario/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/usuario/plist.html', controller: 'usuarioPlistController', resolve: {auth: autenticacionAdministrador}});
 
         $routeProvider.when('/tipousuario/create', {templateUrl: 'js/app/tipousuario/create.html', controller: 'tipousuarioCreateController', resolve: {auth: autenticacionAdministrador}});
@@ -205,14 +202,17 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
 
 
 
-        $routeProvider.when('/profile/viewCliente', {templateUrl: 'js/app/usuario/viewCliente.html', controller: 'usuarioViewClienteController', resolve: {auth: autenticacionCliente}});
+        $routeProvider.when('/profile/viewCliente', {templateUrl: 'js/app/profile/viewCliente.html', controller: 'usuarioViewClienteController', resolve: {auth: autenticacionCliente}});
 
 
 
-        $routeProvider.when('/profile/updateLogged', {templateUrl: 'js/app/usuario/updateLogged.html', controller: 'usuarioUpdateLoggedController', resolve: {auth: autenticacionAny}});
-        $routeProvider.when('/profile/changePass', {templateUrl: 'js/app/usuario/changePass.html', controller: 'usuarioChangePassController', resolve: {auth: autenticacionAny}});
+        $routeProvider.when('/profile/updateLogged', {templateUrl: 'js/app/profile/updateLogged.html', controller: 'usuarioUpdateLoggedController', resolve: {auth: autenticacionAny}});
+        $routeProvider.when('/profile/changePass', {templateUrl: 'js/app/profile/changePass.html', controller: 'usuarioChangePassController', resolve: {auth: autenticacionAny}});
+        $routeProvider.when('/profile/factura/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/profile/facturaPlist.html', controller: 'facturaPlistUserController', resolve: {auth: autenticacionAny}});
+        $routeProvider.when('/profile/factura/:id_factura/linea/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/profile/lineaPlist.html', controller: 'lineaPlistUserController', resolve: {auth: autenticacionAny}});
 
         $routeProvider.when('/producto/plistCliente/:rpp?/:page?/:order?', {templateUrl: 'js/app/producto/plistCliente.html', controller: 'productoPlistClienteController', resolve: {auth: autenticacionAny}});
+        $routeProvider.when('/producto/view/:id?', {templateUrl: 'js/app/producto/view.html', controller: 'productoViewController', resolve: {auth: autenticacionAny}});
 
         $routeProvider.when('/carrito/plist', {templateUrl: 'js/app/carrito/plist.html', controller: 'carritoPlistController', resolve: {auth: autenticacionAny}});
         $routeProvider.when('/carrito/buy', {templateUrl: 'js/app/carrito/buy.html', controller: 'carritoBuyController', resolve: {auth: autenticacionAny}});
