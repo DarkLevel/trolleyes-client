@@ -82,7 +82,7 @@ moduleFactura.controller('facturaPlistUserController', ['$scope', '$http', '$loc
             for (var i = 0; i < $scope.ajaxData.length; i++) {
                 $scope.ajaxData[i].fecha = formatDate($scope.ajaxData[i].fecha);
             }
-            if($scope.ajaxData === 0){
+            if ($scope.ajaxData === 0) {
                 $scope.page = 1;
                 $location.url('profile/factura/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
             }
@@ -185,7 +185,7 @@ moduleFactura.controller('facturaPlistUserController', ['$scope', '$http', '$loc
             var fechaFinal = dia + '/' + mes + '/' + anyo + ' ' + hora + ':' + minuto + ':' + segundo;
             return fechaFinal;
         }
-        
+
         $scope.crearPDF = function (id) {
             var usuario;
             var fecha;
@@ -195,7 +195,7 @@ moduleFactura.controller('facturaPlistUserController', ['$scope', '$http', '$loc
 
             var doc = new jsPDF();
             for (var i = 0; i < length; i++) {
-                if($scope.ajaxData[i].id === id){
+                if ($scope.ajaxData[i].id === id) {
                     usuario = $scope.ajaxData[i].obj_usuario.ape1 + ' ' + $scope.ajaxData[i].obj_usuario.ape2 + ', ' + $scope.ajaxData[i].obj_usuario.nombre;
                     fecha = $scope.ajaxData[i].fecha;
                     iva = $scope.ajaxData[i].iva;
@@ -217,13 +217,13 @@ moduleFactura.controller('facturaPlistUserController', ['$scope', '$http', '$loc
                 doc.addImage(imgData, 'JPEG', 10, 12, 42, 40);
                 doc.setFontSize(13);
                 doc.setFontType('bold');
-                doc.text(55, 20, 'NOMBRE DE LA EMPRESA');
-                doc.text(55, 40, 'Tel. 963 98 98 98');
-                doc.text(55, 50, 'Email prueba@gmail.com');
+                doc.text(55, 20, 'TROLLEYES');
+                doc.text(55, 40, 'Tel. 96 320 85 87');
+                doc.text(55, 50, 'Email javi@hotmail.com');
                 doc.text(55, 30, 'CIF. B45789856');
                 doc.setFontType('normal');
-                doc.text(14, 62, 'C/ Falsa N 123 Pta 25 Bajo');
-                doc.text(14, 72, '54861 Valencia (Valencia)');
+                doc.text(14, 62, 'C/ Doctor Sumsi 33 pta. 3');
+                doc.text(14, 72, '46005 Valencia (Valencia)');
                 doc.setFontSize(30);
                 doc.setFontType('bold');
                 doc.text(125, 23, 'Factura N: ' + id);
@@ -236,7 +236,7 @@ moduleFactura.controller('facturaPlistUserController', ['$scope', '$http', '$loc
                 doc.text(12, 90, 'Codigo');
                 doc.text(50, 90, 'Descripcion');
                 doc.text(125, 90, 'Cantidad');
-                doc.text(170, 90, 'Precio ()');
+                doc.text(170, 90, 'Precio (EUR)');
                 doc.setFillColor(156, 156, 156);
                 doc.rect(9, 93, 193, 5, 'F');
                 doc.setFontSize(15);
@@ -254,12 +254,12 @@ moduleFactura.controller('facturaPlistUserController', ['$scope', '$http', '$loc
                         doc.setFontSize(13);
                         doc.setFontType('bold');
                         doc.text(55, 20, 'TROLLEYES');
-                        doc.text(55, 40, 'Tel. 963 98 98 98');
-                        doc.text(55, 50, 'Email prueba@gmail.com');
+                        doc.text(55, 40, 'Tel. 96 320 85 87');
+                        doc.text(55, 50, 'Email javi@hotmail.com');
                         doc.text(55, 30, 'CIF. B45789856');
                         doc.setFontType('normal');
-                        doc.text(14, 62, 'C/ Falsa N 123 Pta 25 Bajo');
-                        doc.text(14, 72, '54861 Valencia (Valencia)');
+                        doc.text(14, 62, 'C/ Doctor Sumsi 33 pta. 3');
+                        doc.text(14, 72, '46005 Valencia (Valencia)');
                         doc.setFontSize(30);
                         doc.setFontType('bold');
                         doc.text(125, 23, 'Factura N 25');
@@ -281,9 +281,9 @@ moduleFactura.controller('facturaPlistUserController', ['$scope', '$http', '$loc
                     doc.text(12, linea, $scope.ajaxLineasFactura[x].obj_producto.codigo);
                     doc.text(50, linea, $scope.ajaxLineasFactura[x].obj_producto.desc);
                     doc.text(125, linea, ($scope.ajaxLineasFactura[x].cantidad).toString());
-                    doc.text(170, linea, (parseFloat(($scope.ajaxLineasFactura[x].obj_producto.precio)).toFixed(2).toString()));
+                    doc.text(170, linea, (($scope.ajaxLineasFactura[x].obj_producto.precio * $scope.ajaxLineasFactura[x].cantidad).toFixed(2).toString()));
                     linea = linea + 13;
-                    precio = (precio + $scope.ajaxLineasFactura[x].obj_producto.precio);
+                    precio = (precio + ($scope.ajaxLineasFactura[x].obj_producto.precio * $scope.ajaxLineasFactura[x].cantidad));
                     cantidad = cantidad + $scope.ajaxLineasFactura[x].cantidad;
                 }
 
@@ -300,7 +300,7 @@ moduleFactura.controller('facturaPlistUserController', ['$scope', '$http', '$loc
                 doc.text(115, 285, (precio * (iva / 100)).toFixed(2).toString());
                 doc.text(158, 285, (precio * (iva / 100 + 1)).toFixed(2).toString());
 
-                doc.output('save', 'Factura-' + id + '-'+ fecha +'.pdf');
+                doc.output('save', 'Factura-' + id + '-' + fecha + '.pdf');
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxLineasFactura = response.data.message || 'Request failed';
